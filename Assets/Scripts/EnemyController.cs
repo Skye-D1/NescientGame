@@ -22,8 +22,8 @@ public class EnemyController : MonoBehaviour
 
     public void recieveNoise(Vector2 newTarget, bool newTargetPriority)
     {
-        // switch target if current is lower priority or null
-        if (target == null || (!isTargetPriority && newTargetPriority)) {
+        // switch target if new is priority or null
+        if (target == null || newTargetPriority) {
             target = newTarget;
             isTargetPriority = newTargetPriority;
             echoNoise(newTarget, newTargetPriority);

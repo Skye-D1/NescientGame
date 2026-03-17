@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 614180045}
   - component: {fileID: 614180044}
   - component: {fileID: 614180049}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,6 +418,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e54c762ac4f4b8428b97341fab17a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {x: 0, y: 0}
+  isTargetPriority: 0
+  echoRadius: 3
 --- !u!1 &900699116
 GameObject:
   m_ObjectHideFlags: 0
