@@ -42,46 +42,36 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4915847719340758428}
   m_Enabled: 1
-  m_Tiles:
-  - first: {x: -1, y: 0, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
+  m_Tiles: {}
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 944ea9f8ad9b2cd40bde31b6d55850aa, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 2557798679870205400, guid: cea4e499817ba4c44808525993a3f55a, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 1
+  - m_RefCount: 0
     m_Data:
-      e00: 1
+      e00: 3.4042287e+14
       e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
+      e02: 1e-45
+      e03: 2.5749843e-19
+      e10: 2e-43
+      e11: 0
       e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
+      e13: 8.53e-43
+      e20: 2.7611386e+32
+      e21: 2.5749843e-19
+      e22: -7262.836
+      e23: -2.3851112e-19
+      e30: 4.5911e-41
+      e31: 8.53e-43
+      e32: 8.53e-43
+      e33: 8.53e-43
   m_TileColorArray:
-  - m_RefCount: 1
-    m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: -2.3851009e-19, g: -2.3851009e-19, b: -2.3851009e-19, a: -2.3851009e-19}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -211,6 +201,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3935342872544771524}
     m_Modifications:
+    - target: {fileID: 1339414287755417345, guid: c5b99fa83b572b545b79e9133422b644, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339414287755417345, guid: c5b99fa83b572b545b79e9133422b644, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3648949905984941420, guid: c5b99fa83b572b545b79e9133422b644, type: 3}
       propertyPath: m_Name
       value: GreenTile
@@ -265,7 +263,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8557991841067051634, guid: c5b99fa83b572b545b79e9133422b644, type: 3}
   m_PrefabInstance: {fileID: 8493747366240143829}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7448864012422845718
+--- !u!114 &2338040049193169414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,0 +1,10 @@
+To Add New Tile:
+1: import texture as a sprite
+2: make gameObject prefab from sprite
+3: drag PREFAB into tilemap NOT THE SPRITE
+
+To Draw:
+1: Open tile palette
+2: Set brush to "GameObject Brush"
+3: Click on tile in palette that you want to draw with
+4: Draw!
