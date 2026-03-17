@@ -21,11 +21,12 @@ public class PlayerController : MonoBehaviour
     float sneakNoiseVolume = 4f;
     float walkNoiseVolume = 10f;
     float sprintNoiseVolume = 25f;
+    LayerMask enemyMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        enemyMask = LayerMask.GetMask("Enemy");
     }
 
     // Update is called once per frame
@@ -86,10 +87,20 @@ public class PlayerController : MonoBehaviour
         currentNoiseVolume = 2f; // base noise volume
         if (sprinting && currentNoiseVolume < sprintNoiseVolume) {
             currentNoiseVolume = sprintNoiseVolume;
-        }// incomplete
+        } else if (movement.magnitude != 0 && currentNoiseVolume < walkNoiseVolume) {
+            currentNoiseVolume = walkNoiseVolume;
+        } else if (sneaking && currentNoiseVolume < sneakNoiseVolume) {
+            currentNoiseVolume = sneakNoiseVolume;
+        }
+        // overlap circle to check for enemy tag
+        Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
+        for(int i = 0; i < enemiesFound.Length; i++) {
+            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(transform.position, true);
+        }
 
 
         //Debug
         Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
+        Debug.Log("movement magnitude: " + movement.magnitude);
     }
 }

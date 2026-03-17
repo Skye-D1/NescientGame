@@ -3,15 +3,15 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     // target movement location
-    Vector2 target;
-    bool isTargetPriority;
+    public Vector2 target;
+    public bool isTargetPriority;
     public float echoRadius;
-    LayerMask enemyMask = LayerMask.GetMask("Enemy");
+    LayerMask enemyMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        enemyMask = LayerMask.GetMask("Enemy");
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
         
     }
 
-    void recieveNoise(Vector2 newTarget, bool newTargetPriority)
+    public void recieveNoise(Vector2 newTarget, bool newTargetPriority)
     {
         // switch target if current is lower priority or null
         if (target == null || (!isTargetPriority && newTargetPriority)) {
@@ -34,7 +34,7 @@ public class EnemyController : MonoBehaviour
         // overlap circle to check for enemy tag
         Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, echoRadius, enemyMask);
         for(int i = 0; i < enemiesFound.Length; i++) {
-            enemiesFound[i].recieveNoise(newTarget, newTargetPriority);
+            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(newTarget, newTargetPriority);
         }
     }
 }
