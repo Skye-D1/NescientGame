@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     float stamina = 100.0f;
     float thirst = 100.0f;
     float health = 100.0f;
+    float currentNoiseVolume = 0f; // per frame noise
+    float sneakNoiseVolume = 4f;
+    float walkNoiseVolume = 10f;
+    float sprintNoiseVolume = 25f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,6 +81,12 @@ public class PlayerController : MonoBehaviour
         } else{
             thirst = 0;
         }
+
+        // alert enemies with noise
+        currentNoiseVolume = 2f; // base noise volume
+        if (sprinting && currentNoiseVolume < sprintNoiseVolume) {
+            currentNoiseVolume = sprintNoiseVolume;
+        }// incomplete
 
 
         //Debug
