@@ -5,9 +5,11 @@ public class PlayerController : MonoBehaviour
     Vector3 movement;
     bool sprinting = false;
     float sprintMult = 3.0f;
-    float stamina = 100.0f;
     float stamDrain = 30.0f;
     float stamRegen = 10.0f;
+    bool sneaking = false;
+    float sneakMult = 0.5f;
+    float stamina = 100.0f;
     float thirst = 100.0f;
     float health = 100.0f;
 
@@ -36,11 +38,16 @@ public class PlayerController : MonoBehaviour
         }
         movement = Vector3.Normalize(movement);
 
-        //is the player sprinting and stamina regeneration if they aren't
+        //is the player sprinting or sneaking? stamina regeneration if they aren't sprinting
         if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
             sprinting = true;
         } else{
             sprinting = false;
+            if(Input.GetKey(KeyCode.LeftControl)){
+                sneaking = true;
+            } else{
+                sneaking = false;
+            }
             if(stamina + stamRegen * Time.deltaTime < 100){
                 stamina += stamRegen * Time.deltaTime;
             } else{
@@ -53,13 +60,15 @@ public class PlayerController : MonoBehaviour
         if(sprinting && stamina - stamDrain * Time.deltaTime > 0){
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sprintMult);
             stamina = stamina - stamDrain * Time.deltaTime;
+        } else if(sneaking){
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sneakMult);
         } else{
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement);
         }
 
         //thirst
-        if(thirst - Time.deltaTime * ((100 - stamina)/10 + 0.1f) > 0){
-            thirst -= Time.deltaTime * ((100 - stamina)/10 + 0.1f);
+        if(thirst - Time.deltaTime * ((100 - stamina)/50 + 0.1f) > 0){
+            thirst -= Time.deltaTime * ((100 - stamina)/50 + 0.1f);
         } else{
             thirst = 0;
         }
