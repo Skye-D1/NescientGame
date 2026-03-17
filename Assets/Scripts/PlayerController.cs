@@ -3,7 +3,8 @@ using UnityEngine;
 
 //Name: Sam Johnson
 //File: PlayerController.cs
-//Purpose: manage all player movement, input, and things affecting the player
+//Purpose: Manage all player movement, input, and things affecting the player
+
 public class PlayerController : MonoBehaviour
 {
     Vector3 movement;
