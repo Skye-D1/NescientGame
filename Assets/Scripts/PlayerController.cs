@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+//Name: Sam Johnson
+//File: PlayerController.cs
+//Purpose: manage all player movement, input, and things affecting the player
 public class PlayerController : MonoBehaviour
 {
     Vector3 movement;
@@ -72,6 +76,9 @@ public class PlayerController : MonoBehaviour
         } else{
             thirst = 0;
         }
+
+
+        //Debug
         Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
     }
 }
