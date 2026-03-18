@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Vector3 movement;
+    float moveSpeed = 500.0f;
     bool sprinting = false;
     float sprintMult = 3.0f;
     float stamDrain = 30.0f;
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.D)){
             movement += new Vector3(1f,0,0);
         }
-        movement = Vector3.Normalize(movement);
+        movement = Vector3.Normalize(movement)*moveSpeed;
 
         //is the player sprinting or sneaking? stamina regeneration if they aren't sprinting
         if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
@@ -68,12 +69,12 @@ public class PlayerController : MonoBehaviour
 
         //stamina drain and using movement
         if(sprinting && stamina - stamDrain * Time.deltaTime > 0){
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sprintMult);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sprintMult*Time.deltaTime);
             stamina = stamina - stamDrain * Time.deltaTime;
         } else if(sneaking){
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sneakMult);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sneakMult*Time.deltaTime);
         } else{
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*Time.deltaTime);
         }
 
         //thirst
