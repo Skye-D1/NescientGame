@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject projectile;
     Vector3 movement;
     float moveSpeed = 500.0f;
     bool sprinting = false;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float stamina = 100.0f;
     public float thirst = 100.0f;
     public float health = 100.0f;
+    public float Water = 100.0f;
     public float currentNoiseVolume = 0f; // per frame noise
     float sneakNoiseVolume = 4f;
     float walkNoiseVolume = 10f;
@@ -90,7 +92,16 @@ public class PlayerController : MonoBehaviour
             thirst = 0;
         }
 
-        // alert enemies with noise
+        //Water Gun
+        if(Input.GetKeyDown(KeyCode.Space) && Water > 10.0f){
+            Water -= 10;
+            Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position);
+            GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
+            proj.GetComponent<Rigidbody2D>().AddForce(dir * 500.0f);
+        }
+
+
+        // alert enemies with noise - Skye
         currentNoiseVolume = 2f; // base noise volume
         if (sprinting && currentNoiseVolume < sprintNoiseVolume) {
             currentNoiseVolume = sprintNoiseVolume;
@@ -99,7 +110,7 @@ public class PlayerController : MonoBehaviour
         } else if (sneaking && currentNoiseVolume < sneakNoiseVolume) {
             currentNoiseVolume = sneakNoiseVolume;
         }
-        // overlap circle to check for enemy tag
+        // overlap circle to check for enemy tag - Skye
         Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(gameObject, new Vector2(transform.position.x, transform.position.y), true);
