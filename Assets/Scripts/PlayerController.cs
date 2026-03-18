@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         // overlap circle to check for enemy tag
         Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
         for(int i = 0; i < enemiesFound.Length; i++) {
-            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
+            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(gameObject, new Vector2(transform.position.x, transform.position.y), true);
         }
 
 
