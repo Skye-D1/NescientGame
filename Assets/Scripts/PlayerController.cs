@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
     float stamRegen = 10.0f;
     bool sneaking = false;
     float sneakMult = 0.5f;
-    float stamina = 100.0f;
-    float thirst = 100.0f;
-    float health = 100.0f;
+    public float stamina = 100.0f;
+    public float thirst = 100.0f;
+    public float health = 100.0f;
     float currentNoiseVolume = 0f; // per frame noise
     float sneakNoiseVolume = 4f;
     float walkNoiseVolume = 10f;
@@ -101,6 +101,6 @@ public class PlayerController : MonoBehaviour
 
         //Debug
         Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
-        Debug.Log("movement magnitude: " + movement.magnitude);
+        //Debug.Log("movement magnitude: " + movement.magnitude);
     }
 }
