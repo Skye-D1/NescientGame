@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float stamina = 100.0f;
     public float thirst = 100.0f;
     public float health = 100.0f;
-    float currentNoiseVolume = 0f; // per frame noise
+    public float currentNoiseVolume = 0f; // per frame noise
     float sneakNoiseVolume = 4f;
     float walkNoiseVolume = 10f;
     float sprintNoiseVolume = 25f;
@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
+
+        // Disable VSync to use target frameRate
+        QualitySettings.vSyncCount = 0;
+
+        // Set target frame rate to 120 FPS
+        Application.targetFrameRate = 120;
     }
 
     // Update is called once per frame

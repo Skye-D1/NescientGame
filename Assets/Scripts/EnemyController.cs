@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
     void echoNoise(Vector2 newTarget, bool newTargetPriority) {
         // overlap circle to check for enemy tag
-        enemiesFound = Physics2D.OverlapCircleAll(transform.position, echoRadius, enemyMask);
+        enemiesFound = Physics2D.OverlapCircleAll(transform.position, echoRadius, enemyMask); // the aforementioned circle
         Debug.Log("echo :3");
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(gameObject, newTarget, newTargetPriority);
