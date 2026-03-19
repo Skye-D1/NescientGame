@@ -94,11 +94,30 @@ public class PlayerController : MonoBehaviour
 
         //Water Gun shot
         if(Input.GetKeyDown(KeyCode.Space) && Water > 10.0f){
-            Water -= 10;
+            //Water -= 10;
             Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
-            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
-            proj.GetComponent<Rigidbody2D>().AddForce(dir * 1000.0f);
+            
+            //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
+
+            for(int i = 0; i < 10; i++){
+                float radians = Random.Range(-1.25f,1.25f) * Mathf.Deg2Rad;
+                float sin = Mathf.Sin(radians);
+                float cos = Mathf.Cos(radians);
+                float newX = dir.x * cos - dir.y * sin;
+                float newY = dir.x * sin + dir.y * cos;
+                dir.x = newX; dir.y = newY;
+
+                float force = 1000f;
+                float time = 0.25f;
+
+                float perc = Random.Range(-0.15f, 0.15f);
+                force = force * (1 + perc);
+                //time = time * (1 - perc);
+
+                GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
+                proj.GetComponent<Rigidbody2D>().AddForce(dir * force);
+                proj.GetComponent<Projectile>().timer = time;
+            }
         }
 
 
@@ -114,7 +133,7 @@ public class PlayerController : MonoBehaviour
         // overlap circle to check for enemy tag - Skye
         Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
         for(int i = 0; i < enemiesFound.Length; i++) {
-            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(gameObject, new Vector2(transform.position.x, transform.position.y), true);
+            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
         }
 
 
