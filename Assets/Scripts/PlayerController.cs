@@ -7,29 +7,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject projectile;
-    Vector3 movement;
-    float moveSpeed = 500.0f;
-    bool sprinting = false;
-    float sprintMult = 3.0f;
-    float stamDrain = 30.0f;
-    float stamRegen = 10.0f;
-    bool sneaking = false;
-    float sneakMult = 0.5f;
-    public float stamina = 100.0f;
-    public float thirst = 100.0f;
-    public float health = 100.0f;
-    public float Water = 100.0f;
+    public GameObject projectile; // prefab for projectile
+    Vector3 movement; // direction of movement
+    float moveSpeed = 500.0f; // how fast the player moves
+    bool sprinting = false; // whether the player is sprinting this frame or not
+    float sprintMult = 3.0f; // multiplier on how fast the player moves when sprinting
+    float stamDrain = 30.0f; // how fast stamina drains per second of sprinting
+    float stamRegen = 10.0f; // how fast stamina regenerates per second when not sprinting
+    bool sneaking = false; // whether the player is sneaking
+    float sneakMult = 0.5f; // how much slower the player moves while sneaking
+    public float stamina = 100.0f; // how much stamina the player has
+    public float thirst = 100.0f; // how much thirst the player has (100 = no thirst, 0 = completely thirsty)
+    public float health = 100.0f; // health points
+    public float Water = 100.0f; // how much water is in the player's water gun
     public float currentNoiseVolume = 0f; // per frame noise
-    float sneakNoiseVolume = 4f;
-    float walkNoiseVolume = 10f;
-    float sprintNoiseVolume = 25f;
+    float sneakNoiseVolume = 4f; // how loud the player is while sneaking
+    float walkNoiseVolume = 10f; // how loud the player is when walking
+    float sprintNoiseVolume = 25f; // how lound the player is while sprinting
     LayerMask enemyMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        enemyMask = LayerMask.GetMask("Enemy");
+        enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
 
         // Disable VSync to use target frameRate
         QualitySettings.vSyncCount = 0;
@@ -43,19 +43,19 @@ public class PlayerController : MonoBehaviour
     {
         //defining how the player should move this frame
         movement = new Vector3();
-        if(Input.GetKey(KeyCode.W)){
+        if(Input.GetKey(KeyCode.W)){ // up
             movement += new Vector3(0,1f,0);
         } 
-        if(Input.GetKey(KeyCode.S)){
+        if(Input.GetKey(KeyCode.S)){ // down
             movement += new Vector3(0,-1f,0);
         }
-        if(Input.GetKey(KeyCode.A)){
+        if(Input.GetKey(KeyCode.A)){ // left
             movement += new Vector3(-1f,0,0);
         }
-        if(Input.GetKey(KeyCode.D)){
+        if(Input.GetKey(KeyCode.D)){ // right
             movement += new Vector3(1f,0,0);
         }
-        movement = Vector3.Normalize(movement)*moveSpeed;
+        movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
 
         //is the player sprinting or sneaking? stamina regeneration if they aren't sprinting
         if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
@@ -85,14 +85,14 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement*Time.deltaTime);
         }
 
-        //thirst
+        //thirst drain based on stamina
         if(thirst - Time.deltaTime * ((100 - stamina)/50 + 0.1f) > 0){
             thirst -= Time.deltaTime * ((100 - stamina)/50 + 0.1f);
         } else{
             thirst = 0;
         }
 
-        //Water Gun
+        //Water Gun shot
         if(Input.GetKeyDown(KeyCode.Space) && Water > 10.0f){
             Water -= 10;
             Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position);
