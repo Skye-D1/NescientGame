@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     Collider2D[] enemiesFound; // enemies found wjen circle
     public bool isStatic; // if enemy does not move for tutorial
     public bool isLeader; // if enemy will create wander targets
+    LineRenderer lineRenderer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,9 +24,10 @@ public class EnemyController : MonoBehaviour
         enemyMask = LayerMask.GetMask("Enemy");
         target = new Vector2(transform.position.x, transform.position.y); // target own position on start
         // determine if leader
-        if (Random.value() > 0.9) { // todo: check proximity for other leaders
+        if (Random.value > 0.9) { // todo: check proximity for other leaders
             isLeader = true;
         }
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,9 @@ public class EnemyController : MonoBehaviour
         if (!isStatic) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
         }
     }
 
