@@ -1,13 +1,14 @@
 using UnityEngine;
 
 
-//Name: Sam Johnson
+//Name: Sam Johnson (mostly)
 //File: PlayerController.cs
 //Purpose: Manage all player movement, input, and things affecting the player
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject projectile; // prefab for projectile
+    public GameObject noiseCircle; // reference to circle for noise range debug
     Vector3 movement; // direction of movement
     float moveSpeed = 500.0f; // how fast the player moves
     bool sprinting = false; // whether the player is sprinting this frame or not
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public float currentNoiseVolume = 0f; // per frame noise
     float sneakNoiseVolume = 4f; // how loud the player is while sneaking
     float walkNoiseVolume = 10f; // how loud the player is when walking
-    float sprintNoiseVolume = 25f; // how lound the player is while sprinting
+    float sprintNoiseVolume = 25f; // how loud the player is while sprinting
     LayerMask enemyMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -123,11 +124,11 @@ public class PlayerController : MonoBehaviour
 
         // alert enemies with noise - Skye
         currentNoiseVolume = 2f; // base noise volume
-        if (sprinting && currentNoiseVolume < sprintNoiseVolume) {
+        if (sprinting && movement.magnitude != 0) {
             currentNoiseVolume = sprintNoiseVolume;
-        } else if (movement.magnitude != 0 && currentNoiseVolume < walkNoiseVolume) {
+        } else if (movement.magnitude != 0 && !sneaking) {
             currentNoiseVolume = walkNoiseVolume;
-        } else if (sneaking && currentNoiseVolume < sneakNoiseVolume) {
+        } else if (movement.magnitude != 0 && sneaking) {
             currentNoiseVolume = sneakNoiseVolume;
         }
         // overlap circle to check for enemy tag - Skye
@@ -135,6 +136,8 @@ public class PlayerController : MonoBehaviour
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
         }
+
+        noiseCircle.transform.localScale = new Vector3(currentNoiseVolume, currentNoiseVolume, 1f); // debug? maybe
 
 
         //Debug

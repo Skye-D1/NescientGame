@@ -1,27 +1,31 @@
 using UnityEngine;
 
+//Name: Skye Drury
+//File: EnemyController.cs
+//Purpose: Manage enemy movement, recieving and communicating noises, and other enemy behavior
+
 public class EnemyController : MonoBehaviour
 {
-    // target movement location
-    public Vector2 target;
-    float moveSpeed = 200f;
-    Vector3 movement = new Vector3();
-    public bool isTargetPriority;
-    bool didTargetUpdate;
-    public float echoRadius;
-    LayerMask enemyMask;
+    public Vector2 target; // target movement location
+    float moveSpeed = 200f; // speed of movement
+    Vector3 movement = new Vector3(); // current movement direction
+    public bool targetPriority; // whether the target is high priority (player noise)
+    bool didTargetUpdate; // whether the enemy has updated target this frame
+    public float echoRadius; // radius to echo recieved noise to others
+    LayerMask enemyMask; // layermask for finding other enemies
     Collider2D[] enemiesFound; // enemies found wjen circle
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
+        target = new Vector2(transform.position.x, transform.position.y); // target own position on start
     }
 
     // Update is called once per frame
     void Update()
     {
-        didTargetUpdate = false; // allow one (1) target update per frame
+        didTargetUpdate = false; // allow one target update per frame
         // move towards target
         if (target != null) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
@@ -35,7 +39,7 @@ public class EnemyController : MonoBehaviour
         if ((target == null || newTargetPriority) && !didTargetUpdate) {
             didTargetUpdate = true;
             target = newTarget;
-            isTargetPriority = newTargetPriority;
+            targetPriority = newTargetPriority;
             if (newTargetPriority) { // echo to others if priority high
                 echoNoise(newTarget, newTargetPriority);
             }
