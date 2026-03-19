@@ -44,18 +44,8 @@ public class PlayerController : MonoBehaviour
     {
         //defining how the player should move this frame
         movement = new Vector3();
-        if(Input.GetKey(KeyCode.W)){ // up
-            movement += new Vector3(0,1f,0);
-        } 
-        if(Input.GetKey(KeyCode.S)){ // down
-            movement += new Vector3(0,-1f,0);
-        }
-        if(Input.GetKey(KeyCode.A)){ // left
-            movement += new Vector3(-1f,0,0);
-        }
-        if(Input.GetKey(KeyCode.D)){ // right
-            movement += new Vector3(1f,0,0);
-        }
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
         movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
 
         //is the player sprinting or sneaking? stamina regeneration if they aren't sprinting
