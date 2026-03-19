@@ -101,23 +101,24 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
 
             for(int i = 0; i < 10; i++){
-                float radians = Random.Range(-1.25f,1.25f) * Mathf.Deg2Rad;
+                //randomize angle of each projectile
+                float radians = Random.Range(-3f,3f) * Mathf.Deg2Rad;
                 float sin = Mathf.Sin(radians);
                 float cos = Mathf.Cos(radians);
                 float newX = dir.x * cos - dir.y * sin;
                 float newY = dir.x * sin + dir.y * cos;
                 dir.x = newX; dir.y = newY;
 
+                //default force of each projectile
                 float force = 1000f;
-                float time = 0.25f;
 
+                //randomize force slightly
                 float perc = Random.Range(-0.15f, 0.15f);
                 force = force * (1 + perc);
-                //time = time * (1 - perc);
 
+                //make and add force to projectile
                 GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
                 proj.GetComponent<Rigidbody2D>().AddForce(dir * force);
-                proj.GetComponent<Projectile>().timer = time;
             }
         }
 
