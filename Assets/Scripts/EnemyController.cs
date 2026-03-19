@@ -14,12 +14,18 @@ public class EnemyController : MonoBehaviour
     public float echoRadius; // radius to echo recieved noise to others
     LayerMask enemyMask; // layermask for finding other enemies
     Collider2D[] enemiesFound; // enemies found wjen circle
+    public bool isStatic; // if enemy does not move for tutorial
+    public bool isLeader; // if enemy will create wander targets
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
         target = new Vector2(transform.position.x, transform.position.y); // target own position on start
+        // determine if leader
+        if (Random.value() > 0.9) { // todo: check proximity for other leaders
+            isLeader = true;
+        }
     }
 
     // Update is called once per frame
@@ -27,7 +33,7 @@ public class EnemyController : MonoBehaviour
     {
         didTargetUpdate = false; // allow one target update per frame
         // move towards target
-        if (target != null) {
+        if (!isStatic) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
         }

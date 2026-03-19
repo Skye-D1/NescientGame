@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-//Name: Sam Johnson (mostly)
+//Name: Sam Johnson, Skye Drury
 //File: PlayerController.cs
 //Purpose: Manage all player movement, input, and things affecting the player
 
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     float stamDrain = 30.0f; // how fast stamina drains per second of sprinting
     float stamRegen = 10.0f; // how fast stamina regenerates per second when not sprinting
     bool sneaking = false; // whether the player is sneaking
-    float sneakMult = 0.5f; // how much slower the player moves while sneaking
+    float sneakMult = 0.35f; // how much slower the player moves while sneaking
     public float stamina = 100.0f; // how much stamina the player has
     public float thirst = 100.0f; // how much thirst the player has (100 = no thirst, 0 = completely thirsty)
     public float health = 100.0f; // health points
