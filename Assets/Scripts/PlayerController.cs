@@ -95,9 +95,10 @@ public class PlayerController : MonoBehaviour
         //Water Gun shot
         if(Input.GetKeyDown(KeyCode.Space) && Water > 10.0f){
             Water -= 10;
-            Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position);
+            Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
+            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
-            proj.GetComponent<Rigidbody2D>().AddForce(dir * 500.0f);
+            proj.GetComponent<Rigidbody2D>().AddForce(dir * 1000.0f);
         }
 
 
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
 
 
         //Debug
-        Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
+        //Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
         //Debug.Log("movement magnitude: " + movement.magnitude);
     }
 }
