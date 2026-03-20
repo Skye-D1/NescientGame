@@ -17,13 +17,17 @@ public class EnemyController : MonoBehaviour
     Collider2D[] enemiesFound; // enemies found wjen circle
     public bool isStatic; // if enemy does not move for tutorial
     public bool isLeader; // if enemy will create wander targets
+    bool isPlant;
     LineRenderer lineRenderer;
     public GameObject staticPlant; // object to replace enemy with
+    LayerMask levelMask;
+    float strafeValue = 5f; // direction and magnitude of strafe movements
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
+        levelMask = LayerMask.GetMask("Default");
         target = new Vector2(transform.position.x, transform.position.y); // target own position on start
         // determine if leader
         if (Random.value > 0.9) { // todo: check proximity for other leaders
@@ -39,7 +43,6 @@ public class EnemyController : MonoBehaviour
         
         // start moving past target for a time when reached
         if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
-            //Debug.Log("Enemy: overshoot " + movement);
             overshootTimer = 3f;
         }
 
@@ -47,16 +50,27 @@ public class EnemyController : MonoBehaviour
         if (overshootTimer > 0) {
             overshootTimer -= Time.deltaTime;
             lineRenderer.enabled = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
             target = new Vector2(transform.position.x, transform.position.y);
             targetPriority = false;
         // move towards target
         } else if (!isStatic) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
+        }
+
+        // strafe around obstacles
+        if (movement.magnitude > 0) {
+            if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.05f) {
+                Vector2 newMovement = Vector2.Perpendicular(new Vector2(movement.x, movement.y)) * strafeValue;
+                movement = new Vector3(newMovement.x, newMovement.y, 0);
+            }
+        }
+
+        // do movement
+        if (!isStatic) {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
         }
     }
 
@@ -78,7 +92,7 @@ public class EnemyController : MonoBehaviour
     void echoNoise(Vector2 newTarget, bool newTargetPriority) {
         // overlap circle to check for enemy tag
         enemiesFound = Physics2D.OverlapCircleAll(transform.position, echoRadius, enemyMask); // the aforementioned circle
-        Debug.Log("echo :3 " + newTargetPriority);
+        //Debug.Log("echo :3 " + newTargetPriority);
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(newTarget, newTargetPriority);
         }
@@ -86,9 +100,12 @@ public class EnemyController : MonoBehaviour
 
     // recieve signal from colliding water to become static plant
     public void plantify () {
-        // spawn static plant
-        Instantiate(staticPlant, transform.position, transform.rotation);
-        // delete self
-        GameObject.Destroy(gameObject);
+        if (!isPlant) {
+            isPlant = true;
+            // spawn static plant
+            Instantiate(staticPlant, transform.position, transform.rotation);
+            // delete self
+            GameObject.Destroy(gameObject);
+        }
     }
 }
