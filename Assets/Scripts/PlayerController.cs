@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
 
         // Disable VSync to use target frameRate
-        QualitySettings.vSyncCount = 0;
+        QualitySettings.vSyncCount = 1;
 
         // Set target frame rate to 120 FPS
         Application.targetFrameRate = 120;
