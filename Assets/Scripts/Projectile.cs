@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
         if(!stopped && timer <= 0){
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector3();
             stopped = true;
-            timer = Random.Range(0.75f, 0.90f);
+            timer = Random.Range(0.25f, 0.5f);
         }
         else if (stopped && timer <= 0){
             GameObject.Destroy(gameObject);
