@@ -135,6 +135,7 @@ MonoBehaviour:
   echoRadius: 3
   isStatic: 0
   isLeader: 0
+  staticPlant: {fileID: 4324750993966365974, guid: aeffd9985276d8345b97c4d1484fdf9e, type: 3}
 --- !u!58 &2195479111739237513
 CircleCollider2D:
   m_ObjectHideFlags: 0
