@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
     float walkNoiseVolume = 10f; // how loud the player is when walking
     float sprintNoiseVolume = 25f; // how loud the player is while sprinting
     LayerMask enemyMask;
+    int selectedInvSlot = 0;
+    int[,] inventory = new int[3,2];
+    public GameObject[] itemId;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +40,9 @@ public class PlayerController : MonoBehaviour
 
         // Set target frame rate to 120 FPS
         Application.targetFrameRate = 120;
+
+
+        //inventory[0,0] = 1; inventory[0,1] = 100;
     }
 
     // Update is called once per frame
@@ -112,6 +118,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //inventory
+        GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
+        selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
+        while(selectedInvSlot >= 3){
+            selectedInvSlot -= 3;
+        } while(selectedInvSlot < 0){
+            selectedInvSlot += 3;
+        }
+        //Debug.Log(selectedInvSlot);
+        GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+
+        //UpdateInventory();
 
         // alert enemies with noise - Skye
         currentNoiseVolume = 2f; // base noise volume
@@ -134,5 +152,22 @@ public class PlayerController : MonoBehaviour
         //Debug
         //Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
         //Debug.Log("movement magnitude: " + movement.magnitude);
+    }
+
+    void UpdateInventory(){
+        for(int i = 0; i < 3; i++){
+            GameObject slot = GameObject.Find("invSlot" + i);
+            if(slot.transform.childCount != 0){
+                GameObject.Destroy(slot.transform.GetChild(0).gameObject);
+            }
+            
+        }
+
+        for(int i = 0; i < 3; i++){
+            if(inventory[i,0]!=0){
+                //Debug.Log(inventory[i,0]);
+                Instantiate(itemId[inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
+            }
+        }
     }
 }
