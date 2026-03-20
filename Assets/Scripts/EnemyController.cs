@@ -17,19 +17,26 @@ public class EnemyController : MonoBehaviour
     Collider2D[] enemiesFound; // enemies found wjen circle
     public bool isStatic; // if enemy does not move for tutorial
     public bool isLeader; // if enemy will create wander targets
+    bool isPlant;
     LineRenderer lineRenderer;
     public GameObject staticPlant; // object to replace enemy with
+    CircleCollider2D baseCollider;
+    LayerMask levelMask;
+    //float terrainAvoidRange = 1f; // unused
+    float strafeValue = 5f; // direction and magnitude of strafe movements
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy");
+        levelMask = LayerMask.GetMask("Default");
         target = new Vector2(transform.position.x, transform.position.y); // target own position on start
         // determine if leader
         if (Random.value > 0.9) { // todo: check proximity for other leaders
             isLeader = true;
         }
         lineRenderer = gameObject.GetComponent<LineRenderer>();
+        baseCollider = gameObject.GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
@@ -47,17 +54,36 @@ public class EnemyController : MonoBehaviour
         if (overshootTimer > 0) {
             overshootTimer -= Time.deltaTime;
             lineRenderer.enabled = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
             target = new Vector2(transform.position.x, transform.position.y);
             targetPriority = false;
         // move towards target
         } else if (!isStatic) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
             lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
         }
+
+        // strafe around obstacles
+        if (movement.magnitude > 0) {
+            //RaycastHit2D hit = Physics2D.Raycast((transform.position - Vector3.up * 0.8f), movement.normalized, terrainAvoidRange, rayMask_Level);
+
+            //if (Physics2D.OverlapCircleAll((transform.position + movement.normalized), 0.3f, levelMask).Length > 0) {
+            if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.05f) {
+                Vector2 newMovement = Vector2.Perpendicular(new Vector2(movement.x, movement.y)) * strafeValue;
+                movement = new Vector3(newMovement.x, newMovement.y, 0);
+            }
+        }
+
+        // do movement
+        if (!isStatic) {
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
+        }
+
+        /*// if strafe didn't work go the other way
+        if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.1f) {
+            strafeValue *= -1f;
+        }*/
     }
 
     // hear a noise and update target if necessary
@@ -78,7 +104,7 @@ public class EnemyController : MonoBehaviour
     void echoNoise(Vector2 newTarget, bool newTargetPriority) {
         // overlap circle to check for enemy tag
         enemiesFound = Physics2D.OverlapCircleAll(transform.position, echoRadius, enemyMask); // the aforementioned circle
-        Debug.Log("echo :3 " + newTargetPriority);
+        //Debug.Log("echo :3 " + newTargetPriority);
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(newTarget, newTargetPriority);
         }
@@ -86,9 +112,12 @@ public class EnemyController : MonoBehaviour
 
     // recieve signal from colliding water to become static plant
     public void plantify () {
-        // spawn static plant
-        Instantiate(staticPlant, transform.position, transform.rotation);
-        // delete self
-        GameObject.Destroy(gameObject);
+        if (!isPlant) {
+            isPlant = true;
+            // spawn static plant
+            Instantiate(staticPlant, transform.position, transform.rotation);
+            // delete self
+            GameObject.Destroy(gameObject);
+        }
     }
 }
