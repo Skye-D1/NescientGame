@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // recieve signal from colliding water to become static plant
-    void plantify () {
+    public void plantify () {
         // spawn static plant
         Instantiate(staticPlant, transform.position, transform.rotation);
         // delete self
