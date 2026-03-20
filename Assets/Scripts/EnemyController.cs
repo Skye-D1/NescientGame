@@ -20,9 +20,7 @@ public class EnemyController : MonoBehaviour
     bool isPlant;
     LineRenderer lineRenderer;
     public GameObject staticPlant; // object to replace enemy with
-    CircleCollider2D baseCollider;
     LayerMask levelMask;
-    //float terrainAvoidRange = 1f; // unused
     float strafeValue = 5f; // direction and magnitude of strafe movements
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,7 +34,6 @@ public class EnemyController : MonoBehaviour
             isLeader = true;
         }
         lineRenderer = gameObject.GetComponent<LineRenderer>();
-        baseCollider = gameObject.GetComponent<CircleCollider2D>();
     }
 
     // Update is called once per frame
@@ -46,7 +43,6 @@ public class EnemyController : MonoBehaviour
         
         // start moving past target for a time when reached
         if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
-            //Debug.Log("Enemy: overshoot " + movement);
             overshootTimer = 3f;
         }
 
@@ -66,9 +62,6 @@ public class EnemyController : MonoBehaviour
 
         // strafe around obstacles
         if (movement.magnitude > 0) {
-            //RaycastHit2D hit = Physics2D.Raycast((transform.position - Vector3.up * 0.8f), movement.normalized, terrainAvoidRange, rayMask_Level);
-
-            //if (Physics2D.OverlapCircleAll((transform.position + movement.normalized), 0.3f, levelMask).Length > 0) {
             if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.05f) {
                 Vector2 newMovement = Vector2.Perpendicular(new Vector2(movement.x, movement.y)) * strafeValue;
                 movement = new Vector3(newMovement.x, newMovement.y, 0);
@@ -79,11 +72,6 @@ public class EnemyController : MonoBehaviour
         if (!isStatic) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
         }
-
-        /*// if strafe didn't work go the other way
-        if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.1f) {
-            strafeValue *= -1f;
-        }*/
     }
 
     // hear a noise and update target if necessary
