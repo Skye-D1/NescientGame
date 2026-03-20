@@ -72,6 +72,12 @@ public class EnemyController : MonoBehaviour
         if (!isStatic) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
         }
+
+        // no fast
+        if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude > 5f) {
+            Debug.Log("debug: speeding ticket issued.");
+            gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
+        }
     }
 
     // hear a noise and update target if necessary
