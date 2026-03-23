@@ -90,6 +90,7 @@ public class EnemyController : MonoBehaviour
             didTargetUpdate = true;
             target = newTarget;
             targetPriority = newTargetPriority;
+            overshootTimer = 0;
             if (newTargetPriority) { // echo to others if priority high
                 echoNoise(newTarget, newTargetPriority);
             }
