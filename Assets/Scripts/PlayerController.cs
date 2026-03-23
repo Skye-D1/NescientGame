@@ -41,6 +41,16 @@ public class PlayerController : MonoBehaviour
 
         // Set target frame rate to 120 FPS
         Application.targetFrameRate = 120;
+
+        //linerenderer
+        /*
+        LineRenderer noiseCircle = GameObject.Find("debug_noise_range").GetComponent<LineRenderer>();
+        Vector3[] points = new Vector3[360];
+        for(int i = 0; i < 360; i++){
+            float r = Mathf.Sin(Mathf.Deg2Rad*i*10) + 1f;
+            points[i] = new Vector3(r*Mathf.Sin(Mathf.Deg2Rad*i*10),r*Mathf.Cos(Mathf.Deg2Rad*i*10),0);
+        }
+        noiseCircle.SetPositions(points);*/
     }
 
     // Update is called once per frame
