@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
         didTargetUpdate = false; // allow one target update per frame
         
         // start moving past target for a time when reached
-        if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
+        if (targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
             overshootTimer = 3f;
         }
 
@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
         }
 
         // strafe around obstacles
-        if (movement.magnitude > 0) {
+        if (movement.magnitude > 0 && Vector2.Distance(target, transform.position) > 2f) {
             if (gameObject.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.05f) {
                 Vector2 newMovement = Vector2.Perpendicular(new Vector2(movement.x, movement.y)) * strafeValue;
                 movement = new Vector3(newMovement.x, newMovement.y, 0);
@@ -69,8 +69,10 @@ public class EnemyController : MonoBehaviour
         }
 
         // do movement
-        if (!isStatic) {
+        if (!isStatic && (movement * Time.deltaTime).magnitude < 99999f) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
+        } else if ((movement * Time.deltaTime).magnitude >= 99999f) {
+            Debug.Log("debug: no don't do that;" + transform.position);
         }
 
         // no fast
