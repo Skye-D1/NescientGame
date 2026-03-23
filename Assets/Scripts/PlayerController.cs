@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     LayerMask enemyMask;
     int selectedInvSlot = 0;
     int[,] inventory = new int[3,2];
-    public GameObject[] itemId;
+    public GameObject[] itemKey;
+    float hitCooldown = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,9 +41,6 @@ public class PlayerController : MonoBehaviour
 
         // Set target frame rate to 120 FPS
         Application.targetFrameRate = 120;
-
-
-        //inventory[0,0] = 1; inventory[0,1] = 100;
     }
 
     // Update is called once per frame
@@ -126,10 +124,26 @@ public class PlayerController : MonoBehaviour
         } while(selectedInvSlot < 0){
             selectedInvSlot += 3;
         }
-        //Debug.Log(selectedInvSlot);
         GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+        
+        //pickup
+        if(Input.GetKeyDown(KeyCode.E)){
+            Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
+            if(itemsFound.Length > 0){
+                inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                inventory[selectedInvSlot, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                GameObject.Destroy(itemsFound[0].gameObject);
+            }
+        }
 
-        //UpdateInventory();
+        //drop
+        if(Input.GetKeyDown(KeyCode.Q)){
+            DropItem();
+            inventory[selectedInvSlot, 0] = 0;
+            inventory[selectedInvSlot, 1] = 0;
+        }
+
+        UpdateInventory();
 
         // alert enemies with noise - Skye
         currentNoiseVolume = 2f; // base noise volume
@@ -148,10 +162,19 @@ public class PlayerController : MonoBehaviour
 
         noiseCircle.transform.localScale = new Vector3(currentNoiseVolume, currentNoiseVolume, 1f); // debug? maybe
 
-
-        //Debug
-        //Debug.Log("Stamina: " + stamina + " Thirst: " + thirst);
-        //Debug.Log("movement magnitude: " + movement.magnitude);
+        //cooldown on how often enemies can hit player
+        if(hitCooldown > 0){
+            hitCooldown -= Time.deltaTime;
+        }
+        //does enemy hit player?
+        if(hitCooldown <= 0){
+            Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 2.0f, LayerMask.GetMask("Enemy"));
+            if(enemyCollisions != null && (health - 5) >= 0){
+                health -= 5;
+                hitCooldown = 0.5f;
+            }
+        }
+        
     }
 
     void UpdateInventory(){
@@ -165,9 +188,14 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < 3; i++){
             if(inventory[i,0]!=0){
-                //Debug.Log(inventory[i,0]);
-                Instantiate(itemId[inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
+                Instantiate(itemKey[inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
             }
+        }
+    }
+
+    void DropItem(){
+        if(inventory[selectedInvSlot,0] != 0){
+            Instantiate(itemKey[inventory[selectedInvSlot,0]], transform.position, new Quaternion());
         }
     }
 }
