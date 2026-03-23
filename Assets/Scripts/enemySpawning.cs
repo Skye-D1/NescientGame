@@ -24,7 +24,7 @@ public class enemySpawning : MonoBehaviour
             Vector3 newPos = new Vector3(Random.Range(-60f, 60f), Random.Range(-40f, 40f), 0);
             //if (Physics2D.OverlapCircleAll(newPos, 20f, playerMask).Length > 0) {
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                timer = Random.Range(0.12f, 0.20f); // todo: reset from debug level to 12f, 20f
+                timer = Random.Range(12f, 20f);
                 GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
                 inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
             }
