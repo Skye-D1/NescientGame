@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     float[,] inventory = new float[3,2];
     public GameObject[] itemKey;
     float hitCooldown = 0;
+    public Sprite[] bottleSprites;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -166,15 +167,24 @@ public class PlayerController : MonoBehaviour
                         inventory[selectedInvSlot, 1] -= 100f-Water;
                         Water = 100f;
                     }
+
+                    //change sprite of water bottle based on water level
+                    if(inventory[selectedInvSlot, 1] > 75f){
+                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[3];
+                    } else if(inventory[selectedInvSlot, 1] > 50f){
+                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[2];
+                    } else if(inventory[selectedInvSlot, 1] > 25){
+                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[1];
+                    }else{
+                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[0];
+                    }
+
                 } else if(inventory[selectedInvSlot, 0] == 2){
                     //Health Item
-                    if(100f-Health >= inventory[selectedInvSlot, 1]){
-                        Health += inventory[selectedInvSlot, 1];
+                    if(Health != 100.0f){
+                        Health=100f;
                         inventory[selectedInvSlot, 0] = 0;
                         inventory[selectedInvSlot, 1] = 0;
-                    } else if(100f-Health < inventory[selectedInvSlot, 1]){
-                        inventory[selectedInvSlot, 1] -= 100f-Health;
-                        Health = 100f;
                     }
 
                 } else if(inventory[selectedInvSlot, 0] == 3){
@@ -182,6 +192,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        
 
         UpdateInventory();
 
@@ -208,7 +220,7 @@ public class PlayerController : MonoBehaviour
         }
         //does enemy hit player?
         if(hitCooldown <= 0){
-            Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 2.0f, LayerMask.GetMask("Enemy"));
+            Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 1.0f, LayerMask.GetMask("Enemy"));
             if(enemyCollisions != null && (Health - 5) >= 0){
                 Health -= 5;
                 hitCooldown = 0.5f;
@@ -220,14 +232,14 @@ public class PlayerController : MonoBehaviour
     void UpdateInventory(){
         for(int i = 0; i < 3; i++){
             GameObject slot = GameObject.Find("invSlot" + i);
-            if(slot.transform.childCount != 0){
+            if((slot.transform.childCount != 0 && inventory[i,0] == 0) || (slot.transform.childCount != 0 && slot.transform.GetChild(0).gameObject.GetComponent<Item>().itemID != inventory[i,0])){
                 GameObject.Destroy(slot.transform.GetChild(0).gameObject);
             }
-            
         }
 
         for(int i = 0; i < 3; i++){
-            if(inventory[i,0]!=0){
+            GameObject slot = GameObject.Find("invSlot" + i);
+            if(inventory[i,0]!=0 && slot.transform.childCount == 0){
                 Instantiate(itemKey[(int)inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
             }
         }
