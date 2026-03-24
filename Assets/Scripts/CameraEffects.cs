@@ -13,15 +13,15 @@ public class CameraEffects : MonoBehaviour
     {
         //health vignette
         GameObject healthV = GameObject.Find("Vignette_Health");
-        float health = GameObject.Find("Player").GetComponent<PlayerController>().health;
+        float Health = GameObject.Find("Player").GetComponent<PlayerController>().Health;
 
-        healthV.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0, (100f-health)/100f);
+        healthV.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0, (100f-Health)/100f);
 
         
         //stamina vignette
         GameObject stamV = GameObject.Find("Vignette_Stamina");
-        float stamina = GameObject.Find("Player").GetComponent<PlayerController>().stamina;
+        float Stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
 
-        stamV.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (100f-stamina)/100f);
+        stamV.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (100f-Stamina)/100f);
     }
 }
