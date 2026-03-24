@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
         //Water Gun shot
         if(Input.GetButtonDown("Fire1") && Water > 10.0f){
-            //Water -= 10;
+            Water -= 10;
             Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
             
             //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
         
         //pickup
-        if(Input.GetKeyDown(KeyCode.E)){
+        if(Input.GetKeyDown(KeyCode.E) && inventory[selectedInvSlot, 0] == 0){
             Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
             if(itemsFound.Length > 0){
                 inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
