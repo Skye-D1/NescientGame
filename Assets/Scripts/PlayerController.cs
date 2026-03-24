@@ -13,21 +13,21 @@ public class PlayerController : MonoBehaviour
     float moveSpeed = 500.0f; // how fast the player moves
     bool sprinting = false; // whether the player is sprinting this frame or not
     float sprintMult = 3.0f; // multiplier on how fast the player moves when sprinting
-    float stamDrain = 30.0f; // how fast stamina drains per second of sprinting
-    float stamRegen = 10.0f; // how fast stamina regenerates per second when not sprinting
+    float stamDrain = 30.0f; // how fast Stamina drains per second of sprinting
+    float stamRegen = 10.0f; // how fast Stamina regenerates per second when not sprinting
     bool sneaking = false; // whether the player is sneaking
     float sneakMult = 0.35f; // how much slower the player moves while sneaking
-    public float stamina = 100.0f; // how much stamina the player has
-    public float thirst = 100.0f; // how much thirst the player has (100 = no thirst, 0 = completely thirsty)
-    public float health = 100.0f; // health points
-    public float Water = 100.0f; // how much water is in the player's water gun
+    public float Stamina = 100.0f; // how much Stamina the player has
+    public float Thirst = 100.0f; // how much Thirst the player has (100 = no Thirst, 0 = completely Thirsty)
+    public float Health = 100.0f; // Health points
+    public float Water = 100.0f; // how much Water is in the player's Water gun
     public float currentNoiseVolume = 0f; // per frame noise
     float sneakNoiseVolume = 4f; // how loud the player is while sneaking
     float walkNoiseVolume = 10f; // how loud the player is when walking
     float sprintNoiseVolume = 25f; // how loud the player is while sprinting
     LayerMask enemyMask;
     int selectedInvSlot = 0;
-    int[,] inventory = new int[3,2];
+    float[,] inventory = new float[3,2];
     public GameObject[] itemKey;
     float hitCooldown = 0;
 
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
         movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
 
-        //is the player sprinting or sneaking? stamina regeneration if they aren't sprinting
+        //is the player sprinting or sneaking? Stamina regeneration if they aren't sprinting
         if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
             sprinting = true;
         } else{
@@ -72,33 +72,33 @@ public class PlayerController : MonoBehaviour
             } else{
                 sneaking = false;
             }
-            if(stamina + stamRegen * Time.deltaTime < 100){
-                stamina += stamRegen * Time.deltaTime;
+            if(Stamina + stamRegen * Time.deltaTime < 100){
+                Stamina += stamRegen * Time.deltaTime;
             } else{
-                stamina = 100.0f;
+                Stamina = 100.0f;
             }
             
         }
 
-        //stamina drain and using movement
-        if(sprinting && stamina - stamDrain * Time.deltaTime > 0){
+        //Stamina drain and using movement
+        if(sprinting && Stamina - stamDrain * Time.deltaTime > 0){
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sprintMult*Time.deltaTime);
-            stamina = stamina - stamDrain * Time.deltaTime;
+            Stamina = Stamina - stamDrain * Time.deltaTime;
         } else if(sneaking){
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sneakMult*Time.deltaTime);
         } else{
             gameObject.GetComponent<Rigidbody2D>().AddForce(movement*Time.deltaTime);
         }
 
-        //thirst drain based on stamina
-        if(thirst - Time.deltaTime * ((100 - stamina)/50 + 0.1f) > 0){
-            thirst -= Time.deltaTime * ((100 - stamina)/50 + 0.1f);
+        //Thirst drain based on Stamina
+        if(Thirst - Time.deltaTime * ((100 - Stamina)/50 + 0.1f) > 0){
+            Thirst -= Time.deltaTime * ((100 - Stamina)/50 + 0.1f);
         } else{
-            thirst = 0;
+            Thirst = 0;
         }
 
         //Water Gun shot
-        if(Input.GetKeyDown(KeyCode.Space) && Water > 10.0f){
+        if(Input.GetButtonDown("Fire1") && Water > 10.0f){
             //Water -= 10;
             Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
             
@@ -153,6 +153,36 @@ public class PlayerController : MonoBehaviour
             inventory[selectedInvSlot, 1] = 0;
         }
 
+        //use item
+        if(Input.GetButtonDown("Fire2")){
+            if(inventory[selectedInvSlot, 0] != 0){
+                if(inventory[selectedInvSlot, 0] == 1){
+                    //Water Bottle
+                    if(100f-Water >= inventory[selectedInvSlot, 1]){
+                        Water += inventory[selectedInvSlot, 1];
+                        inventory[selectedInvSlot, 0] = 0;
+                        inventory[selectedInvSlot, 1] = 0;
+                    } else if(100f-Water < inventory[selectedInvSlot, 1]){
+                        inventory[selectedInvSlot, 1] -= 100f-Water;
+                        Water = 100f;
+                    }
+                } else if(inventory[selectedInvSlot, 0] == 2){
+                    //Health Item
+                    if(100f-Health >= inventory[selectedInvSlot, 1]){
+                        Health += inventory[selectedInvSlot, 1];
+                        inventory[selectedInvSlot, 0] = 0;
+                        inventory[selectedInvSlot, 1] = 0;
+                    } else if(100f-Health < inventory[selectedInvSlot, 1]){
+                        inventory[selectedInvSlot, 1] -= 100f-Health;
+                        Health = 100f;
+                    }
+
+                } else if(inventory[selectedInvSlot, 0] == 3){
+                    //Hedge Clippers
+                }
+            }
+        }
+
         UpdateInventory();
 
         // alert enemies with noise - Skye
@@ -179,8 +209,8 @@ public class PlayerController : MonoBehaviour
         //does enemy hit player?
         if(hitCooldown <= 0){
             Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 2.0f, LayerMask.GetMask("Enemy"));
-            if(enemyCollisions != null && (health - 5) >= 0){
-                health -= 5;
+            if(enemyCollisions != null && (Health - 5) >= 0){
+                Health -= 5;
                 hitCooldown = 0.5f;
             }
         }
@@ -198,14 +228,14 @@ public class PlayerController : MonoBehaviour
 
         for(int i = 0; i < 3; i++){
             if(inventory[i,0]!=0){
-                Instantiate(itemKey[inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
+                Instantiate(itemKey[(int)inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
             }
         }
     }
 
     void DropItem(){
         if(inventory[selectedInvSlot,0] != 0){
-            Instantiate(itemKey[inventory[selectedInvSlot,0]], transform.position, new Quaternion());
+            Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], transform.position, new Quaternion());
         }
     }
 }

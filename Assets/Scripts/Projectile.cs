@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider){
         if(!stopped && !collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Projectile")){
-            Debug.Log(collider.gameObject.name);
+            //Debug.Log(collider.gameObject.name);
             timer = 0f;
             if(collider.gameObject.CompareTag("Enemy")){
                 collider.gameObject.GetComponent<EnemyController>().plantify();
