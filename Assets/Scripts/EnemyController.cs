@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
     public GameObject staticPlant; // object to replace enemy with
     LayerMask levelMask;
     float strafeValue = 5f; // direction and magnitude of strafe movements
+    float wanderCooldown = 0f;
+    float maxWanderCooldown = 10f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,11 +31,13 @@ public class EnemyController : MonoBehaviour
         enemyMask = LayerMask.GetMask("Enemy");
         levelMask = LayerMask.GetMask("Default");
         target = new Vector2(transform.position.x, transform.position.y); // target own position on start
+        lineRenderer = gameObject.GetComponent<LineRenderer>();
+        
         // determine if leader
         if (Random.value > 0.9) { // todo: check proximity for other leaders
             isLeader = true;
+            lineRenderer.startColor = new Color(1f,1f,0f,1f);
         }
-        lineRenderer = gameObject.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
@@ -46,7 +50,7 @@ public class EnemyController : MonoBehaviour
             overshootTimer = 3f;
         }
 
-        // keep moving past target for a bit
+        // keep moving past target for a bit (overshoot)
         if (overshootTimer > 0) {
             overshootTimer -= Time.deltaTime;
             lineRenderer.enabled = false;
@@ -80,6 +84,18 @@ public class EnemyController : MonoBehaviour
             Debug.Log("debug: speeding ticket issued.");
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
         }
+
+        // leader generate new wander point if necessary
+        if (isLeader && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) {
+            if (wanderCooldown < 0) {
+                // generate new wander point and broadcast to nearby
+                Vector2 newPoint = new Vector2(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f)).normalized * 20f;
+                echoNoise(newPoint, false, 10f);
+                wanderCooldown = maxWanderCooldown;
+            } else {
+                wanderCooldown -= Time.deltaTime;
+            }
+        }
     }
 
     // hear a noise and update target if necessary
@@ -87,21 +103,24 @@ public class EnemyController : MonoBehaviour
     {
         // switch target if new is priority or current is null
         if ((target == null || newTargetPriority) && !didTargetUpdate) {
+            wanderCooldown = maxWanderCooldown; // ensure leader does not immediately make new wander target
             didTargetUpdate = true;
             target = newTarget;
             targetPriority = newTargetPriority;
             overshootTimer = 0;
             if (newTargetPriority) { // echo to others if priority high
-                echoNoise(newTarget, newTargetPriority);
+                echoNoise(newTarget, newTargetPriority, 0);
             }
         }
     }
 
     // communicate some recieved noises to other enemies nearby
-    void echoNoise(Vector2 newTarget, bool newTargetPriority) {
+    void echoNoise(Vector2 newTarget, bool newTargetPriority, float rangeOverride) {
+        if (rangeOverride == 0) {
+            rangeOverride = echoRadius;
+        }
         // overlap circle to check for enemy tag
-        enemiesFound = Physics2D.OverlapCircleAll(transform.position, echoRadius, enemyMask); // the aforementioned circle
-        //Debug.Log("echo :3 " + newTargetPriority);
+        enemiesFound = Physics2D.OverlapCircleAll(transform.position, rangeOverride, enemyMask); // the aforementioned circle
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(newTarget, newTargetPriority);
         }
