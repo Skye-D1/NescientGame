@@ -41,7 +41,7 @@ public class enemySpawning : MonoBehaviour
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
                 itemTimer = Random.Range(12f, 20f);
-                Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length - 1)], newPos, transform.rotation);
+                Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], newPos, transform.rotation);
             }
         } else {
             itemTimer -= Time.deltaTime;
