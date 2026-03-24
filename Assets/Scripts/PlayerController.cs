@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 //Name: Sam Johnson, Skye Drury
 //File: PlayerController.cs
@@ -7,6 +8,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Volume volume;
     public GameObject projectile; // prefab for projectile
     public GameObject noiseCircle; // reference to circle for noise range debug
     Vector3 movement; // direction of movement
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] itemKey;
     float hitCooldown = 0;
     public Sprite[] bottleSprites;
+    bool lookingUp = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,6 +60,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vignette vignette;
+        volume.profile.TryGet(out vignette);
+        if(Health == 0){
+            if(vignette.intensity.value < 1f){
+                vignette.intensity.value += Time.deltaTime;
+            }else if(vignette.smoothness.value < 1f){
+                vignette.smoothness.value += Time.deltaTime;
+            } else{
+                Time.timeScale = 0;
+            }
+        }
+
         //defining how the player should move this frame
         movement = new Vector3();
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -127,6 +142,33 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //is player trying to look at water gun
+        if(Input.GetKey(KeyCode.F)){
+            lookingUp = true;
+        } else{
+            lookingUp=false;
+        }
+
+        //looking at water gun logic
+        //going up
+        if(lookingUp == true){
+            if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != 0){
+                GameObject.Find("HUDWaterGun").transform.position += new Vector3(0,Time.deltaTime*14f,0);
+                if(GameObject.Find("HUDWaterGun").transform.position.y > 0){
+                    //Debug.Log("HUD view up!!!");
+                    GameObject.Find("HUDWaterGun").transform.position = new Vector3(0,0,0);
+                }
+            }
+        }
+        //going down
+        else if(!lookingUp && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -14f){
+            GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*14f,0);
+            if(GameObject.Find("HUDWaterGun").transform.position.y < -14f){
+                //Debug.Log("HUD view down!!!");
+                GameObject.Find("HUDWaterGun").transform.position = new Vector3(0,-14f,0);
+            }
+        }
+
         //inventory
         GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
         selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
@@ -159,14 +201,26 @@ public class PlayerController : MonoBehaviour
             if(inventory[selectedInvSlot, 0] != 0){
                 if(inventory[selectedInvSlot, 0] == 1){
                     //Water Bottle
-                    if(100f-Water >= inventory[selectedInvSlot, 1]){
-                        Water += inventory[selectedInvSlot, 1];
-                        inventory[selectedInvSlot, 0] = 0;
-                        inventory[selectedInvSlot, 1] = 0;
-                    } else if(100f-Water < inventory[selectedInvSlot, 1]){
-                        inventory[selectedInvSlot, 1] -= 100f-Water;
-                        Water = 100f;
+                    if(Input.GetKey(KeyCode.F)){
+                        if(100f-Water >= inventory[selectedInvSlot, 1]){
+                            Water += inventory[selectedInvSlot, 1];
+                            inventory[selectedInvSlot, 0] = 0;
+                            inventory[selectedInvSlot, 1] = 0;
+                        } else if(100f-Water < inventory[selectedInvSlot, 1]){
+                            inventory[selectedInvSlot, 1] -= 100f-Water;
+                            Water = 100f;
+                        }
+                    }else{
+                        if(100f-Thirst >= inventory[selectedInvSlot, 1]){
+                            Thirst += inventory[selectedInvSlot, 1];
+                            inventory[selectedInvSlot, 0] = 0;
+                            inventory[selectedInvSlot, 1] = 0;
+                        } else if(100f-Thirst < inventory[selectedInvSlot, 1]){
+                            inventory[selectedInvSlot, 1] -= 100f-Thirst;
+                            Thirst = 100f;
+                        }
                     }
+                    
 
                     //change sprite of water bottle based on water level
                     if(inventory[selectedInvSlot, 1] > 75f){
@@ -182,7 +236,10 @@ public class PlayerController : MonoBehaviour
                 } else if(inventory[selectedInvSlot, 0] == 2){
                     //Health Item
                     if(Health != 100.0f){
-                        Health=100f;
+                        Health+=25;
+                        if(Health > 100f){
+                            Health = 100f;
+                        }
                         inventory[selectedInvSlot, 0] = 0;
                         inventory[selectedInvSlot, 1] = 0;
                     }
