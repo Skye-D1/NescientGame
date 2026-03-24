@@ -7,9 +7,13 @@ using UnityEngine;
 public class enemySpawning : MonoBehaviour
 {
     public GameObject spawnableEnemy;
-    float timer;
+    float enemyTimer;
+    float itemTimer;
     LayerMask playerMask;
     public GameObject player;
+    float mapHeight = 80f;
+    float mapWidth = 120f;
+    public GameObject[] itemSpawnTable;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,16 +24,27 @@ public class enemySpawning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timer < 0) {
-            Vector3 newPos = new Vector3(Random.Range(-60f, 60f), Random.Range(-40f, 40f), 0);
-            //if (Physics2D.OverlapCircleAll(newPos, 20f, playerMask).Length > 0) {
+        // if enemy timer out and new position valid, spawn enemy and reset timer
+        if (enemyTimer < 0) {
+            Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                timer = Random.Range(12f, 20f);
+                enemyTimer = Random.Range(12f, 20f);
                 GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
                 inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
             }
         } else {
-            timer -= Time.deltaTime;
+            enemyTimer -= Time.deltaTime;
+        }
+
+        // if item timer out and new position valid, spawn item and reset timer
+        if (itemTimer < 0 && itemSpawnTable.Length > 0) {
+            Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
+            if (Vector3.Distance(player.transform.position, newPos) > 20f) {
+                itemTimer = Random.Range(12f, 20f);
+                Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length - 1)], newPos, transform.rotation);
+            }
+        } else {
+            itemTimer -= Time.deltaTime;
         }
     }
 }
