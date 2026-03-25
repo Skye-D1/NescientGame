@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Water Gun shot
-        if(Input.GetButtonDown("Fire1") && Water > 10.0f){
+        if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
             Water -= 10;
             Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
             
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
                 GameObject.Find("HUDWaterGun").transform.position += new Vector3(0,Time.deltaTime*14f,0);
                 if(GameObject.Find("HUDWaterGun").transform.position.y > 0){
                     //Debug.Log("HUD view up!!!");
-                    GameObject.Find("HUDWaterGun").transform.position = new Vector3(0,0,0);
+                    GameObject.Find("HUDWaterGun").transform.position = transform.position;
                 }
             }
         }
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*14f,0);
             if(GameObject.Find("HUDWaterGun").transform.position.y < -14f){
                 //Debug.Log("HUD view down!!!");
-                GameObject.Find("HUDWaterGun").transform.position = new Vector3(0,-14f,0);
+                GameObject.Find("HUDWaterGun").transform.position = transform.position + new Vector3(0,-14f,0);
             }
         }
 
