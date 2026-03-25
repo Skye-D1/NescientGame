@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2195479111739237513}
   - component: {fileID: -8592544363619189342}
   - component: {fileID: 8690229214743789586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: enemyPlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,3 +184,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046a1700dade1014eb7cddec3ada15a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 0

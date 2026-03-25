@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     float hitCooldown = 0;
     public Sprite[] bottleSprites;
     bool lookingUp = false;
+    bool dying;
+    public LayerMask damageMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,8 +49,6 @@ public class PlayerController : MonoBehaviour
 
         // Set target frame rate to 120 FPS
         Application.targetFrameRate = 120;
-
-        
 
         //linerenderer
         /*
@@ -64,9 +64,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
-        if(Health == 0){
+        if(Health <= 0){
+            dying = true;
+            //Debug.Log("dying: " + dying);
             if(vignette.intensity.value < 1f){
                 vignette.intensity.value += Time.deltaTime;
             }else if(vignette.smoothness.value < 1f){
@@ -158,7 +159,7 @@ public class PlayerController : MonoBehaviour
         if(lookingUp == true){
             if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != 0){
                 GameObject.Find("HUDWaterGun").transform.position += new Vector3(0,Time.deltaTime*14f,0);
-                if(GameObject.Find("HUDWaterGun").transform.position.y > 0){
+                if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y > 0){
                     //Debug.Log("HUD view up!!!");
                     GameObject.Find("HUDWaterGun").transform.position = transform.position;
                 }
@@ -167,7 +168,7 @@ public class PlayerController : MonoBehaviour
         //going down
         else if(!lookingUp && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -14f){
             GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*14f,0);
-            if(GameObject.Find("HUDWaterGun").transform.position.y < -14f){
+            if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y < -14f){
                 //Debug.Log("HUD view down!!!");
                 GameObject.Find("HUDWaterGun").transform.position = transform.position + new Vector3(0,-14f,0);
             }
@@ -286,9 +287,9 @@ public class PlayerController : MonoBehaviour
         }
         //does enemy hit player?
         if(hitCooldown <= 0){
-            Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 1.0f, LayerMask.GetMask("Enemy"));
+            Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 1.0f, damageMask);
             if(enemyCollisions != null && (Health - 5) >= 0){
-                Health -= 5;
+                Health -= 30;
                 hitCooldown = 0.5f;
             }
         }
@@ -315,5 +316,10 @@ public class PlayerController : MonoBehaviour
         if(inventory[selectedInvSlot,0] != 0){
             Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], transform.position, new Quaternion());
         }
+    }
+
+    public bool isDying(){
+        //Debug.Log("is dying is " + dying);
+        return dying;
     }
 }
