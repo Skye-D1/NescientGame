@@ -11,7 +11,7 @@ public class enemySpawning : MonoBehaviour
     float itemTimer;
     LayerMask playerMask;
     public GameObject player;
-    float mapHeight = 80f;
+    float mapHeight = 54f;
     float mapWidth = 120f;
     public GameObject[] itemSpawnTable;
 
@@ -28,7 +28,7 @@ public class enemySpawning : MonoBehaviour
         if (enemyTimer < 0) {
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                enemyTimer = Random.Range(12f, 20f);
+                enemyTimer = Random.Range(4f, 7f);
                 GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
                 inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
             }
@@ -40,7 +40,7 @@ public class enemySpawning : MonoBehaviour
         if (itemTimer < 0 && itemSpawnTable.Length > 0) {
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                itemTimer = Random.Range(12f, 20f);
+                itemTimer = Random.Range(12f, 40f);
                 Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], newPos, transform.rotation);
             }
         } else {
