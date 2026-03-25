@@ -11,7 +11,7 @@ public class enemySpawning : MonoBehaviour
     float itemTimer;
     LayerMask playerMask;
     public GameObject player;
-    float mapHeight = 80f;
+    float mapHeight = 54f;
     float mapWidth = 120f;
     public GameObject[] itemSpawnTable;
 
