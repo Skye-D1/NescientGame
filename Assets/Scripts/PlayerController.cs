@@ -8,7 +8,7 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
-    public Volume volume;
+    
     public GameObject projectile; // prefab for projectile
     public GameObject noiseCircle; // reference to circle for noise range debug
     Vector3 movement; // direction of movement
@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
         // Set target frame rate to 120 FPS
         Application.targetFrameRate = 120;
 
+        
+
         //linerenderer
         /*
         LineRenderer noiseCircle = GameObject.Find("debug_noise_range").GetComponent<LineRenderer>();
@@ -60,8 +62,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vignette vignette;
-        volume.profile.TryGet(out vignette);
+        
+        Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
         if(Health == 0){
             if(vignette.intensity.value < 1f){
                 vignette.intensity.value += Time.deltaTime;
