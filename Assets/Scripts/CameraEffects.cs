@@ -1,11 +1,15 @@
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CameraEffects : MonoBehaviour
 {
+    public Volume volume;
+    public Vignette vignette;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        volume.profile.TryGet(out vignette);
     }
 
     // Update is called once per frame
@@ -19,9 +23,9 @@ public class CameraEffects : MonoBehaviour
 
         
         //stamina vignette
-        GameObject stamV = GameObject.Find("Vignette_Stamina");
         float Stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
+        vignette.intensity.value = (100f-Stamina)/100f;
 
-        stamV.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (100f-Stamina)/100f);
+        //stamV.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (100f-Stamina)/100f);
     }
 }
