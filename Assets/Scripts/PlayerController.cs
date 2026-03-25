@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     float sneakNoiseVolume = 4f; // how loud the player is while sneaking
     float walkNoiseVolume = 10f; // how loud the player is when walking
     float sprintNoiseVolume = 25f; // how loud the player is while sprinting
+    float soundPulseDelay = 0.5f;
+    float soundPulseTimer = 0;
     LayerMask enemyMask;
     int selectedInvSlot = 0;
     float[,] inventory = new float[3,2];
@@ -268,8 +270,13 @@ public class PlayerController : MonoBehaviour
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
         }
-
-        noiseCircle.transform.localScale = new Vector3(currentNoiseVolume, currentNoiseVolume, 1f); // debug? maybe
+        if (soundPulseTimer > soundPulseDelay) {
+            soundPulseTimer = 0;
+            GameObject newNoiseCircle = Instantiate(noiseCircle, transform.position, new Quaternion());
+            newNoiseCircle.GetComponent<noiseCircleController>().noiseRange = currentNoiseVolume;
+        } else {
+            soundPulseTimer += Time.deltaTime;
+        }
 
         //cooldown on how often enemies can hit player
         if(hitCooldown > 0){
