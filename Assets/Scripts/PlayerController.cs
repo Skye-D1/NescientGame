@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
-        if(Health <= 0){
+        if(Health <= 0 || Thirst <= 0){
             dying = true;
             //Debug.Log("dying: " + dying);
             if(vignette.intensity.value < 1f){
