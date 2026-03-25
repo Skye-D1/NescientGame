@@ -166,11 +166,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         //going down
-        else if(!lookingUp && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -14f){
-            GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*14f,0);
-            if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y < -14f){
+        else if(!lookingUp && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -9.75f){
+            GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
+            if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y < -9.75){
                 //Debug.Log("HUD view down!!!");
-                GameObject.Find("HUDWaterGun").transform.position = transform.position + new Vector3(0,-14f,0);
+                GameObject.Find("HUDWaterGun").transform.position = transform.position + new Vector3(0,-9.75f,0);
             }
         }
 
