@@ -35,9 +35,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] itemKey;
     float hitCooldown = 0;
     public Sprite[] bottleSprites;
-    bool lookingUp = false;
     bool dying;
-    public LayerMask damageMask;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -147,16 +145,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //is player trying to look at water gun
-        if(Input.GetKey(KeyCode.F)){
-            lookingUp = true;
-        } else{
-            lookingUp=false;
-        }
-
         //looking at water gun logic
         //going up
-        if(lookingUp == true){
+        if(Input.GetKey(KeyCode.F)){
             if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != 0){
                 GameObject.Find("HUDWaterGun").transform.position += new Vector3(0,Time.deltaTime*14f,0);
                 if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y > 0){
@@ -166,7 +157,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         //going down
-        else if(!lookingUp && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -9.75f){
+        else if(!Input.GetKey(KeyCode.F) && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -9.75f){
             GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
             if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y < -9.75){
                 //Debug.Log("HUD view down!!!");
@@ -287,9 +278,12 @@ public class PlayerController : MonoBehaviour
         }
         //does enemy hit player?
         if(hitCooldown <= 0){
-            Collider2D enemyCollisions = Physics2D.OverlapCircle(transform.position, 1.0f, damageMask);
-            if(enemyCollisions != null && (Health - 5) >= 0){
+            if(Physics2D.OverlapCircle(transform.position, 1.0f, LayerMask.GetMask("Enemy")) != null && (Health - 5) >= 0){
                 Health -= 30;
+                hitCooldown = 0.5f;
+            }
+            else if(Physics2D.OverlapCircle(transform.position, 1.0f, LayerMask.GetMask("DeadEnemy")) != null && (Health - 5) >= 0){
+                Health -= 15;
                 hitCooldown = 0.5f;
             }
         }
