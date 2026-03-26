@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] bottleSprites;
     bool dying;
     GameObject hudWaterGun;
+    public GameObject debugCircle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -122,7 +123,7 @@ public class PlayerController : MonoBehaviour
         //Water Gun shot
         if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
             Water -= 10;
-            Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
+            Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
             
             //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
 
@@ -245,6 +246,14 @@ public class PlayerController : MonoBehaviour
 
                 } else if(inventory[selectedInvSlot, 0] == 3){
                     //Hedge Clippers
+                    Collider2D[] deadEnemies = Physics2D.OverlapCircleAll((new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y)).normalized + (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset), 2f, LayerMask.GetMask("DeadEnemy"));
+                    GameObject circle = GameObject.Instantiate(debugCircle, (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y)).normalized + (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset), new Quaternion());
+                    circle.transform.localScale = new Vector3(2f,2f, 1f);
+
+                    foreach(Collider2D bush in deadEnemies){
+                        Debug.Log("Enemy detected!");
+                        GameObject.Destroy(bush.gameObject);
+                    }
                 }
             }
         }
@@ -319,7 +328,8 @@ public class PlayerController : MonoBehaviour
 
     void DropItem(){
         if(inventory[selectedInvSlot,0] != 0){
-            Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], transform.position, new Quaternion());
+            GameObject item = Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], transform.position, new Quaternion());
+            item.GetComponent<Item>().power = inventory[selectedInvSlot, 1];
         }
     }
 
