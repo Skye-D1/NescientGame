@@ -28,7 +28,7 @@ public class enemySpawning : MonoBehaviour
         if (enemyTimer < 0) {
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                enemyTimer = Random.Range(4f, 7f);
+                enemyTimer = Random.Range(2f, 3f);
                 GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
                 inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
             }
