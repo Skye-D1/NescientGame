@@ -38,11 +38,14 @@ public class PlayerController : MonoBehaviour
     bool lookingUp = false;
     bool dying;
     public LayerMask damageMask;
+    GameObject hudWaterGun;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
+
+        hudWaterGun = GameObject.Find("HUDWaterGun");
 
         // Disable VSync to use target frameRate
         QualitySettings.vSyncCount = 1;
@@ -157,20 +160,20 @@ public class PlayerController : MonoBehaviour
         //looking at water gun logic
         //going up
         if(lookingUp == true){
-            if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != 0){
-                GameObject.Find("HUDWaterGun").transform.position += new Vector3(0,Time.deltaTime*14f,0);
-                if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y > 0){
+            if(hudWaterGun.transform.position.y - transform.position.y != 0){
+                hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
+                if(hudWaterGun.transform.position.y - transform.position.y > 0){
                     //Debug.Log("HUD view up!!!");
-                    GameObject.Find("HUDWaterGun").transform.position = transform.position;
+                    hudWaterGun.transform.position = transform.position;
                 }
             }
         }
         //going down
-        else if(!lookingUp && GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y != -9.75f){
-            GameObject.Find("HUDWaterGun").transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
-            if(GameObject.Find("HUDWaterGun").transform.position.y - transform.position.y < -9.75){
+        else if(!lookingUp && hudWaterGun.transform.position.y - transform.position.y != -9.75f){
+            hudWaterGun.transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
+            if(hudWaterGun.transform.position.y - transform.position.y < -9.75){
                 //Debug.Log("HUD view down!!!");
-                GameObject.Find("HUDWaterGun").transform.position = transform.position + new Vector3(0,-9.75f,0);
+                hudWaterGun.transform.position = transform.position + new Vector3(0,-9.75f,0);
             }
         }
 
@@ -293,6 +296,14 @@ public class PlayerController : MonoBehaviour
                 hitCooldown = 0.5f;
             }
         }
+
+        // update water gauge needle position
+        float currentZ = hudWaterGun.transform.GetChild(0).transform.eulerAngles.z;
+        float targetZ = Mathf.Lerp(140f, -140f, (Water/100f));
+        if (currentZ > 180) {
+            currentZ -= 360;
+        }
+        hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, Mathf.Sign(targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
         
     }
 
