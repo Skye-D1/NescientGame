@@ -6,7 +6,8 @@ public class Building : MonoBehaviour
     public float outRadius;
     public float inRadius;
     SpriteRenderer roofSprite;
-    bool isFirstFrame = true;
+    public float offset;
+    int frame = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,9 +19,12 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isFirstFrame){
-            isFirstFrame = false;
-            roofSprite.sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        if(frame < 3){
+            frame += 1;
+        }
+        if(frame == 3){
+            frame += 1;
+            roofSprite.sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder + (int)Mathf.Floor(offset * 10f);
         }
         float distance = Vector3.Distance(player.transform.position, transform.position);
         if(distance-inRadius < outRadius-inRadius){
