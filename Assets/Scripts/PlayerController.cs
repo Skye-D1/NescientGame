@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
                 Health -= 30;
                 hitCooldown = 0.5f;
             }
-            else if(Physics2D.OverlapCircle(transform.position, 0.5f, LayerMask.GetMask("DeadEnemy")) != null && (Health - 5) >= 0){
+            else if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 0.5f, LayerMask.GetMask("DeadEnemy")) != null && (Health - 5) >= 0){
                 Health -= 15;
                 hitCooldown = 0.5f;
             }
