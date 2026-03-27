@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     Vector3 movement; // direction of movement
     float moveSpeed = 500.0f; // how fast the player moves
     bool sprinting = false; // whether the player is sprinting this frame or not
-    bool wasSprinting; // whether player was sprinting last frame
     float sprintMult = 3.0f; // multiplier on how fast the player moves when sprinting
     float stamDrain = 30.0f; // how fast Stamina drains per second of sprinting
     float stamRegen = 10.0f; // how fast Stamina regenerates per second when not sprinting
@@ -25,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public float Health = 100.0f; // Health points
     public float Water = 100.0f; // how much Water is in the player's Water gun
     public float currentNoiseVolume = 0f; // per frame noise
+    float prevNoiseVolume; // noise volume last frame
     float sneakNoiseVolume = 4f; // how loud the player is while sneaking
     float walkNoiseVolume = 10f; // how loud the player is when walking
     float sprintNoiseVolume = 25f; // how loud the player is while sprinting
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] bottleSprites;
     bool dying;
     GameObject hudWaterGun;
-    public GameObject debugCircle;
+    //public GameObject debugCircle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -251,13 +251,17 @@ public class PlayerController : MonoBehaviour
                 } else if(inventory[selectedInvSlot, 0] == 3){
                     //Hedge Clippers
                     Collider2D[] deadEnemies = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 2f, LayerMask.GetMask("DeadEnemy"));
-                    GameObject circle = GameObject.Instantiate(debugCircle, new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, new Quaternion());
-                    circle.transform.localScale = new Vector3(2f,2f, 1f);
+                    //GameObject circle = GameObject.Instantiate(debugCircle, new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, new Quaternion());
+                    //circle.transform.localScale = new Vector3(2f,2f, 1f);
+                    
 
                     foreach(Collider2D bush in deadEnemies){
                         Debug.Log("Enemy detected!");
                         GameObject.Destroy(bush.gameObject);
                     }
+                    // destroy item
+                    inventory[selectedInvSlot, 0] = 0;
+                    inventory[selectedInvSlot, 1] = 0;
                 }
             }
         }
@@ -269,19 +273,22 @@ public class PlayerController : MonoBehaviour
         // alert enemies with noise - Skye
         if (sprinting && movement.magnitude != 0) {
             currentNoiseVolume = sprintNoiseVolume;
-            if (!wasSprinting) {
+            if (prevNoiseVolume < sprintNoiseVolume) {
                 soundPulseTimer = -1; // force sound pulse visual
             }
-            wasSprinting = true;
         } else if (movement.magnitude != 0 && !sneaking) {
             currentNoiseVolume = walkNoiseVolume;
+            if (prevNoiseVolume < walkNoiseVolume) {
+                soundPulseTimer = -1; // force sound pulse visual
+            }
         } else if (movement.magnitude != 0 && sneaking) {
             currentNoiseVolume = sneakNoiseVolume;
+            if (prevNoiseVolume < sneakNoiseVolume) {
+                soundPulseTimer = -1; // force sound pulse visual
+            }
         }
 
-        if (!sprinting) {
-            wasSprinting = false;
-        }
+        prevNoiseVolume = currentNoiseVolume;
 
         // overlap circle to check for enemy tag - Skye
         Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
