@@ -2,7 +2,7 @@ using UnityEngine;
 
 //Name: Skye Drury
 //File: EnemyController.cs
-//Purpose: Manage enemy movement, recieving and communicating noises, and other enemy behavior
+//Purpose: Manage enemy movement, receiving and communicating noises, and other enemy behavior
 
 public class EnemyController : MonoBehaviour
 {

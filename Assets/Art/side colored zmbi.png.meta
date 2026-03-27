@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 836745829ea7ce24c880c04e56bb1664
+guid: 19028b38e6b311941b8b5b698402a9b5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 692451553763850865
-    second: WaterBottle(Inventory)_0
+      213: 3669205746100690709
+    second: side colored zmbi_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 369
+  spritePixelsToUnits: 800
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WaterBottle(Inventory)_0
+      name: side colored zmbi_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 188
-        height: 369
+        x: 1189
+        y: 108
+        width: 702
+        height: 1987
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17af246f4051c9900800000000000000
-      internalID: 692451553763850865
+      spriteID: 51f57209f23abe230800000000000000
+      internalID: 3669205746100690709
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WaterBottle(Inventory)_0: 692451553763850865
+      side colored zmbi_0: 3669205746100690709
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
