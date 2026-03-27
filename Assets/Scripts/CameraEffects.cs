@@ -2,14 +2,20 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+//Name: Sam Johnson
+//File: CameraEffects.cs
+//Purpose: Manage all post-processing effects
+
 public class CameraEffects : MonoBehaviour
 {
     public Volume volume;
     public Vignette vignette;
+    ColorAdjustments saturation;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         volume.profile.TryGet(out vignette);
+        volume.profile.TryGet(out saturation);
     }
 
     // Update is called once per frame
@@ -29,6 +35,8 @@ public class CameraEffects : MonoBehaviour
             vignette.intensity.value = (100f-Stamina)/175f;
         }
 
-        //stamV.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, (100f-Stamina)/100f);
+        //thirst desaturation
+        float Thirst = GameObject.Find("Player").GetComponent<PlayerController>().Thirst;
+        saturation.saturation.value = -(100f-Thirst);
     }
 }

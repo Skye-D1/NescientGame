@@ -1,6 +1,10 @@
 using UnityEngine;
 using System;
 
+//Name: Sam Johnson
+//File: layerSetStatic.cs
+//Purpose: Manages the sortingLayer of objects that have a static position
+
 public class layerSetStatic : MonoBehaviour
 {
     public float offset;
