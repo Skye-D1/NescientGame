@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Vector3 movement; // direction of movement
     float moveSpeed = 500.0f; // how fast the player moves
     bool sprinting = false; // whether the player is sprinting this frame or not
+    bool wasSprinting; // whether player was sprinting last frame
     float sprintMult = 3.0f; // multiplier on how fast the player moves when sprinting
     float stamDrain = 30.0f; // how fast Stamina drains per second of sprinting
     float stamRegen = 10.0f; // how fast Stamina regenerates per second when not sprinting
@@ -27,7 +28,8 @@ public class PlayerController : MonoBehaviour
     float sneakNoiseVolume = 4f; // how loud the player is while sneaking
     float walkNoiseVolume = 10f; // how loud the player is when walking
     float sprintNoiseVolume = 25f; // how loud the player is while sprinting
-    float soundPulseDelay = 0.5f;
+    float waterGunNoiseVolume = 10f;
+    float soundPulseDelay = 1f; // delay between noise pulse visualizations
     float soundPulseTimer = 0;
     LayerMask enemyMask;
     int selectedInvSlot = 0;
@@ -120,11 +122,13 @@ public class PlayerController : MonoBehaviour
             Thirst = 0;
         }
 
-        //Water Gun shot
+        //Water Gun shoot
         if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
             Water -= 10;
             Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
-            
+            currentNoiseVolume = waterGunNoiseVolume;
+            soundPulseTimer = -1; // force sound pulse visual
+
             //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
 
             for(int i = 0; i < 10; i++){
@@ -263,25 +267,33 @@ public class PlayerController : MonoBehaviour
         UpdateInventory();
 
         // alert enemies with noise - Skye
-        currentNoiseVolume = 2f; // base noise volume
         if (sprinting && movement.magnitude != 0) {
             currentNoiseVolume = sprintNoiseVolume;
+            if (!wasSprinting) {
+                soundPulseTimer = -1; // force sound pulse visual
+            }
+            wasSprinting = true;
         } else if (movement.magnitude != 0 && !sneaking) {
             currentNoiseVolume = walkNoiseVolume;
         } else if (movement.magnitude != 0 && sneaking) {
             currentNoiseVolume = sneakNoiseVolume;
         }
+
+        if (!sprinting) {
+            wasSprinting = false;
+        }
+
         // overlap circle to check for enemy tag - Skye
         Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
         for(int i = 0; i < enemiesFound.Length; i++) {
             enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
         }
-        if (soundPulseTimer > soundPulseDelay) {
-            soundPulseTimer = 0;
+        if (soundPulseTimer < 0) { // sound pulse happen on timed repeat
+            soundPulseTimer = soundPulseDelay;
             GameObject newNoiseCircle = Instantiate(noiseCircle, transform.position, new Quaternion());
             newNoiseCircle.GetComponent<noiseCircleController>().noiseRange = currentNoiseVolume;
         } else {
-            soundPulseTimer += Time.deltaTime;
+            soundPulseTimer -= Time.deltaTime;
         }
 
         //cooldown on how often enemies can hit player
@@ -308,6 +320,7 @@ public class PlayerController : MonoBehaviour
         }
         hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, Mathf.Sign(targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
         
+        currentNoiseVolume = 2f; // base noise volume for next frame
     }
 
     void UpdateInventory(){
