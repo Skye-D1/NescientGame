@@ -16,6 +16,7 @@ public class LootContainerSpawn : MonoBehaviour
     void Start()
     {
         playerMask = LayerMask.GetMask("Player");
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
