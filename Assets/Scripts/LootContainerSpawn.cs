@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class LootContainerSpawn : MonoBehaviour
 {
-    float itemTimer;
+    public float itemTimer;
     LayerMask playerMask;
     public GameObject player;
     public GameObject[] itemSpawnTable;
@@ -26,9 +26,9 @@ public class LootContainerSpawn : MonoBehaviour
         // if item timer out and player not nearby, set ready and reset timer
         if (itemTimer < 0 && itemSpawnTable.Length > 0) {
             if (Vector3.Distance(player.transform.position, transform.position) > 10f) {
-                itemTimer = Random.Range(12f, 20f);
                 isItemReady = true;
             }
+            itemTimer = Random.Range(12f, 20f);
         } else {
             itemTimer -= Time.deltaTime;
         }
