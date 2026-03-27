@@ -1,5 +1,9 @@
 using UnityEngine;
 
+//Name: Sam Johnson
+//File: Item.cs
+//Purpose: Manages holding data about items and layering them correctly
+
 public class Item : MonoBehaviour
 {
     public int itemID = 0; // what item is it?

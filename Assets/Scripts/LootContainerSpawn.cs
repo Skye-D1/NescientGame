@@ -11,6 +11,7 @@ public class LootContainerSpawn : MonoBehaviour
     public GameObject player;
     public GameObject[] itemSpawnTable;
     public bool isItemReady;
+    public Vector3 spawnOffsets;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +31,12 @@ public class LootContainerSpawn : MonoBehaviour
             }
         } else {
             itemTimer -= Time.deltaTime;
+        }
+        
+        // if player press e and in range
+        if(isItemReady && Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.transform.position, transform.position) < 2f) {
+            isItemReady = false;
+            Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], (transform.position + spawnOffsets), transform.rotation);
         }
 
 

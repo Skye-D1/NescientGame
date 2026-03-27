@@ -246,8 +246,8 @@ public class PlayerController : MonoBehaviour
 
                 } else if(inventory[selectedInvSlot, 0] == 3){
                     //Hedge Clippers
-                    Collider2D[] deadEnemies = Physics2D.OverlapCircleAll((new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y)).normalized + (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset), 2f, LayerMask.GetMask("DeadEnemy"));
-                    GameObject circle = GameObject.Instantiate(debugCircle, (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y)).normalized + (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset), new Quaternion());
+                    Collider2D[] deadEnemies = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 2f, LayerMask.GetMask("DeadEnemy"));
+                    GameObject circle = GameObject.Instantiate(debugCircle, new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, new Quaternion());
                     circle.transform.localScale = new Vector3(2f,2f, 1f);
 
                     foreach(Collider2D bush in deadEnemies){
