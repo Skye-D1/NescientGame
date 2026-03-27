@@ -1,6 +1,10 @@
 using UnityEngine;
 using System;
 
+//Name: Sam Johnson
+//File: layerSetDynamic.cs
+//Purpose: Manages the sortingLayer of objects that have a dynamic position
+
 public class layerSetDynamic : MonoBehaviour
 {
     SpriteRenderer Renderer;

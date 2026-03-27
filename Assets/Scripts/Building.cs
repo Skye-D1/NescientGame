@@ -1,5 +1,9 @@
 using UnityEngine;
 
+//Name: Sam Johnson
+//File: Building.cs
+//Purpose: Manages the sortingLayer of buildings and their roofs as well as the transparency of the roof
+
 public class Building : MonoBehaviour
 {
     GameObject player;

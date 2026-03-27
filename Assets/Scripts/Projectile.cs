@@ -1,5 +1,9 @@
 using UnityEngine;
 
+//Name: Sam Johnson
+//File: Projectile.cs
+//Purpose: Manage player's projectiles
+
 public class Projectile : MonoBehaviour
 {
     public float timer = 0.25f;
