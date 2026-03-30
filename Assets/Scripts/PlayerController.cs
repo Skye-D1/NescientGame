@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     float hitCooldown = 0;
     public Sprite[] bottleSprites;
     bool dying;
+    public bool preventDie; // debug probably
     GameObject hudWaterGun;
     //public GameObject debugCircle;
 
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
-        if(Health <= 0 || Thirst <= 0){
+        if((Health <= 0 || Thirst <= 0) && !preventDie){
             dying = true;
             //Debug.Log("dying: " + dying);
             if(vignette.intensity.value < 1f){
