@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
     float maxWanderCooldown = 3f;
     float mapHeight = 54f;
     float mapWidth = 120f;
+    float targetRandFactor = 3f;
     Rigidbody2D RB;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,7 +55,7 @@ public class EnemyController : MonoBehaviour
         if (targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
             overshootTimer = 3f;
             hasTarget = false;
-        } else if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) {
+        } else if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 5f) {
             hasTarget = false;
         }
 
@@ -94,18 +95,19 @@ public class EnemyController : MonoBehaviour
         }
 
         // leader generate new wander point if necessary
-        if (isLeader && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) {
+        if (isLeader && !hasTarget) {
             if (wanderCooldown < 0) {
                 // generate new wander point and broadcast to nearby
                 Vector2 newPoint;
                 do {
-                    newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 20f;
+                    newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 25f;
                 } while (Mathf.Abs(newPoint.x + transform.position.x) > (mapWidth/2f) || Mathf.Abs(newPoint.y + transform.position.y) > (mapHeight/2f));
 
                 echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
                 target = new Vector2(transform.position.x, transform.position.y) + newPoint;
                 //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
                 wanderCooldown = maxWanderCooldown + (maxWanderCooldown * (Random.value - 0.5f));
+                didTargetUpdate = true;
             } else {
                 wanderCooldown -= Time.deltaTime;
             }
@@ -119,7 +121,11 @@ public class EnemyController : MonoBehaviour
         if ((!hasTarget || newTargetPriority) && !didTargetUpdate) {
             wanderCooldown = maxWanderCooldown; // ensure leader does not immediately make new wander target
             didTargetUpdate = true;
-            target = newTarget;
+            do {
+                target = new Vector2(newTarget.x + Random.Range(-targetRandFactor, targetRandFactor), newTarget.y + Random.Range(-targetRandFactor, targetRandFactor));
+            } while ((Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f)));
+
+
             targetPriority = newTargetPriority;
             hasTarget = true;
             overshootTimer = 0;
