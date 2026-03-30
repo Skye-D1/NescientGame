@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour
     float strafeValue = 5f; // direction and magnitude of strafe movements
     float wanderCooldown = 0f;
     float maxWanderCooldown = 3f;
+    float mapHeight = 54f;
+    float mapWidth = 120f;
     Rigidbody2D RB;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -37,7 +39,7 @@ public class EnemyController : MonoBehaviour
         RB = gameObject.GetComponent<Rigidbody2D>();
         
         // determine if leader
-        if (Random.value > 0.8) { // todo: check proximity for other leaders
+        if (Random.value > 0.4) { // todo: check proximity for other leaders
             isLeader = true;
             lineRenderer.startColor = new Color(1f,1f,0f,1f);
         }
@@ -65,7 +67,7 @@ public class EnemyController : MonoBehaviour
         // move towards target
         } else if (!isStatic && hasTarget) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
-            //lineRenderer.enabled = true;
+            lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
         }
@@ -95,7 +97,11 @@ public class EnemyController : MonoBehaviour
         if (isLeader && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) {
             if (wanderCooldown < 0) {
                 // generate new wander point and broadcast to nearby
-                Vector2 newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 20f;
+                Vector2 newPoint;
+                do {
+                    newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 20f;
+                } while (Mathf.Abs(newPoint.x + transform.position.x) > (mapWidth/2f) || Mathf.Abs(newPoint.y + transform.position.y) > (mapHeight/2f));
+
                 echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
                 target = new Vector2(transform.position.x, transform.position.y) + newPoint;
                 //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
