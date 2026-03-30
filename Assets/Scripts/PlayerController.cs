@@ -345,6 +345,23 @@ public class PlayerController : MonoBehaviour
         hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, Mathf.Sign(targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
         
         currentNoiseVolume = 2f; // base noise volume for next frame
+
+        //enemy chase drums
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 14f, LayerMask.GetMask("Enemy"));
+        AudioSource drums = gameObject.GetComponent<AudioSource>();
+        if(enemiesInRange.Length > 0){
+            if(enemiesInRange.Length == 1){
+                drums.volume = (14f-Vector3.Distance(enemiesInRange[0].transform.position, transform.position))/14f;
+            } else{
+                float dist = 14f;
+                for(int i = 0; i < enemiesInRange.Length; i++){
+                    if(Vector3.Distance(enemiesInRange[i].transform.position, transform.position) < dist){
+                        dist = Vector3.Distance(enemiesInRange[i].transform.position, transform.position);
+                    }
+                }
+                drums.volume = (14f-dist)/14f;
+            }
+        }
     }
 
     void UpdateInventory(){
