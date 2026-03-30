@@ -68,7 +68,7 @@ public class EnemyController : MonoBehaviour
         // move towards target
         } else if (!isStatic && hasTarget) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
-            lineRenderer.enabled = true;
+            //lineRenderer.enabled = true;
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
         }
