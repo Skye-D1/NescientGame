@@ -184,12 +184,28 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
         
         //pickup
-        if(Input.GetKeyDown(KeyCode.E) && inventory[selectedInvSlot, 0] == 0){
+        if(Input.GetKeyDown(KeyCode.E)){
             Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
             if(itemsFound.Length > 0){
-                inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                inventory[selectedInvSlot, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                GameObject.Destroy(itemsFound[0].gameObject);
+                if(inventory[selectedInvSlot, 0] == 0){
+                    inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                    inventory[selectedInvSlot, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                    GameObject.Destroy(itemsFound[0].gameObject);
+                } else{
+                    if(inventory[0, 0] == 0){
+                        inventory[0, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                        inventory[0, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                        GameObject.Destroy(itemsFound[0].gameObject);
+                    } else if(inventory[1, 0] == 0){
+                        inventory[1, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                        inventory[1, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                        GameObject.Destroy(itemsFound[0].gameObject);
+                    } else if(inventory[2, 0] == 0){
+                        inventory[2, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                        inventory[2, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                        GameObject.Destroy(itemsFound[0].gameObject);
+                    }
+                }
             }
         }
 
