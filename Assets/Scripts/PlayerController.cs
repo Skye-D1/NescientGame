@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject projectile; // prefab for projectile
     public GameObject noiseCircle; // reference to circle for noise range debug
     Vector3 movement; // direction of movement
+    Vector3 prevMovement; // movement last frame
     float moveSpeed = 500.0f; // how fast the player moves
     bool sprinting = false; // whether the player is sprinting this frame or not
     float sprintMult = 3.0f; // multiplier on how fast the player moves when sprinting
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
     public bool preventDie; // debug probably
     public bool debugLasers; // debuggin emeny
     GameObject hudWaterGun;
+    SpriteRenderer selfRenderer;
+    bool useMouseForLook;
     public bool isPaused = false;
     //public GameObject debugCircle;
 
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
 
         hudWaterGun = GameObject.Find("HUDWaterGun");
+        selfRenderer = gameObject.GetComponent<SpriteRenderer>();
 
         // Disable VSync to use target frameRate
         QualitySettings.vSyncCount = 1;
@@ -88,6 +92,28 @@ public class PlayerController : MonoBehaviour
             //defining how the player should move this frame
             movement = new Vector3();
             movement.x = Input.GetAxisRaw("Horizontal");
+            if (prevMovement != movement) { // if changed move input, loop at move direction
+                useMouseForLook = false;
+            }
+            if (movement.x > 0) {
+                selfRenderer.flipX = true;
+            } else if (movement.x < 0) {
+                selfRenderer.flipX = false;
+            } else { // if not movin, look at mouse
+                useMouseForLook = true;
+            }
+            if (Input.mousePositionDelta.magnitude > 1) { // if mouse movin, look at mouse
+                useMouseForLook = true;
+            }
+            if (useMouseForLook) {
+                if (Input.mousePosition.x > 0) {
+                    selfRenderer.flipX = true;
+                } else if (Input.mousePosition.x < 0) {
+                    selfRenderer.flipX = false;
+                }
+            }
+            prevMovement = movement;
+
             movement.y = Input.GetAxisRaw("Vertical");
             movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
 
