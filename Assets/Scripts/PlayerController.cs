@@ -184,22 +184,23 @@ public class PlayerController : MonoBehaviour
             }
 
             //looking at water gun logic
+            Vector3 cameraPos = GameObject.Find("Main Camera").transform.position;
             //going up
             if(Input.GetKey(KeyCode.F)){
-                if(hudWaterGun.transform.position.y - transform.position.y != 0){
+                if(hudWaterGun.transform.position.y - cameraPos.y != 0){
                     hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
-                    if(hudWaterGun.transform.position.y - transform.position.y > 0){
+                    if(hudWaterGun.transform.position.y - cameraPos.y > 0){
                         //Debug.Log("HUD view up!!!");
-                        hudWaterGun.transform.position = transform.position;
+                        hudWaterGun.transform.position = cameraPos + new Vector3(0,0,10f);
                     }
                 }
             }
             //going down
-            else if(!Input.GetKey(KeyCode.F) && hudWaterGun.transform.position.y - transform.position.y != -9.75f){
+            else if(!Input.GetKey(KeyCode.F) && hudWaterGun.transform.position.y - cameraPos.y != -9.75f){
                 hudWaterGun.transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
-                if(hudWaterGun.transform.position.y - transform.position.y < -9.75){
+                if(hudWaterGun.transform.position.y - cameraPos.y < -9.75){
                     //Debug.Log("HUD view down!!!");
-                    hudWaterGun.transform.position = transform.position + new Vector3(0,-9.75f,0);
+                    hudWaterGun.transform.position = cameraPos + new Vector3(0,-9.75f,100);
                 }
             }
 
@@ -381,7 +382,7 @@ public class PlayerController : MonoBehaviour
             if(enemiesInRange.Length > 0){
                 if(enemiesInRange.Length == 1){
                     float dist = Vector3.Distance(enemiesInRange[0].transform.position, transform.position);
-                    Debug.Log(dist);
+                    //Debug.Log(dist);
                     if(dist <= 2f){
                         drums.volume = 1f;
                     } else{
@@ -394,7 +395,7 @@ public class PlayerController : MonoBehaviour
                             dist = Vector3.Distance(enemiesInRange[i].transform.position, transform.position);
                         }
                     }
-                    Debug.Log(dist);
+                    //Debug.Log(dist);
                     if(dist <= 2f){
                         drums.volume = 1f;
                     } else{
@@ -404,6 +405,9 @@ public class PlayerController : MonoBehaviour
             } else{
                 drums.volume = 0f;
             }*/
+
+            //camera lag behind
+            GameObject.Find("Main Camera").transform.position = new Vector3(transform.position.x + -0.25f * gameObject.GetComponent<Rigidbody2D>().linearVelocity.x, transform.position.y + -0.25f * gameObject.GetComponent<Rigidbody2D>().linearVelocity.y, -10f);
         }
     }
 
