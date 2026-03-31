@@ -166,6 +166,18 @@ public class EnemyController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;
+        // when enter bush go slower
+        } else if (collision.gameObject.transform.name.Contains("enemyPlant")) {
+            Debug.Log("enemy in bush");
+            RB.linearDamping = 10f;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision) {
+        // when leave bush go faster
+        if (collision.gameObject.transform.name.Contains("enemyPlant")) {
+            Debug.Log("enemy out of bush");
+            RB.linearDamping = 5f;
         }
     }
 }

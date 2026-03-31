@@ -106,9 +106,9 @@ public class PlayerController : MonoBehaviour
                 useMouseForLook = true;
             }
             if (useMouseForLook) {
-                if (Input.mousePosition.x > 0) {
+                if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x) {
                     selfRenderer.flipX = true;
-                } else if (Input.mousePosition.x < 0) {
+                } else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x) {
                     selfRenderer.flipX = false;
                 }
             }
