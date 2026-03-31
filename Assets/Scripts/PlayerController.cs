@@ -156,6 +156,7 @@ public class PlayerController : MonoBehaviour
             //Water Gun shoot
             if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
                 Water -= 10;
+                useMouseForLook = true;
                 Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
                 currentNoiseVolume = waterGunNoiseVolume;
                 soundPulseTimer = -1; // force sound pulse visual
