@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public bool preventDie; // debug probably
     public bool debugLasers; // debuggin emeny
     GameObject hudWaterGun;
+    public bool isPaused = false;
     //public GameObject debugCircle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,297 +71,312 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
-        if((Health <= 0 || Thirst <= 0) && !preventDie){
-            dying = true;
-            //Debug.Log("dying: " + dying);
-            if(vignette.intensity.value < 1f){
-                vignette.intensity.value += Time.deltaTime;
-            }else if(vignette.smoothness.value < 1f){
-                vignette.smoothness.value += Time.deltaTime;
-            } else{
-                Time.timeScale = 0;
-            }
-        }
-
-        //defining how the player should move this frame
-        movement = new Vector3();
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
-
-        //is the player sprinting or sneaking? Stamina regeneration if they aren't sprinting
-        if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
-            sprinting = true;
-        } else{
-            sprinting = false;
-            if(Input.GetKey(KeyCode.LeftControl)){
-                sneaking = true;
-            } else{
-                sneaking = false;
-            }
-            if(Stamina + stamRegen * Time.deltaTime < 100){
-                Stamina += stamRegen * Time.deltaTime;
-            } else{
-                Stamina = 100.0f;
-            }
-            
-        }
-
-        //Stamina drain and using movement
-        if(sprinting && Stamina - stamDrain * Time.deltaTime > 0){
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sprintMult*Time.deltaTime);
-            Stamina = Stamina - stamDrain * Time.deltaTime;
-        } else if(sneaking){
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sneakMult*Time.deltaTime);
-        } else{
-            gameObject.GetComponent<Rigidbody2D>().AddForce(movement*Time.deltaTime);
-        }
-
-        //Thirst drain based on Stamina
-        if(Thirst - Time.deltaTime * ((100 - Stamina)/50 + 0.1f) > 0){
-            Thirst -= Time.deltaTime * ((100 - Stamina)/50 + 0.1f);
-        } else{
-            Thirst = 0;
-        }
-
-        //Water Gun shoot
-        if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
-            Water -= 10;
-            Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
-            currentNoiseVolume = waterGunNoiseVolume;
-            soundPulseTimer = -1; // force sound pulse visual
-
-            //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
-
-            for(int i = 0; i < 10; i++){
-                //randomize angle of each projectile
-                float radians = Random.Range(-3f,3f) * Mathf.Deg2Rad;
-                float sin = Mathf.Sin(radians);
-                float cos = Mathf.Cos(radians);
-                float newX = dir.x * cos - dir.y * sin;
-                float newY = dir.x * sin + dir.y * cos;
-                dir.x = newX; dir.y = newY;
-
-                //default force of each projectile
-                float force = 1000f;
-
-                //randomize force slightly
-                float perc = Random.Range(-0.15f, 0.15f);
-                force = force * (1 + perc);
-
-                //make and add force to projectile
-                GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
-                proj.GetComponent<Rigidbody2D>().AddForce(dir * force);
-            }
-        }
-
-        //looking at water gun logic
-        //going up
-        if(Input.GetKey(KeyCode.F)){
-            if(hudWaterGun.transform.position.y - transform.position.y != 0){
-                hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
-                if(hudWaterGun.transform.position.y - transform.position.y > 0){
-                    //Debug.Log("HUD view up!!!");
-                    hudWaterGun.transform.position = transform.position;
-                }
-            }
-        }
-        //going down
-        else if(!Input.GetKey(KeyCode.F) && hudWaterGun.transform.position.y - transform.position.y != -9.75f){
-            hudWaterGun.transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
-            if(hudWaterGun.transform.position.y - transform.position.y < -9.75){
-                //Debug.Log("HUD view down!!!");
-                hudWaterGun.transform.position = transform.position + new Vector3(0,-9.75f,0);
-            }
-        }
-
-        //inventory
-        GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
-        selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
-        while(selectedInvSlot >= 3){
-            selectedInvSlot -= 3;
-        } while(selectedInvSlot < 0){
-            selectedInvSlot += 3;
-        }
-        GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
-        
-        //pickup
-        if(Input.GetKeyDown(KeyCode.E)){
-            Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
-            if(itemsFound.Length > 0){
-                if(inventory[selectedInvSlot, 0] == 0){
-                    inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                    inventory[selectedInvSlot, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                    GameObject.Destroy(itemsFound[0].gameObject);
+        if(!isPaused){
+            Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
+            if((Health <= 0 || Thirst <= 0) && !preventDie){
+                dying = true;
+                //Debug.Log("dying: " + dying);
+                if(vignette.intensity.value < 1f){
+                    vignette.intensity.value += Time.deltaTime;
+                }else if(vignette.smoothness.value < 1f){
+                    vignette.smoothness.value += Time.deltaTime;
                 } else{
-                    if(inventory[0, 0] == 0){
-                        inventory[0, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                        inventory[0, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                        GameObject.Destroy(itemsFound[0].gameObject);
-                    } else if(inventory[1, 0] == 0){
-                        inventory[1, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                        inventory[1, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                        GameObject.Destroy(itemsFound[0].gameObject);
-                    } else if(inventory[2, 0] == 0){
-                        inventory[2, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                        inventory[2, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                        GameObject.Destroy(itemsFound[0].gameObject);
+                    Time.timeScale = 0;
+                }
+            }
+
+            //defining how the player should move this frame
+            movement = new Vector3();
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+            movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
+
+            //is the player sprinting or sneaking? Stamina regeneration if they aren't sprinting
+            if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
+                sprinting = true;
+            } else{
+                sprinting = false;
+                if(Input.GetKey(KeyCode.LeftControl)){
+                    sneaking = true;
+                } else{
+                    sneaking = false;
+                }
+                if(Stamina + stamRegen * Time.deltaTime < 100){
+                    Stamina += stamRegen * Time.deltaTime;
+                } else{
+                    Stamina = 100.0f;
+                }
+                
+            }
+
+            //Stamina drain and using movement
+            if(sprinting && Stamina - stamDrain * Time.deltaTime > 0){
+                gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sprintMult*Time.deltaTime);
+                Stamina = Stamina - stamDrain * Time.deltaTime;
+            } else if(sneaking){
+                gameObject.GetComponent<Rigidbody2D>().AddForce(movement*sneakMult*Time.deltaTime);
+            } else{
+                gameObject.GetComponent<Rigidbody2D>().AddForce(movement*Time.deltaTime);
+            }
+
+            //Thirst drain based on Stamina
+            if(Thirst - Time.deltaTime * ((100 - Stamina)/50 + 0.1f) > 0){
+                Thirst -= Time.deltaTime * ((100 - Stamina)/50 + 0.1f);
+            } else{
+                Thirst = 0;
+            }
+
+            //Water Gun shoot
+            if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
+                Water -= 10;
+                Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
+                currentNoiseVolume = waterGunNoiseVolume;
+                soundPulseTimer = -1; // force sound pulse visual
+
+                //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
+
+                for(int i = 0; i < 10; i++){
+                    //randomize angle of each projectile
+                    float radians = Random.Range(-3f,3f) * Mathf.Deg2Rad;
+                    float sin = Mathf.Sin(radians);
+                    float cos = Mathf.Cos(radians);
+                    float newX = dir.x * cos - dir.y * sin;
+                    float newY = dir.x * sin + dir.y * cos;
+                    dir.x = newX; dir.y = newY;
+
+                    //default force of each projectile
+                    float force = 1000f;
+
+                    //randomize force slightly
+                    float perc = Random.Range(-0.15f, 0.15f);
+                    force = force * (1 + perc);
+
+                    //make and add force to projectile
+                    GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
+                    proj.GetComponent<Rigidbody2D>().AddForce(dir * force);
+                }
+            }
+
+            //looking at water gun logic
+            //going up
+            if(Input.GetKey(KeyCode.F)){
+                if(hudWaterGun.transform.position.y - transform.position.y != 0){
+                    hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
+                    if(hudWaterGun.transform.position.y - transform.position.y > 0){
+                        //Debug.Log("HUD view up!!!");
+                        hudWaterGun.transform.position = transform.position;
                     }
                 }
             }
-        }
+            //going down
+            else if(!Input.GetKey(KeyCode.F) && hudWaterGun.transform.position.y - transform.position.y != -9.75f){
+                hudWaterGun.transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
+                if(hudWaterGun.transform.position.y - transform.position.y < -9.75){
+                    //Debug.Log("HUD view down!!!");
+                    hudWaterGun.transform.position = transform.position + new Vector3(0,-9.75f,0);
+                }
+            }
 
-        //drop
-        if(Input.GetKeyDown(KeyCode.Q)){
-            DropItem();
-            inventory[selectedInvSlot, 0] = 0;
-            inventory[selectedInvSlot, 1] = 0;
-        }
-
-        //use item
-        if(Input.GetButtonDown("Fire2")){
-            if(inventory[selectedInvSlot, 0] != 0){
-                if(inventory[selectedInvSlot, 0] == 1){
-                    //Water Bottle
-                    if(Input.GetKey(KeyCode.F)){
-                        if(100f-Water >= inventory[selectedInvSlot, 1]){
-                            Water += inventory[selectedInvSlot, 1];
-                            inventory[selectedInvSlot, 0] = 0;
-                            inventory[selectedInvSlot, 1] = 0;
-                        } else if(100f-Water < inventory[selectedInvSlot, 1]){
-                            inventory[selectedInvSlot, 1] -= 100f-Water;
-                            Water = 100f;
-                        }
-                    }else{
-                        if(100f-Thirst >= inventory[selectedInvSlot, 1]){
-                            Thirst += inventory[selectedInvSlot, 1];
-                            inventory[selectedInvSlot, 0] = 0;
-                            inventory[selectedInvSlot, 1] = 0;
-                        } else if(100f-Thirst < inventory[selectedInvSlot, 1]){
-                            inventory[selectedInvSlot, 1] -= 100f-Thirst;
-                            Thirst = 100f;
+            //inventory
+            GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
+            selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
+            while(selectedInvSlot >= 3){
+                selectedInvSlot -= 3;
+            } while(selectedInvSlot < 0){
+                selectedInvSlot += 3;
+            }
+            GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+            
+            //pickup
+            if(Input.GetKeyDown(KeyCode.E)){
+                Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
+                if(itemsFound.Length > 0){
+                    if(inventory[selectedInvSlot, 0] == 0){
+                        inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                        inventory[selectedInvSlot, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                        GameObject.Destroy(itemsFound[0].gameObject);
+                    } else{
+                        if(inventory[0, 0] == 0){
+                            inventory[0, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                            inventory[0, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                            GameObject.Destroy(itemsFound[0].gameObject);
+                        } else if(inventory[1, 0] == 0){
+                            inventory[1, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                            inventory[1, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                            GameObject.Destroy(itemsFound[0].gameObject);
+                        } else if(inventory[2, 0] == 0){
+                            inventory[2, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
+                            inventory[2, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
+                            GameObject.Destroy(itemsFound[0].gameObject);
                         }
                     }
-                    
+                }
+            }
 
-                    //change sprite of water bottle based on water level
-                    if(inventory[selectedInvSlot, 1] > 75f){
-                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[3];
-                    } else if(inventory[selectedInvSlot, 1] > 50f){
-                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[2];
-                    } else if(inventory[selectedInvSlot, 1] > 25){
-                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[1];
-                    }else{
-                        GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[0];
-                    }
+            //drop
+            if(Input.GetKeyDown(KeyCode.Q)){
+                DropItem();
+                inventory[selectedInvSlot, 0] = 0;
+                inventory[selectedInvSlot, 1] = 0;
+            }
 
-                } else if(inventory[selectedInvSlot, 0] == 2){
-                    //Health Item
-                    if(Health != 100.0f){
-                        Health+=25;
-                        if(Health > 100f){
-                            Health = 100f;
+            //use item
+            if(Input.GetButtonDown("Fire2")){
+                if(inventory[selectedInvSlot, 0] != 0){
+                    if(inventory[selectedInvSlot, 0] == 1){
+                        //Water Bottle
+                        if(Input.GetKey(KeyCode.F)){
+                            if(100f-Water >= inventory[selectedInvSlot, 1]){
+                                Water += inventory[selectedInvSlot, 1];
+                                inventory[selectedInvSlot, 0] = 0;
+                                inventory[selectedInvSlot, 1] = 0;
+                            } else if(100f-Water < inventory[selectedInvSlot, 1]){
+                                inventory[selectedInvSlot, 1] -= 100f-Water;
+                                Water = 100f;
+                            }
+                        }else{
+                            if(100f-Thirst >= inventory[selectedInvSlot, 1]){
+                                Thirst += inventory[selectedInvSlot, 1];
+                                inventory[selectedInvSlot, 0] = 0;
+                                inventory[selectedInvSlot, 1] = 0;
+                            } else if(100f-Thirst < inventory[selectedInvSlot, 1]){
+                                inventory[selectedInvSlot, 1] -= 100f-Thirst;
+                                Thirst = 100f;
+                            }
                         }
+                        
+
+                        //change sprite of water bottle based on water level
+                        if(inventory[selectedInvSlot, 1] > 75f){
+                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[3];
+                        } else if(inventory[selectedInvSlot, 1] > 50f){
+                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[2];
+                        } else if(inventory[selectedInvSlot, 1] > 25){
+                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[1];
+                        }else{
+                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[0];
+                        }
+
+                    } else if(inventory[selectedInvSlot, 0] == 2){
+                        //Health Item
+                        if(Health != 100.0f){
+                            Health+=25;
+                            if(Health > 100f){
+                                Health = 100f;
+                            }
+                            inventory[selectedInvSlot, 0] = 0;
+                            inventory[selectedInvSlot, 1] = 0;
+                        }
+
+                    } else if(inventory[selectedInvSlot, 0] == 3){
+                        //Hedge Clippers
+                        Collider2D[] deadEnemies = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 2f, LayerMask.GetMask("DeadEnemy"));
+                        //GameObject circle = GameObject.Instantiate(debugCircle, new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, new Quaternion());
+                        //circle.transform.localScale = new Vector3(2f,2f, 1f);
+                        
+
+                        foreach(Collider2D bush in deadEnemies){
+                            Debug.Log("Enemy detected!");
+                            GameObject.Destroy(bush.gameObject);
+                        }
+                        // destroy item
                         inventory[selectedInvSlot, 0] = 0;
                         inventory[selectedInvSlot, 1] = 0;
                     }
-
-                } else if(inventory[selectedInvSlot, 0] == 3){
-                    //Hedge Clippers
-                    Collider2D[] deadEnemies = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 2f, LayerMask.GetMask("DeadEnemy"));
-                    //GameObject circle = GameObject.Instantiate(debugCircle, new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, new Quaternion());
-                    //circle.transform.localScale = new Vector3(2f,2f, 1f);
-                    
-
-                    foreach(Collider2D bush in deadEnemies){
-                        Debug.Log("Enemy detected!");
-                        GameObject.Destroy(bush.gameObject);
-                    }
-                    // destroy item
-                    inventory[selectedInvSlot, 0] = 0;
-                    inventory[selectedInvSlot, 1] = 0;
                 }
             }
-        }
 
-        
+            
 
-        UpdateInventory();
+            UpdateInventory();
 
-        // alert enemies with noise - Skye
-        if (sprinting && movement.magnitude != 0) {
-            currentNoiseVolume = sprintNoiseVolume;
-            if (prevNoiseVolume < sprintNoiseVolume) {
-                soundPulseTimer = -1; // force sound pulse visual
+            // alert enemies with noise - Skye
+            if (sprinting && movement.magnitude != 0) {
+                currentNoiseVolume = sprintNoiseVolume;
+                if (prevNoiseVolume < sprintNoiseVolume) {
+                    soundPulseTimer = -1; // force sound pulse visual
+                }
+            } else if (movement.magnitude != 0 && !sneaking) {
+                currentNoiseVolume = walkNoiseVolume;
+                if (prevNoiseVolume < walkNoiseVolume) {
+                    soundPulseTimer = -1; // force sound pulse visual
+                }
+            } else if (movement.magnitude != 0 && sneaking) {
+                currentNoiseVolume = sneakNoiseVolume;
+                if (prevNoiseVolume < sneakNoiseVolume) {
+                    soundPulseTimer = -1; // force sound pulse visual
+                }
             }
-        } else if (movement.magnitude != 0 && !sneaking) {
-            currentNoiseVolume = walkNoiseVolume;
-            if (prevNoiseVolume < walkNoiseVolume) {
-                soundPulseTimer = -1; // force sound pulse visual
+
+            prevNoiseVolume = currentNoiseVolume;
+
+            // overlap circle to check for enemy tag - Skye
+            Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
+            for(int i = 0; i < enemiesFound.Length; i++) {
+                enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
             }
-        } else if (movement.magnitude != 0 && sneaking) {
-            currentNoiseVolume = sneakNoiseVolume;
-            if (prevNoiseVolume < sneakNoiseVolume) {
-                soundPulseTimer = -1; // force sound pulse visual
+            if (soundPulseTimer < 0) { // sound pulse happen on timed repeat
+                soundPulseTimer = soundPulseDelay;
+                GameObject newNoiseCircle = Instantiate(noiseCircle, transform.position, new Quaternion());
+                newNoiseCircle.GetComponent<noiseCircleController>().noiseRange = currentNoiseVolume;
+            } else {
+                soundPulseTimer -= Time.deltaTime;
             }
-        }
 
-        prevNoiseVolume = currentNoiseVolume;
-
-        // overlap circle to check for enemy tag - Skye
-        Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(transform.position, currentNoiseVolume, enemyMask);
-        for(int i = 0; i < enemiesFound.Length; i++) {
-            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(new Vector2(transform.position.x, transform.position.y), true);
-        }
-        if (soundPulseTimer < 0) { // sound pulse happen on timed repeat
-            soundPulseTimer = soundPulseDelay;
-            GameObject newNoiseCircle = Instantiate(noiseCircle, transform.position, new Quaternion());
-            newNoiseCircle.GetComponent<noiseCircleController>().noiseRange = currentNoiseVolume;
-        } else {
-            soundPulseTimer -= Time.deltaTime;
-        }
-
-        //cooldown on how often enemies can hit player
-        if(hitCooldown > 0){
-            hitCooldown -= Time.deltaTime;
-        }
-        //does enemy hit player?
-        if(hitCooldown <= 0){
-            if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 0.5f, LayerMask.GetMask("Enemy")) != null && (Health - 5) >= 0){
-                Health -= 30;
-                hitCooldown = 0.5f;
+            //cooldown on how often enemies can hit player
+            if(hitCooldown > 0){
+                hitCooldown -= Time.deltaTime;
             }
-            else if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 0.5f, LayerMask.GetMask("DeadEnemy")) != null && (Health - 5) >= 0){
-                Health -= 15;
-                hitCooldown = 0.5f;
+            //does enemy hit player?
+            if(hitCooldown <= 0){
+                if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 0.5f, LayerMask.GetMask("Enemy")) != null && (Health - 5) >= 0){
+                    Health -= 30;
+                    hitCooldown = 0.5f;
+                }
+                else if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 0.5f, LayerMask.GetMask("DeadEnemy")) != null && (Health - 5) >= 0){
+                    Health -= 15;
+                    hitCooldown = 0.5f;
+                }
             }
-        }
 
-        // update water gauge needle position
-        float currentZ = hudWaterGun.transform.GetChild(0).transform.eulerAngles.z;
-        float targetZ = Mathf.Lerp(140f, -140f, (Water/100f));
-        if (currentZ > 180) {
-            currentZ -= 360;
-        }
-        hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, Mathf.Sign(targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
-        
-        currentNoiseVolume = 2f; // base noise volume for next frame
+            // update water gauge needle position
+            float currentZ = hudWaterGun.transform.GetChild(0).transform.eulerAngles.z;
+            float targetZ = Mathf.Lerp(140f, -140f, (Water/100f));
+            if (currentZ > 180) {
+                currentZ -= 360;
+            }
+            hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, Mathf.Sign(targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
+            
+            currentNoiseVolume = 2f; // base noise volume for next frame
 
-        //enemy chase drums
-        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 14f, LayerMask.GetMask("Enemy"));
-        AudioSource drums = gameObject.GetComponent<AudioSource>();
-        if(enemiesInRange.Length > 0){
-            if(enemiesInRange.Length == 1){
-                drums.volume = (14f-Vector3.Distance(enemiesInRange[0].transform.position, transform.position))/14f;
+            //enemy chase drums
+            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 14f, LayerMask.GetMask("Enemy"));
+            AudioSource drums = gameObject.GetComponent<AudioSource>();
+            if(enemiesInRange.Length > 0){
+                if(enemiesInRange.Length == 1){
+                    float dist = Vector3.Distance(enemiesInRange[0].transform.position, transform.position);
+                    Debug.Log(dist);
+                    if(dist <= 2f){
+                        drums.volume = 1f;
+                    } else{
+                        drums.volume = (12f-dist)/12f;
+                    }
+                } else{
+                    float dist = 14f;
+                    for(int i = 0; i < enemiesInRange.Length; i++){
+                        if(Vector3.Distance(enemiesInRange[i].transform.position, transform.position) < dist){
+                            dist = Vector3.Distance(enemiesInRange[i].transform.position, transform.position);
+                        }
+                    }
+                    Debug.Log(dist);
+                    if(dist <= 2f){
+                        drums.volume = 1f;
+                    } else{
+                        drums.volume = (12f-dist)/12f;
+                    }
+                }
             } else{
-                float dist = 14f;
-                for(int i = 0; i < enemiesInRange.Length; i++){
-                    if(Vector3.Distance(enemiesInRange[i].transform.position, transform.position) < dist){
-                        dist = Vector3.Distance(enemiesInRange[i].transform.position, transform.position);
-                    }
-                }
-                drums.volume = (14f-dist)/14f;
+                drums.volume = 0f;
             }
         }
     }
