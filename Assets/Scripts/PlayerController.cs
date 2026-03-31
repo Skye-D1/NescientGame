@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour
             currentNoiseVolume = 2f; // base noise volume for next frame
 
             //enemy chase drums
-            Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 14f, LayerMask.GetMask("Enemy"));
+            /*Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 14f, LayerMask.GetMask("Enemy"));
             AudioSource drums = gameObject.GetComponent<AudioSource>();
             if(enemiesInRange.Length > 0){
                 if(enemiesInRange.Length == 1){
@@ -377,7 +377,7 @@ public class PlayerController : MonoBehaviour
                 }
             } else{
                 drums.volume = 0f;
-            }
+            }*/
         }
     }
 
