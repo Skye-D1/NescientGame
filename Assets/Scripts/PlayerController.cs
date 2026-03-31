@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] bottleSprites;
     bool dying;
     public bool preventDie; // debug probably
+    public bool debugLasers; // debuggin emeny
     GameObject hudWaterGun;
     //public GameObject debugCircle;
 

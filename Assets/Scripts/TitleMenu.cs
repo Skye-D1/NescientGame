@@ -30,18 +30,18 @@ public class TitleMenu : MonoBehaviour
     }
 
     // load main scene
-    void playFunction() {
+    public void playFunction() {
         Debug.Log("meow");
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 
     // 
-    void creditsFunction() {
+    public void creditsFunction() {
         Debug.Log("credits time");
     }
 
     // quit game
-    void quitFunction() {
+    public void quitFunction() {
         Application.Quit();
     }
 

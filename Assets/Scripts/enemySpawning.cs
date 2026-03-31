@@ -37,14 +37,14 @@ public class enemySpawning : MonoBehaviour
         }
 
         // if item timer out and new position valid, spawn item and reset timer
-        if (itemTimer < 0 && itemSpawnTable.Length > 0) {
+        /*if (itemTimer < 0 && itemSpawnTable.Length > 0) {
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                itemTimer = Random.Range(12f, 40f);
+                itemTimer = Random.Range(20f, 4000f);
                 Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], newPos, transform.rotation);
             }
         } else {
             itemTimer -= Time.deltaTime;
-        }
+        }*/
     }
 }

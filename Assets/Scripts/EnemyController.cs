@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     bool isPlant;
     LineRenderer lineRenderer;
     public GameObject staticPlant; // object to replace enemy with
+    PlayerController playerScript; // the player controlscript for purposes
     LayerMask levelMask;
     float strafeValue = 5f; // direction and magnitude of strafe movements
     float wanderCooldown = 0f;
@@ -38,6 +39,7 @@ public class EnemyController : MonoBehaviour
         target = new Vector2(transform.position.x, transform.position.y); // target own position on start
         lineRenderer = gameObject.GetComponent<LineRenderer>();
         RB = gameObject.GetComponent<Rigidbody2D>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         
         // determine if leader
         if (Random.value > 0.4) { // todo: check proximity for other leaders
@@ -55,8 +57,8 @@ public class EnemyController : MonoBehaviour
         if (targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
             overshootTimer = 3f;
             hasTarget = false;
-        } else if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 5f) {
-            hasTarget = false;
+        } else if ((Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) || (!targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 5f)) {
+            hasTarget = false;  
         }
 
         // keep moving past target for a bit (overshoot)
@@ -68,7 +70,11 @@ public class EnemyController : MonoBehaviour
         // move towards target
         } else if (!isStatic && hasTarget) {
             movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
-            //lineRenderer.enabled = true;
+            if (playerScript.debugLasers) { // laser when laser time
+                lineRenderer.enabled = true;
+            } else {
+                lineRenderer.enabled = false; // not laser when not laser time
+            }
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
         }
