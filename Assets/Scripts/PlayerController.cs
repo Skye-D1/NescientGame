@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
                 }else if(vignette.smoothness.value < 1f){
                     vignette.smoothness.value += Time.deltaTime;
                 } else{
+                    isPaused = true;
                     Time.timeScale = 0;
                 }
             }
