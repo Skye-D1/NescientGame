@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
         isPlaying[0] = true;
         isLooping[0] = true;
         loopLengths[0] = sounds[0].length;
+        PlayClip(0, true);
     }
 
     // Update is called once per frame
