@@ -28,7 +28,7 @@ public class noiseCircleController : MonoBehaviour
             offset = 2f;
         }
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,(opacityRate*timer + offset));
-        Debug.Log(opacityRate*timer + offset);
+        //Debug.Log(opacityRate*timer + offset);
     
 
         if (timer > lifetime) {

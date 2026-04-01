@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer selfRenderer;
     bool useMouseForLook;
     public bool isPaused = false;
-    //public GameObject debugCircle;
+    Vector3 lastVelocity;
+    float cameraLagRatio = 0.25f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -217,6 +218,7 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
             
             //pickup
+            bool playPickupSound = true;
             if(Input.GetKeyDown(KeyCode.E)){
                 Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
                 if(itemsFound.Length > 0){
@@ -237,7 +239,13 @@ public class PlayerController : MonoBehaviour
                             inventory[2, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
                             inventory[2, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
                             GameObject.Destroy(itemsFound[0].gameObject);
+                        } else{
+                            playPickupSound = false;
                         }
+                    }
+
+                    if(playPickupSound){
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySound(2*itemsFound[0].gameObject.GetComponent<Item>().itemID, false);
                     }
                 }
             }
@@ -409,7 +417,7 @@ public class PlayerController : MonoBehaviour
             }*/
 
             //camera lag behind
-            GameObject.Find("Main Camera").transform.position = new Vector3(transform.position.x + -0.25f * gameObject.GetComponent<Rigidbody2D>().linearVelocity.x, transform.position.y + -0.25f * gameObject.GetComponent<Rigidbody2D>().linearVelocity.y, -10f);
+            GameObject.Find("Main Camera").transform.position = new Vector3(transform.position.x + -1.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.x * cameraLagRatio + lastVelocity.x * (1-cameraLagRatio)), transform.position.y + -1.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.y * cameraLagRatio + lastVelocity.y * (1-cameraLagRatio)), -10f);
         }
     }
 
