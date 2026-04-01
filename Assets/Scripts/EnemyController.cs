@@ -105,10 +105,14 @@ public class EnemyController : MonoBehaviour
             if (wanderCooldown < 0) {
                 // generate new wander point and broadcast to nearby
                 Vector2 newPoint;
+                int loopys = 0;
                 do {
+                    loopys++;
                     newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 25f;
-                } while (Mathf.Abs(newPoint.x + transform.position.x) > (mapWidth/2f) || Mathf.Abs(newPoint.y + transform.position.y) > (mapHeight/2f));
-
+                } while (loopys < 100 && Mathf.Abs(newPoint.x + transform.position.x) > (mapWidth/2f) || Mathf.Abs(newPoint.y + transform.position.y) > (mapHeight/2f));
+                if (loopys > 90) {
+                    Debug.Log("loopys problem 1 in enemycontroller");
+                }
                 echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
                 target = new Vector2(transform.position.x, transform.position.y) + newPoint;
                 //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
@@ -121,35 +125,39 @@ public class EnemyController : MonoBehaviour
     }
 
     // hear a noise and update target if necessary
-    public void recieveNoise(Vector2 newTarget, bool newTargetPriority)
+    public void recieveNoise(Vector2 newTarget, bool isNewTargetPriority)
     {
         // switch target if new is priority or current is invalid
-        if ((!hasTarget || newTargetPriority) && !didTargetUpdate) {
+        if ((!hasTarget || isNewTargetPriority) && !didTargetUpdate) {
             wanderCooldown = maxWanderCooldown; // ensure leader does not immediately make new wander target
             didTargetUpdate = true;
+            int loopys = 0;
             do {
+                loopys++;
                 target = new Vector2(newTarget.x + Random.Range(-targetRandFactor, targetRandFactor), newTarget.y + Random.Range(-targetRandFactor, targetRandFactor));
-            } while ((Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f)));
+            } while ((loopys < 100 && Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f)));
+            if (loopys > 90) {
+                Debug.Log("loopys problem 2 in enemycontroller");
+            }
 
-
-            targetPriority = newTargetPriority;
+            targetPriority = isNewTargetPriority;
             hasTarget = true;
             overshootTimer = 0;
-            if (newTargetPriority) { // echo to others if priority high
-                echoNoise(newTarget, newTargetPriority, 0);
+            if (isNewTargetPriority) { // echo to others if priority high
+                echoNoise(newTarget, isNewTargetPriority, 0);
             }
         }
     }
 
     // communicate some recieved noises to other enemies nearby
-    void echoNoise(Vector2 newTarget, bool newTargetPriority, float rangeOverride) {
+    void echoNoise(Vector2 newTarget, bool isNewTargetPriority, float rangeOverride) {
         if (rangeOverride == 0) {
             rangeOverride = echoRadius;
         }
         // overlap circle to check for enemy tag
         enemiesFound = Physics2D.OverlapCircleAll(transform.position, rangeOverride, enemyMask); // the aforementioned circle
         for(int i = 0; i < enemiesFound.Length; i++) {
-            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(newTarget, newTargetPriority);
+            enemiesFound[i].gameObject.GetComponent<EnemyController>().recieveNoise(newTarget, isNewTargetPriority);
         }
     }
 
@@ -164,6 +172,7 @@ public class EnemyController : MonoBehaviour
         }
     }
     void OnCollisionEnter2D(Collision2D collision) {
+        // forget target when hit barrier
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;
         // when enter bush go slower
