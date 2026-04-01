@@ -11,13 +11,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuPanel;
     public bool isPaused = false;
 
-
+    PlayerController playerScript; // the player controlscript for purposes
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         PauseMenuPanel.SetActive(false);
+        playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        playerScript.isPaused = true;
     }
 
 
@@ -49,6 +51,7 @@ public class PauseMenu : MonoBehaviour
         PauseMenuPanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        playerScript.isPaused = false;
     }
 
 
