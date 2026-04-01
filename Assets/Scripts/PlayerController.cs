@@ -45,7 +45,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer selfRenderer;
     bool useMouseForLook;
     public bool isPaused = false;
-    //public GameObject debugCircle;
+    Vector3 lastVelocity;
+    float cameraLagRatio = 0.25f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -409,7 +410,7 @@ public class PlayerController : MonoBehaviour
             }*/
 
             //camera lag behind
-            GameObject.Find("Main Camera").transform.position = new Vector3(transform.position.x + -0.25f * gameObject.GetComponent<Rigidbody2D>().linearVelocity.x, transform.position.y + -0.25f * gameObject.GetComponent<Rigidbody2D>().linearVelocity.y, -10f);
+            GameObject.Find("Main Camera").transform.position = new Vector3(transform.position.x + -1.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.x * cameraLagRatio + lastVelocity.x * (1-cameraLagRatio)), transform.position.y + -1.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.y * cameraLagRatio + lastVelocity.y * (1-cameraLagRatio)), -10f);
         }
     }
 
