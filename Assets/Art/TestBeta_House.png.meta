@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b1b73c691f9efd747a7d5c7a04f10ccb
+guid: 949438265e4683b40b3238403ea835bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -320759307392252153
-    second: HouseRough_0
+      213: -1644992450257940366
+    second: TestBeta_House_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HouseRough_0
+      name: TestBeta_House_0
       rect:
         serializedVersion: 2
-        x: 310
-        y: 83
-        width: 782
-        height: 910
+        x: 0
+        y: 0
+        width: 1397
+        height: 1080
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7070c700c1f6c8bf0800000000000000
-      internalID: -320759307392252153
+      spriteID: 2701d200510db29e0800000000000000
+      internalID: -1644992450257940366
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b4eee4630e9ba2546ba0bfdeb34cde34
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HouseRough_0: -320759307392252153
+      TestBeta_House_0: -1644992450257940366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
