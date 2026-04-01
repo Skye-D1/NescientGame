@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer selfRenderer;
     bool useMouseForLook;
     public bool isPaused = false;
-    Vector3 lastVelocity;
-    float cameraLagRatio = 0.25f;
+    Vector3 lastCameraChange;
+    float cameraLagRatio = 100f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
                     }
 
                     if(playPickupSound){
-                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySound(2*itemsFound[0].gameObject.GetComponent<Item>().itemID, false);
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(2*itemsFound[0].gameObject.GetComponent<Item>().itemID, false);
                     }
                 }
             }
@@ -417,7 +417,12 @@ public class PlayerController : MonoBehaviour
             }*/
 
             //camera lag behind
-            GameObject.Find("Main Camera").transform.position = new Vector3(transform.position.x + -1.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.x * cameraLagRatio + lastVelocity.x * (1-cameraLagRatio)), transform.position.y + -1.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.y * cameraLagRatio + lastVelocity.y * (1-cameraLagRatio)), -10f);
+            /*
+            Vector3 newPos = new Vector3(transform.position.x + -0.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.x * cameraLagRatio * Time.deltaTime + lastCameraChange.x * (1-cameraLagRatio * Time.deltaTime)), transform.position.y + -0.25f * (gameObject.GetComponent<Rigidbody2D>().linearVelocity.y * cameraLagRatio * Time.deltaTime + lastCameraChange.y * (1-cameraLagRatio * Time.deltaTime)), -10f);
+            lastCameraChange = GameObject.Find("Main Camera").transform.position - newPos;
+            GameObject.Find("Main Camera").transform.position = newPos;
+            */
+            
         }
     }
 
