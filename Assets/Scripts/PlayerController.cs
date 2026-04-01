@@ -218,6 +218,7 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
             
             //pickup
+            bool playPickupSound = true;
             if(Input.GetKeyDown(KeyCode.E)){
                 Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
                 if(itemsFound.Length > 0){
@@ -238,7 +239,13 @@ public class PlayerController : MonoBehaviour
                             inventory[2, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
                             inventory[2, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
                             GameObject.Destroy(itemsFound[0].gameObject);
+                        } else{
+                            playPickupSound = false;
                         }
+                    }
+
+                    if(playPickupSound){
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlaySound(2*itemsFound[0].gameObject.GetComponent<Item>().itemID, false);
                     }
                 }
             }
