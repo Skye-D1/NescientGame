@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public float currentNoiseVolume = 0f; // per frame noise
     float prevNoiseVolume; // noise volume last frame
     float sneakNoiseVolume = 4f; // how loud the player is while sneaking
-    float walkNoiseVolume = 10f; // how loud the player is when walking
+    float walkNoiseVolume = 7f; // how loud the player is when walking
     float sprintNoiseVolume = 25f; // how loud the player is while sprinting
     float waterGunNoiseVolume = 10f;
     float soundPulseDelay = 1f; // delay between noise pulse visualizations

@@ -7,7 +7,10 @@ using UnityEngine;
 public class noiseCircleController : MonoBehaviour
 {
     public float noiseRange;
-    float timer;
+    float timer = 0;
+    float opacityRate = -1.5f;
+    float offset = 1f;
+    float lifetime = 0.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +23,15 @@ public class noiseCircleController : MonoBehaviour
     {
         timer += Time.deltaTime;
         transform.localScale = new Vector3(noiseRange * (2f * timer), noiseRange * (2f * timer), 1f);
-        if (timer > 0.5f) {
+        if(timer >= lifetime*0.8f){
+            opacityRate = -4f;
+            offset = 2f;
+        }
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,(opacityRate*timer + offset));
+        Debug.Log(opacityRate*timer + offset);
+    
+
+        if (timer > lifetime) {
             GameObject.Destroy(gameObject);
         }
     }
