@@ -30,7 +30,7 @@ public class LootContainerSpawn : MonoBehaviour
     {
         // if item timer out and player not nearby, set ready and reset timer
         if (itemTimer < 0 && itemSpawnTable.Length > 0) {
-            if (Vector3.Distance(player.transform.position, transform.position) > 10f) {
+            if (Vector3.Distance(player.transform.position, transform.position) > 15f) {
                 isItemReady = true;
                 spriteRenderer.sprite = closedSprite;
             }

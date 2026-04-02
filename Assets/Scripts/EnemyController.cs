@@ -142,9 +142,9 @@ public class EnemyController : MonoBehaviour
             do {
                 loopys++;
                 target = new Vector2(newTarget.x + Random.Range(-targetRandFactor, targetRandFactor), newTarget.y + Random.Range(-targetRandFactor, targetRandFactor));
-            } while ((loopys < 100 && Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f)));
+            } while ((loopys < 100 && (Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f))));
             if (loopys > 90) {
-                Debug.Log("loopys problem 2 in enemycontroller");
+                Debug.Log("loopys problem 2 in enemycontroller; target:" + target);
             }
 
             targetPriority = isNewTargetPriority;
