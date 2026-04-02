@@ -422,7 +422,9 @@ public class PlayerController : MonoBehaviour
             lastCameraChange = GameObject.Find("Main Camera").transform.position - newPos;
             GameObject.Find("Main Camera").transform.position = newPos;
             */
-            
+            Vector2 camera = new Vector2(GameObject.Find("Main Camera").transform.position.x, GameObject.Find("Main Camera").transform.position.y);
+            Vector2 direction = (new Vector2(transform.position.x, transform.position.y) - camera);
+            GameObject.Find("Main Camera").transform.position += new Vector3(direction.x / 0.5f * Time.deltaTime, direction.y / 0.5f * Time.deltaTime, 0);
         }
     }
 
