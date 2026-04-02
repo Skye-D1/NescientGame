@@ -122,6 +122,13 @@ public class EnemyController : MonoBehaviour
                 wanderCooldown -= Time.deltaTime;
             }
         }
+
+        //slow down if moving through bush
+        if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.4f, LayerMask.GetMask("DeadEnemy")) != null){
+            moveSpeed = 150f;
+        } else{
+            moveSpeed = 300f;
+        }
     }
 
     // hear a noise and update target if necessary
@@ -176,18 +183,6 @@ public class EnemyController : MonoBehaviour
         // forget target when hit barrier
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;
-        // when enter bush go slower
-        } else if (collision.gameObject.transform.name.Contains("enemyPlant")) {
-            Debug.Log("enemy in bush");
-            RB.linearDamping = 10f;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D collision) {
-        // when leave bush go faster
-        if (collision.gameObject.transform.name.Contains("enemyPlant")) {
-            Debug.Log("enemy out of bush");
-            RB.linearDamping = 5f;
         }
     }
 }
