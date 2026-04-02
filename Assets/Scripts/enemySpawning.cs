@@ -11,8 +11,8 @@ public class enemySpawning : MonoBehaviour
     float itemTimer;
     LayerMask playerMask;
     public GameObject player;
-    float mapHeight = 54f;
-    float mapWidth = 120f;
+    public float mapHeight; // default 54f for alpha map
+    public float mapWidth; // default 120f for alpha map
     public GameObject[] itemSpawnTable;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

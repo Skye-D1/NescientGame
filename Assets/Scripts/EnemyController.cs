@@ -172,6 +172,7 @@ public class EnemyController : MonoBehaviour
         }
     }
     void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("enemy touched " + collision.gameObject.transform.name);
         // forget target when hit barrier
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;
