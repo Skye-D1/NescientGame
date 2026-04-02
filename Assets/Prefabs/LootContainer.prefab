@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 8403858814980272110, guid: 51a7b3726a8e0d049bd90eca0c3e8726, type: 3}
   - {fileID: 656293466806290139, guid: 0572e0d3c8430f14c9696a2e5c4ddd13, type: 3}
   isItemReady: 0
-  spawnOffsets: {x: 0, y: -0.1, z: 0}
+  spawnOffsets: {x: 0, y: -0.2, z: 0}
   openSprite: {fileID: 7477496793726388702, guid: ad7dde7d78e73af43921cffe3aef739b, type: 3}
 --- !u!212 &1339414287755417345
 SpriteRenderer:
