@@ -220,32 +220,43 @@ public class PlayerController : MonoBehaviour
             //pickup
             bool playPickupSound = true;
             if(Input.GetKeyDown(KeyCode.E)){
-                Collider2D[] itemsFound = Physics2D.OverlapCircleAll(transform.position, 2.0f, LayerMask.GetMask("Item"));
+                Collider2D[] itemsFound = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 2.0f, LayerMask.GetMask("Item"));
                 if(itemsFound.Length > 0){
+                    //find closest item
+                    float itemDist = 3f;
+                    GameObject closestItem = null;
+                    foreach(Collider2D item in itemsFound){
+                        if(Vector2.Distance(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, new Vector2(item.gameObject.transform.position.x, item.gameObject.transform.position.y)) < itemDist){
+                            itemDist = Vector2.Distance(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, new Vector2(item.gameObject.transform.position.x, item.gameObject.transform.position.y));
+                            closestItem = item.gameObject;
+                        }
+                    }
+                    
+                    //put item in free slot if available
                     if(inventory[selectedInvSlot, 0] == 0){
-                        inventory[selectedInvSlot, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                        inventory[selectedInvSlot, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                        GameObject.Destroy(itemsFound[0].gameObject);
+                        inventory[selectedInvSlot, 0] = closestItem.GetComponent<Item>().itemID;
+                        inventory[selectedInvSlot, 1] = closestItem.GetComponent<Item>().power;
+                        GameObject.Destroy(closestItem);
                     } else{
                         if(inventory[0, 0] == 0){
-                            inventory[0, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                            inventory[0, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                            GameObject.Destroy(itemsFound[0].gameObject);
+                            inventory[0, 0] = closestItem.GetComponent<Item>().itemID;
+                            inventory[0, 1] = closestItem.GetComponent<Item>().power;
+                            GameObject.Destroy(closestItem);
                         } else if(inventory[1, 0] == 0){
-                            inventory[1, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                            inventory[1, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                            GameObject.Destroy(itemsFound[0].gameObject);
+                            inventory[1, 0] = closestItem.GetComponent<Item>().itemID;
+                            inventory[1, 1] = closestItem.GetComponent<Item>().power;
+                            GameObject.Destroy(closestItem);
                         } else if(inventory[2, 0] == 0){
-                            inventory[2, 0] = itemsFound[0].gameObject.GetComponent<Item>().itemID;
-                            inventory[2, 1] = itemsFound[0].gameObject.GetComponent<Item>().power;
-                            GameObject.Destroy(itemsFound[0].gameObject);
+                            inventory[2, 0] = closestItem.GetComponent<Item>().itemID;
+                            inventory[2, 1] = closestItem.GetComponent<Item>().power;
+                            GameObject.Destroy(closestItem);
                         } else{
                             playPickupSound = false;
                         }
                     }
 
                     if(playPickupSound){
-                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(2*itemsFound[0].gameObject.GetComponent<Item>().itemID, false);
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(2*closestItem.GetComponent<Item>().itemID, false);
                     }
                 }
             }
@@ -260,6 +271,9 @@ public class PlayerController : MonoBehaviour
             //use item
             if(Input.GetButtonDown("Fire2")){
                 if(inventory[selectedInvSlot, 0] != 0){
+                    
+                    GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 2*(int)inventory[0,0], false);
+                    
                     if(inventory[selectedInvSlot, 0] == 1){
                         //Water Bottle
                         if(Input.GetKey(KeyCode.F)){
@@ -364,6 +378,7 @@ public class PlayerController : MonoBehaviour
             if(hitCooldown > 0){
                 hitCooldown -= Time.deltaTime;
             }
+
             //does enemy hit player?
             if(hitCooldown <= 0){
                 if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("Enemy")) != null && (Health - 5) >= 0){
@@ -446,7 +461,7 @@ public class PlayerController : MonoBehaviour
 
     void DropItem(){
         if(inventory[selectedInvSlot,0] != 0){
-            GameObject item = Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], transform.position, new Quaternion());
+            GameObject item = Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, new Quaternion());
             item.GetComponent<Item>().power = inventory[selectedInvSlot, 1];
         }
     }
