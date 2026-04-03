@@ -380,13 +380,33 @@ public class PlayerController : MonoBehaviour
 
             //does enemy hit player?
             if(hitCooldown <= 0){
-                if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("Enemy")) != null && (Health - 5) >= 0){
-                    Health -= 30;
-                    hitCooldown = 0.5f;
+                Collider2D[] EnemyColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("Enemy"));
+                Collider2D[] DeadEnemyColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("DeadEnemy"));
+                if(EnemyColliders.Length > 0 && (Health - 5) >= 0){
+                    bool hit = false;
+                    foreach(Collider2D col in EnemyColliders){
+                        if(col.GetType() == typeof(CircleCollider2D)){
+                            hit = true;
+                            break;
+                        }
+                    }
+                    if(hit){
+                        Health -= 30;
+                        hitCooldown = 0.5f;
+                    }
                 }
-                else if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("DeadEnemy")) != null && (Health - 5) >= 0){
-                    Health -= 15;
-                    hitCooldown = 0.5f;
+                else if(DeadEnemyColliders.Length > 0 && (Health - 5) >= 0){
+                    bool hit = false;
+                    foreach(Collider2D col in DeadEnemyColliders){
+                        if(col.GetType() == typeof(CircleCollider2D)){
+                            hit = true;
+                            break;
+                        }
+                    }
+                    if(hit){
+                        Health -= 30;
+                        hitCooldown = 0.5f;
+                    }
                 }
             }
 
