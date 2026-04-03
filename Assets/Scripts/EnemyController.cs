@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour
     float mapHeight = 80f;
     float mapWidth = 150f;
     float targetRandFactor = 3f;
+    float randCooldown = 0f;
+    Vector2 randValues;
     Rigidbody2D RB;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -129,6 +131,11 @@ public class EnemyController : MonoBehaviour
         } else{
             RB.linearDamping = 5f;
         }
+
+        // target offset cooldown timer
+        if (randCooldown > 0) {
+            randCooldown -= Time.deltaTime;
+        }
     }
 
     // hear a noise and update target if necessary
@@ -141,7 +148,18 @@ public class EnemyController : MonoBehaviour
             int loopys = 0;
             do {
                 loopys++;
-                target = new Vector2(newTarget.x + Random.Range(-targetRandFactor, targetRandFactor), newTarget.y + Random.Range(-targetRandFactor, targetRandFactor));
+                // randomize target offset
+                if (randCooldown <= 0) {
+                    randCooldown = Random.Range(3f, 18f);
+                    randValues = new Vector2(Random.Range(-targetRandFactor, targetRandFactor), Random.Range(-targetRandFactor, targetRandFactor));
+                }
+
+                // if close to the randomization radius of target, disable rand to intercept
+                if (Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < (targetRandFactor * 1.2f)) {
+                    randValues = new Vector2();
+                }
+
+                target = new Vector2(newTarget.x + randValues.x, newTarget.y + randValues.y);
             } while ((loopys < 100 && (Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f))));
             if (loopys > 90) {
                 Debug.Log("loopys problem 2 in enemycontroller; target:" + target);
