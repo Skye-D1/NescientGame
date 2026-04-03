@@ -125,9 +125,9 @@ public class EnemyController : MonoBehaviour
 
         //slow down if moving through bush
         if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.4f, LayerMask.GetMask("DeadEnemy")) != null){
-            moveSpeed = 150f;
+            RB.linearDamping = 20f;
         } else{
-            moveSpeed = 300f;
+            RB.linearDamping = 5f;
         }
     }
 
@@ -179,7 +179,7 @@ public class EnemyController : MonoBehaviour
         }
     }
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("enemy touched " + collision.gameObject.transform.name);
+        //Debug.Log("enemy touched " + collision.gameObject.transform.name);
         // forget target when hit barrier
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;
