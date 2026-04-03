@@ -26,8 +26,8 @@ public class EnemyController : MonoBehaviour
     float strafeValue = 5f; // direction and magnitude of strafe movements
     float wanderCooldown = 0f;
     float maxWanderCooldown = 3f;
-    float mapHeight = 54f;
-    float mapWidth = 120f;
+    float mapHeight = 80f;
+    float mapWidth = 150f;
     float targetRandFactor = 3f;
     Rigidbody2D RB;
 
@@ -125,9 +125,9 @@ public class EnemyController : MonoBehaviour
 
         //slow down if moving through bush
         if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.4f, LayerMask.GetMask("DeadEnemy")) != null){
-            moveSpeed = 150f;
+            RB.linearDamping = 20f;
         } else{
-            moveSpeed = 300f;
+            RB.linearDamping = 5f;
         }
     }
 
@@ -179,7 +179,7 @@ public class EnemyController : MonoBehaviour
         }
     }
     void OnCollisionEnter2D(Collision2D collision) {
-        Debug.Log("enemy touched " + collision.gameObject.transform.name);
+        //Debug.Log("enemy touched " + collision.gameObject.transform.name);
         // forget target when hit barrier
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;

@@ -327,7 +327,6 @@ public class PlayerController : MonoBehaviour
                         
 
                         foreach(Collider2D bush in deadEnemies){
-                            Debug.Log("Enemy detected!");
                             GameObject.Destroy(bush.gameObject);
                         }
                         // destroy item
