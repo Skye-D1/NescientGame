@@ -26,8 +26,8 @@ public class EnemyController : MonoBehaviour
     float strafeValue = 5f; // direction and magnitude of strafe movements
     float wanderCooldown = 0f;
     float maxWanderCooldown = 3f;
-    float mapHeight = 54f;
-    float mapWidth = 120f;
+    float mapHeight = 80f;
+    float mapWidth = 150f;
     float targetRandFactor = 3f;
     Rigidbody2D RB;
 
