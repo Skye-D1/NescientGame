@@ -1,6 +1,7 @@
 //using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //Name: Aidan Gillette
 //File: PauseMenu.cs
@@ -10,6 +11,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject PauseMenuPanel;
     public bool isPaused = false;
+    public bool isMainMenu = true;
+    MainMenu mainMenu;
 
     PlayerController playerScript; // the player controlscript for purposes
 
@@ -19,6 +22,7 @@ public class PauseMenu : MonoBehaviour
     {
         PauseMenuPanel.SetActive(false);
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        mainMenu = GameObject.Find("MainMenuThing").GetComponent<MainMenu>();
     }
 
     // Update is called once per frame
@@ -55,9 +59,9 @@ public class PauseMenu : MonoBehaviour
     }
 
 
-    public void QuitGame()
+    public void QuitToMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MainScene");
     }
 
 }

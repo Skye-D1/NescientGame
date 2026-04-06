@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public bool isPaused = false;
     Vector3 lastCameraChange;
     float cameraLagRatio = 100f;
+    Vignette vignette;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -76,8 +77,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (vignette == null) {
+            vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
+        }
         if(!isPaused){
-            Vignette vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
             if((Health <= 0 || Thirst <= 0) && !preventDie){
                 dying = true;
                 //Debug.Log("dying: " + dying);
