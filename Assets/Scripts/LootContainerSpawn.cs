@@ -15,6 +15,9 @@ public class LootContainerSpawn : MonoBehaviour
     public Sprite openSprite; // set to alternate
     Sprite closedSprite; // set from current on start
     SpriteRenderer spriteRenderer;
+    public bool restrictAccess; // whether restrict to box trigger
+    public bool destroyOnUse; // for single use container
+    bool isPlayerInTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,12 +43,27 @@ public class LootContainerSpawn : MonoBehaviour
         }
         
         // if player press e and in range
-        if(isItemReady && Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.transform.position, transform.position) < 2f) {
+        if(isItemReady && Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.transform.position, transform.position) < 2f && (!restrictAccess || isPlayerInTrigger)) {
             isItemReady = false;
             spriteRenderer.sprite = openSprite;
             Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], (transform.position + spawnOffsets), transform.rotation);
+            if (destroyOnUse) {
+                // particles here maybe
+                GameObject.Destroy(gameObject);
+            }
         }
+    }
+    void OnTriggerEnter2D(Collider2D found) {
+        // if thing is player, isPlayerInTrigger set to true
+        if (found.gameObject.transform.name.Contains("Player")) {
+            isPlayerInTrigger = true;
+        }
+    }
 
-
+    void OnTriggerExit2D(Collider2D found) {
+        // if thing is player, isPlayerInTrigger set to false
+        if (found.gameObject.transform.name.Contains("Player")) {
+            isPlayerInTrigger = false;
+        }
     }
 }

@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/byebye/TitleScene.unity
     guid: 36b32a09a86b20e4fbd7411529099680
   - enabled: 1
