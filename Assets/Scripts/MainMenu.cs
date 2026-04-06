@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
     PlayerController playerScript; // the player controlscript for purposes
     PauseMenu pauseMenu;
+    public Volume volume;
     Vignette vignette;
 
 
@@ -26,16 +27,16 @@ public class MainMenu : MonoBehaviour
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         playerScript.isPaused = true;
         pauseMenu = GameObject.Find("MenuThing").GetComponent<PauseMenu>();
+        volume.profile.TryGet(out vignette);
+
+        vignette.smoothness.value = 1f;
+        vignette.intensity.value = 1f;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (vignette == null) {
-            vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
-            vignette.intensity.value = 1f;
-        }
         if (MainMenuPanel.activeSelf) {
             if(vignette.intensity.value < 1f){
                 vignette.intensity.value += Time.deltaTime;
