@@ -55,9 +55,15 @@ public class LootContainerSpawn : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D found) {
         // if thing is player, isPlayerInTrigger set to true
+        if (found.gameObject.transform.name.Contains("Player")) {
+            isPlayerInTrigger = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D found) {
         // if thing is player, isPlayerInTrigger set to false
+        if (found.gameObject.transform.name.Contains("Player")) {
+            isPlayerInTrigger = false;
+        }
     }
 }
