@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
 
     PlayerController playerScript; // the player controlscript for purposes
     PauseMenu pauseMenu;
+    public Volume volume;
     Vignette vignette;
     float vScale = 1f;
 
@@ -29,6 +30,10 @@ public class MainMenu : MonoBehaviour
         playerScript.isPaused = true;
         pauseMenu = GameObject.Find("MenuThing").GetComponent<PauseMenu>();
         MMVignette = GameObject.Find("MMVignette");
+        volume.profile.TryGet(out vignette);
+
+        vignette.smoothness.value = 1f;
+        vignette.intensity.value = 1f;
         
     }
 
