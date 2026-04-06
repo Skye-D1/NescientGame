@@ -11,11 +11,13 @@ using UnityEngine.Rendering.Universal;
 public class MainMenu : MonoBehaviour
 {
     public GameObject MainMenuPanel;
+    public GameObject MMVignette;
     //public bool isPaused = false;
 
     PlayerController playerScript; // the player controlscript for purposes
     PauseMenu pauseMenu;
     Vignette vignette;
+    float vScale = 1f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +28,7 @@ public class MainMenu : MonoBehaviour
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         playerScript.isPaused = true;
         pauseMenu = GameObject.Find("MenuThing").GetComponent<PauseMenu>();
+        MMVignette = GameObject.Find("MMVignette");
         
     }
 
@@ -36,6 +39,7 @@ public class MainMenu : MonoBehaviour
             vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
             vignette.intensity.value = 1f;
         }
+        MMVignette.transform.localScale = new Vector3(vScale, vScale, vScale);
         if (MainMenuPanel.activeSelf) {
             if(vignette.intensity.value < 1f){
                 vignette.intensity.value += Time.deltaTime;
@@ -43,6 +47,7 @@ public class MainMenu : MonoBehaviour
                 vignette.smoothness.value += Time.deltaTime;
             }
         } else {
+            vScale += Time.deltaTime;
             if(vignette.intensity.value > 0f){
                 vignette.intensity.value -= Time.deltaTime;
             }else if(vignette.smoothness.value > 0f){
