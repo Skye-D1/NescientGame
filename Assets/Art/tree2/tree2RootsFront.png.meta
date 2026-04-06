@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: bd0018f80df08df46840e6fa93d43fe7
+guid: bfbdf18c78d0cd84f82348771ab5c3f3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2541579827414792756
-    second: tree1_0
+      213: 2395153697946573603
+    second: tree2RootsFront_0
+  - first:
+      213: -7021160759817324658
+    second: tree2RootsFront_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tree1_0
+      name: tree2RootsFront_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1320
-        height: 1977
+        x: 231
+        y: 478
+        width: 599
+        height: 239
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc584a2ec9e7abcd0800000000000000
-      internalID: -2541579827414792756
+      spriteID: 32b9194299b4d3120800000000000000
+      internalID: 2395153697946573603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tree2RootsFront_1
+      rect:
+        serializedVersion: 2
+        x: 1302
+        y: 493
+        width: 665
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e873d281d73df8e90800000000000000
+      internalID: -7021160759817324658
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      tree1_0: -2541579827414792756
+      tree2RootsFront_0: 2395153697946573603
+      tree2RootsFront_1: -7021160759817324658
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
