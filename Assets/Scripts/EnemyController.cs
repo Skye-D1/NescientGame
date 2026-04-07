@@ -26,8 +26,7 @@ public class EnemyController : MonoBehaviour
     float strafeValue = 5f; // direction and magnitude of strafe movements
     float wanderCooldown = 0f;
     float maxWanderCooldown = 3f;
-    float mapHeight = 80f;
-    float mapWidth = 150f;
+    float[] mapEdgesXY = {-70f, 62f, -40, 28};
     float targetRandFactor = 3f;
     float randCooldown = 0f;
     Vector2 randValues;
@@ -111,9 +110,10 @@ public class EnemyController : MonoBehaviour
                 do {
                     loopys++;
                     newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 25f;
-                } while (loopys < 100 && Mathf.Abs(newPoint.x + transform.position.x) > (mapWidth/2f) || Mathf.Abs(newPoint.y + transform.position.y) > (mapHeight/2f));
-                if (loopys > 90) {
-                    Debug.Log("loopys problem 1 in enemycontroller");
+                } while (loopys < 10 && ((newPoint.x + transform.position.x) < mapEdgesXY[0] || (newPoint.x + transform.position.x) > mapEdgesXY[1] || (newPoint.y + transform.position.y) < mapEdgesXY[2] || (newPoint.y + transform.position.y) > mapEdgesXY[3]));
+                if (loopys > 9) {
+                    //Debug.Log("loopys problem 1 in enemycontroller");
+                    hasTarget = false;
                 }
                 echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
                 target = new Vector2(transform.position.x, transform.position.y) + newPoint;
@@ -160,9 +160,10 @@ public class EnemyController : MonoBehaviour
                 }
 
                 target = new Vector2(newTarget.x + randValues.x, newTarget.y + randValues.y);
-            } while ((loopys < 100 && (Mathf.Abs(target.x) > (mapWidth/2f) || Mathf.Abs(target.y) > (mapHeight/2f))));
-            if (loopys > 90) {
-                Debug.Log("loopys problem 2 in enemycontroller; target:" + target);
+            } while (loopys < 10 && ((target.x + transform.position.x) < mapEdgesXY[0] || (target.x + transform.position.x) > mapEdgesXY[1] || (target.y + transform.position.y) < mapEdgesXY[2] || (target.y + transform.position.y) > mapEdgesXY[3]));
+            if (loopys > 9) {
+                //Debug.Log("loopys problem 2 in enemycontroller; target:" + target);
+                hasTarget = false;
             }
 
             targetPriority = isNewTargetPriority;
@@ -196,11 +197,11 @@ public class EnemyController : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
     }
-    void OnCollisionEnter2D(Collision2D collision) {
+    /*void OnCollisionEnter2D(Collision2D collision) {
         //Debug.Log("enemy touched " + collision.gameObject.transform.name);
         // forget target when hit barrier
         if (collision.gameObject.transform.name.Contains("Barrier")) {
             hasTarget = false;
         }
-    }
+    }*/
 }

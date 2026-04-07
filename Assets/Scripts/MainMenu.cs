@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 //Name: Skye Drury
 //File: MainMenu.cs
@@ -35,9 +36,10 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
         MMVignette.transform.localScale = new Vector3(vScale, vScale, vScale);
-        if (MainMenuPanel.activeSelf) {
-        } else {
+        if (!MainMenuPanel.activeSelf && vScale < 10f) {
             vScale += Time.deltaTime;
+        } else if (vScale > 10f) {
+            MMVignette.SetActive(false);
         }
     }
 
@@ -53,6 +55,11 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("CreditScene");
     }
 
 }

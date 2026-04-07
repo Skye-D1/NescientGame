@@ -63,5 +63,9 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("CreditScene");
+    }
 
 }
