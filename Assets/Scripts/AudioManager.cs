@@ -1,10 +1,10 @@
 using UnityEngine;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
-    AudioSource source;
     float bpm = 145f;
-    public AudioClip[] sounds;
+    public int sounds;
     public float[] loopLengths; //length of loop in beats
     int[] beatsIn; //how many beats into the clip it is
     bool[] isPlaying;
@@ -16,13 +16,17 @@ public class AudioManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        source = gameObject.GetComponent<AudioSource>();
-        beatsIn = new int[sounds.Length];
-        isPlaying = new bool[sounds.Length];
-        isLooping = new bool[sounds.Length];
+        beatsIn = new int[sounds];
+        isPlaying = new bool[sounds];
+        isLooping = new bool[sounds];
         isPlaying[0] = true;
         isLooping[0] = true;
-        loopLengths[0] = sounds[0].length;
+        try{
+            loopLengths[0] = transform.GetChild(0).GetComponent<AudioChildManager>().source.clip.length;
+        } catch(Exception E){
+            Debug.Log("sound in audiosource 1 is not a clip.");
+        }
+        
         PlayClip(0, true);
     }
 
@@ -34,19 +38,16 @@ public class AudioManager : MonoBehaviour
             timeSinceLastBeat = 0;
 
             //BEAT
-            for(int i = 0; i < sounds.Length; i++){
+            for(int i = 0; i < sounds; i++){
                 if(isPlaying[i]){
                     beatsIn[i] += 1;
                     if(beatsIn[i] >= loopLengths[i] && isLooping[i]){
-                        source.PlayOneShot(sounds[i]);
-                        beatsIn[i] = 0;
+                        PlayClip(i, true);
                     } else if(beatsIn[i] >= loopLengths[i] && soundToPlayAfter[i] != -1){
                         beatsIn[i] = 0;
                         isPlaying[i] = false;
 
-                        source.PlayOneShot(sounds[soundToPlayAfter[i]]);
-                        isPlaying[soundToPlayAfter[i]] = true;
-                        beatsIn[soundToPlayAfter[i]] = 0;
+                        PlayClip(soundToPlayAfter[i], isLooping[soundToPlayAfter[i]]);
                     }else if(beatsIn[i] >= loopLengths[i]){
                         beatsIn[i] = 0;
                         isPlaying[i] = false;
@@ -57,7 +58,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayClip(int index, bool loop){
-        source.PlayOneShot(sounds[index]);
+        transform.GetChild(index).GetComponent<AudioChildManager>().playSound();
         isPlaying[index] = true;
         beatsIn[index] = 0;
         isLooping[index] = loop;
