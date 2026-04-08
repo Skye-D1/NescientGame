@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     float randCooldown = 0f;
     Vector2 randValues;
     Rigidbody2D RB;
+    float targetDecayTimer = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -60,6 +61,13 @@ public class EnemyController : MonoBehaviour
             hasTarget = false;
         } else if ((Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) || (!targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 5f)) {
             hasTarget = false;  
+        }
+
+        // target decay to forget target after some time
+        if (targetDecayTimer < 22f) {
+            targetDecayTimer += Time.deltaTime;
+        } else {
+            hasTarget = false;
         }
 
         // keep moving past target for a bit (overshoot)
@@ -117,6 +125,7 @@ public class EnemyController : MonoBehaviour
                 }
                 echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
                 target = new Vector2(transform.position.x, transform.position.y) + newPoint;
+                targetDecayTimer = 0;
                 //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
                 wanderCooldown = maxWanderCooldown + (maxWanderCooldown * (Random.value - 0.5f));
                 didTargetUpdate = true;
@@ -160,6 +169,7 @@ public class EnemyController : MonoBehaviour
                 }
 
                 target = new Vector2(newTarget.x + randValues.x, newTarget.y + randValues.y);
+                targetDecayTimer = 0;
             } while (loopys < 10 && ((target.x + transform.position.x) < mapEdgesXY[0] || (target.x + transform.position.x) > mapEdgesXY[1] || (target.y + transform.position.y) < mapEdgesXY[2] || (target.y + transform.position.y) > mapEdgesXY[3]));
             if (loopys > 9) {
                 //Debug.Log("loopys problem 2 in enemycontroller; target:" + target);

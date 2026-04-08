@@ -30,12 +30,16 @@ public class enemySpawning : MonoBehaviour
         if (enemyTimer < 0) {
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
-                // reset timer
-                enemyTimer = Random.Range(enemySpawnDelayRange[0], enemySpawnDelayRange[1]);
-                // spawn enemy
-                GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
-                inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
-                totalEnemiesSpawned++;
+                // if population below limit
+                Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(new Vector2(transform.position.x + newPos.x, transform.position.y + newPos.y), 20.0f, LayerMask.GetMask("Enemy"));
+                if (enemiesFound.Length < 15) {
+                    // reset timer
+                    enemyTimer = Random.Range(enemySpawnDelayRange[0], enemySpawnDelayRange[1]);
+                    // spawn enemy
+                    GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
+                    inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
+                    totalEnemiesSpawned++;
+                }
             }
         } else {
             // progress timer
