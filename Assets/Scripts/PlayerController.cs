@@ -3,6 +3,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 //Name: Sam Johnson, Skye Drury
 //File: PlayerController.cs
@@ -102,6 +103,8 @@ public class PlayerController : MonoBehaviour
                 } else{
                     isPaused = true;
                     Time.timeScale = 0;
+                    // restart at main menu
+                    SceneManager.LoadScene("MainScene");
                 }
             }
 
