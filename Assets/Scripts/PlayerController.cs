@@ -462,6 +462,11 @@ public class PlayerController : MonoBehaviour
             Vector2 camera = new Vector2(GameObject.Find("Main Camera").transform.position.x, GameObject.Find("Main Camera").transform.position.y);
             Vector2 direction = (new Vector2(transform.position.x, transform.position.y) - camera);
             GameObject.Find("Main Camera").transform.position += new Vector3(direction.x / 0.5f * Time.deltaTime, direction.y / 0.5f * Time.deltaTime, 0);
+            //update animator
+            Animator anim = gameObject.GetComponent<Animator>();
+            anim.SetBool("Moving", !(movement == new Vector3()));
+            anim.SetBool("Sprinting", sprinting);
+            anim.SetBool("Sneaking", sneaking);
         }
     }
 
