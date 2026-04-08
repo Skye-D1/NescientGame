@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     float strafeValue = 5f; // direction and magnitude of strafe movements
     float wanderCooldown = 0f;
     float maxWanderCooldown = 3f;
-    float[] mapEdgesXY = {-70f, 62f, -40, 28};
+    float[] mapEdgesXY = {-40f, 40f, -40, 40}; // {-70f, 62f, -40, 28};
     float targetRandFactor = 3f;
     float randCooldown = 0f;
     Vector2 randValues;
