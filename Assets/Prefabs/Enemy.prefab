@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1266799871433071482}
   - component: {fileID: 508895847157216414}
   - component: {fileID: 9093381849424354367}
+  - component: {fileID: 1717519326320873712}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -82,12 +83,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3669205746100690709, guid: 19028b38e6b311941b8b5b698402a9b5, type: 3}
+  m_Sprite: {fileID: -1632381696017279218, guid: 1592cc22842b3ff49a82ddc06fd43e1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0228572, y: 1.4628571}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -139,6 +140,8 @@ MonoBehaviour:
   isStatic: 0
   isLeader: 0
   staticPlant: {fileID: 4324750993966365974, guid: aeffd9985276d8345b97c4d1484fdf9e, type: 3}
+  targetDecayTimer: 0
+  predictiveValue: 0
 --- !u!58 &2195479111739237513
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -319,9 +322,9 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.58, y: 0.5}
-    oldSize: {x: 0.8775, y: 2.48375}
-    newSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.0228572, y: 1.4628571}
+    newSize: {x: 1.0228572, y: 1.4628571}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -341,3 +344,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
+--- !u!95 &1717519326320873712
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4324750993966365974}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56cb8152ae2f45f40b77b69219d410f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

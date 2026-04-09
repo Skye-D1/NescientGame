@@ -35,6 +35,7 @@ public class EnemyController : MonoBehaviour
     Vector2 preciseTarget; // exact target location
     Vector2 prevPreciseTarget; // exact target location last frame
     [SerializeField] float predictiveValue; // how much this individual predicts target position
+    Animator anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,6 +53,8 @@ public class EnemyController : MonoBehaviour
             isLeader = true;
             lineRenderer.startColor = new Color(1f,1f,0f,1f);
         }
+
+        anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -149,6 +152,11 @@ public class EnemyController : MonoBehaviour
         if (randCooldown > 0) {
             randCooldown -= Time.deltaTime;
         }
+
+        //update animation
+        anim.SetBool("moving", RB.linearVelocity.magnitude > 0.01f);
+        anim.SetFloat("speed", RB.linearVelocity.magnitude);
+
     }
 
     // hear a noise and update target if necessary
