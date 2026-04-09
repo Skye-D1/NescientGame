@@ -183,7 +183,7 @@ public class EnemyController : MonoBehaviour
             
             // predictive targeting
             if (prevPreciseTarget.magnitude > 0 && isNewTargetPriority) {
-                target += (((prevPreciseTarget - preciseTarget) / Time.deltaTime) * -predictiveValue * Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)));
+                target += (((prevPreciseTarget - preciseTarget) / Time.deltaTime) * -predictiveValue * Mathf.Sqrt(Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y))));
             }
             prevPreciseTarget = preciseTarget;
 
