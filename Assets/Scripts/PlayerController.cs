@@ -253,6 +253,15 @@ public class PlayerController : MonoBehaviour
             } while(selectedInvSlot < 0){
                 selectedInvSlot += 3;
             }
+
+            if(Input.GetKeyDown(KeyCode.Alpha1)){
+                selectedInvSlot = 0;
+            } else if(Input.GetKeyDown(KeyCode.Alpha2)){
+                selectedInvSlot = 1;
+            } else if(Input.GetKeyDown(KeyCode.Alpha3)){
+                selectedInvSlot = 2;
+            }
+
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
             
             //pickup
