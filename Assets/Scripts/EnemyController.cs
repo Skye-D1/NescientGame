@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Vector2 target; // target movement location
+    [SerializeField] Vector2 target; // target movement location
     float moveSpeed = 400f; // speed of movement
     Vector3 movement = new Vector3(); // current movement direction
-    public bool targetPriority; // whether the target is high priority (player noise)
-    public bool hasTarget; // whether current target is valid
+    [SerializeField] bool targetPriority; // whether the target is high priority (player noise)
+    [SerializeField] bool hasTarget; // whether current target is valid
     bool didTargetUpdate; // whether the enemy has updated target this frame
     float overshootTimer; // time left moving past target
     public float echoRadius; // radius to echo recieved noise to others
@@ -31,7 +31,10 @@ public class EnemyController : MonoBehaviour
     float randCooldown = 0f;
     Vector2 randValues;
     Rigidbody2D RB;
-    float targetDecayTimer = 0;
+    [SerializeField] float targetDecayTimer = 0;
+    Vector2 preciseTarget; // exact target location
+    Vector2 prevPreciseTarget; // exact target location last frame
+    [SerializeField] float predictiveValue; // how much this individual predicts target position
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +45,7 @@ public class EnemyController : MonoBehaviour
         lineRenderer = gameObject.GetComponent<LineRenderer>();
         RB = gameObject.GetComponent<Rigidbody2D>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        predictiveValue = Random.Range(0.5f, 2f);
         
         // determine if leader
         if (Random.value > 0.4) { // todo: check proximity for other leaders
@@ -154,6 +158,7 @@ public class EnemyController : MonoBehaviour
         if ((!hasTarget || isNewTargetPriority) && !didTargetUpdate) {
             wanderCooldown = maxWanderCooldown; // ensure leader does not immediately make new wander target
             didTargetUpdate = true;
+            preciseTarget = newTarget;
             int loopys = 0;
             do {
                 loopys++;
@@ -175,6 +180,12 @@ public class EnemyController : MonoBehaviour
                 //Debug.Log("loopys problem 2 in enemycontroller; target:" + target);
                 hasTarget = false;
             }
+            
+            // predictive targeting
+            if (prevPreciseTarget.magnitude > 0 && isNewTargetPriority) {
+                target += (((prevPreciseTarget - preciseTarget) / Time.deltaTime) * -predictiveValue * Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)));
+            }
+            prevPreciseTarget = preciseTarget;
 
             targetPriority = isNewTargetPriority;
             hasTarget = true;
