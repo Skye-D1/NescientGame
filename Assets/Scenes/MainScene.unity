@@ -72326,7 +72326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &377842158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333496,6 +333496,7 @@ GameObject:
   - component: {fileID: 1721066853}
   - component: {fileID: 1721066855}
   - component: {fileID: 1721066854}
+  - component: {fileID: 1721066856}
   m_Layer: 5
   m_Name: MainMenuPanel
   m_TagString: Untagged
@@ -333563,6 +333564,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721066852}
   m_CullTransparentMesh: 1
+--- !u!95 &1721066856
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721066852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 144dd030fc135d742a20c1e090bb7ae6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1721156481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8557991841067051634, guid: 412d4ff78daf5784688943a02254b6a0, type: 3}
@@ -335280,6 +335303,7 @@ GameObject:
   - component: {fileID: 1731215238}
   - component: {fileID: 1731215239}
   - component: {fileID: 1731215240}
+  - component: {fileID: 1731215241}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -335363,7 +335387,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2218195403011463550, guid: c3193dcaff70dea4485495fb051e4e10, type: 3}
+  m_Sprite: {fileID: 902234594027920814, guid: 930f33d683c340a499b3784e0c0d8ca0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -335474,6 +335498,28 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731215233}
   m_Enabled: 1
+--- !u!95 &1731215241
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731215233}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6bf84205e82e8c14fbaa5773ee5b2a58, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1731683018
 PrefabInstance:
   m_ObjectHideFlags: 0
