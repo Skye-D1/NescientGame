@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public Vector2 target; // target movement location
-    float moveSpeed = 300f; // speed of movement
+    float moveSpeed = 400f; // speed of movement
     Vector3 movement = new Vector3(); // current movement direction
     public bool targetPriority; // whether the target is high priority (player noise)
     public bool hasTarget; // whether current target is valid

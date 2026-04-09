@@ -172,8 +172,8 @@ public class PlayerController : MonoBehaviour
             }
 
             //Water Gun shoot
-            if(Input.GetButtonDown("Fire1") && Water >= 10.0f){
-                Water -= 10;
+            if(Input.GetButtonDown("Fire1") && Water >= 6f){
+                Water -= 6f;
                 useMouseForLook = true;
                 Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
                 currentNoiseVolume = waterGunNoiseVolume;

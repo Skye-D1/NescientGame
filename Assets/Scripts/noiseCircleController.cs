@@ -8,8 +8,8 @@ public class noiseCircleController : MonoBehaviour
 {
     public float noiseRange;
     float timer = 0;
-    float opacityRate = -1.5f;
-    float offset = 1f;
+    float opacityRate = -0.75f; // -1.5f
+    float offset = 0.5f; // 1f
     float lifetime = 0.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +28,7 @@ public class noiseCircleController : MonoBehaviour
             offset = 2f;
         }
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,(opacityRate*timer + offset));
+        Debug.Log("noisecircle: " + (opacityRate*timer + offset));
         //Debug.Log(opacityRate*timer + offset);
     
 
