@@ -53,10 +53,13 @@ public class PlayerController : MonoBehaviour
     Vignette vignette;
     TextMeshPro fpsCounter;
     float fpsUpdateTimer;
+    //public GameObject debugCircle;
+    Animator anim;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        anim = gameObject.GetComponent<Animator>();
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
 
         fpsCounter = GameObject.Find("fpsCounter").GetComponentInChildren<TextMeshPro>();
@@ -111,6 +114,9 @@ public class PlayerController : MonoBehaviour
             //defining how the player should move this frame
             movement = new Vector3();
             movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+
+            //look direction
             if (prevMovement != movement) { // if changed move input, loop at move direction
                 useMouseForLook = false;
             }
@@ -125,15 +131,30 @@ public class PlayerController : MonoBehaviour
                 useMouseForLook = true;
             }
             if (useMouseForLook) {
+                //flip towards mouse
                 if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x) {
                     selfRenderer.flipX = true;
                 } else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).x < transform.position.x) {
                     selfRenderer.flipX = false;
                 }
+
+                //if mouse look direction is different from regular look direction, reverse animation speed
+                if((Camera.main.ScreenToWorldPoint(Input.mousePosition).x > transform.position.x) != (movement.x > 0)){
+                    anim.SetFloat("walkMult", -1f);
+                    anim.SetFloat("sprintMult", -3f);
+                    anim.SetFloat("sneakMult", -0.35f);
+                } else{
+                    anim.SetFloat("walkMult", 1f);
+                    anim.SetFloat("sprintMult", 3f);
+                    anim.SetFloat("sneakMult", 0.35f);
+                }
+            } else{
+                anim.SetFloat("walkMult", 1f);
+                anim.SetFloat("sprintMult", 3f);
+                anim.SetFloat("sneakMult", 0.35f);
             }
             prevMovement = movement;
-
-            movement.y = Input.GetAxisRaw("Vertical");
+            
             movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
 
             //is the player sprinting or sneaking? Stamina regeneration if they aren't sprinting
@@ -476,8 +497,8 @@ public class PlayerController : MonoBehaviour
             Vector2 camera = new Vector2(GameObject.Find("Main Camera").transform.position.x, GameObject.Find("Main Camera").transform.position.y);
             Vector2 direction = (new Vector2(transform.position.x, transform.position.y) - camera);
             GameObject.Find("Main Camera").transform.position += new Vector3(direction.x / 0.5f * Time.deltaTime, direction.y / 0.5f * Time.deltaTime, 0);
+            
             //update animator
-            Animator anim = gameObject.GetComponent<Animator>();
             anim.SetBool("Moving", !(movement == new Vector3()));
             anim.SetBool("Sprinting", sprinting);
             anim.SetBool("Sneaking", sneaking);
