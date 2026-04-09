@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     float fpsUpdateTimer;
     //public GameObject debugCircle;
     Animator anim;
+    float forceSoundPulseCooldown = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -91,6 +92,7 @@ public class PlayerController : MonoBehaviour
             fpsCounter.text = "fps:" + Mathf.Round(1f / Time.deltaTime);
             fpsUpdateTimer = 0;
         }
+        forceSoundPulseCooldown -= Time.deltaTime;
 
         if (vignette == null) {
             vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
@@ -198,7 +200,7 @@ public class PlayerController : MonoBehaviour
                 useMouseForLook = true;
                 Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
                 currentNoiseVolume = waterGunNoiseVolume;
-                soundPulseTimer = -1; // force sound pulse visual
+                forceSoundPulseVisual();
 
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) -transform.position);
 
@@ -391,17 +393,17 @@ public class PlayerController : MonoBehaviour
             if (sprinting && movement.magnitude != 0) {
                 currentNoiseVolume = sprintNoiseVolume;
                 if (prevNoiseVolume < sprintNoiseVolume) {
-                    soundPulseTimer = -1; // force sound pulse visual
+                    forceSoundPulseVisual();
                 }
             } else if (movement.magnitude != 0 && !sneaking) {
                 currentNoiseVolume = walkNoiseVolume;
                 if (prevNoiseVolume < walkNoiseVolume) {
-                    soundPulseTimer = -1; // force sound pulse visual
+                    forceSoundPulseVisual();
                 }
             } else if (movement.magnitude != 0 && sneaking) {
                 currentNoiseVolume = sneakNoiseVolume;
                 if (prevNoiseVolume < sneakNoiseVolume) {
-                    soundPulseTimer = -1; // force sound pulse visual
+                    forceSoundPulseVisual();
                 }
             }
 
@@ -540,5 +542,12 @@ public class PlayerController : MonoBehaviour
     public bool isDying(){
         //Debug.Log("is dying is " + dying);
         return dying;
+    }
+
+    void forceSoundPulseVisual() {
+        if (forceSoundPulseCooldown <= 0) {
+            soundPulseTimer = -1;
+            forceSoundPulseCooldown = 0.5f;
+        }
     }
 }
