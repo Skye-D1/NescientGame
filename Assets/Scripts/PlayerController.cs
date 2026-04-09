@@ -509,7 +509,12 @@ public class PlayerController : MonoBehaviour
             
             //update animator
             anim.SetBool("Moving", !(movement == new Vector3()));
-            anim.SetBool("Sprinting", sprinting);
+            if(Stamina > 5 && sprinting){
+                anim.SetBool("Sprinting", true);
+            } else{
+                anim.SetBool("Sprinting", false);
+            }
+            
             anim.SetBool("Sneaking", sneaking);
         }
     }
