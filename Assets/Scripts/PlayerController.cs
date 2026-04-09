@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 //Name: Sam Johnson, Skye Drury
 //File: PlayerController.cs
@@ -48,12 +51,15 @@ public class PlayerController : MonoBehaviour
     Vector3 lastCameraChange;
     float cameraLagRatio = 100f;
     Vignette vignette;
+    TextMeshPro fpsCounter;
+    float fpsUpdateTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
 
+        fpsCounter = GameObject.Find("fpsCounter").GetComponentInChildren<TextMeshPro>();
         hudWaterGun = GameObject.Find("HUDWaterGun");
         selfRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -77,6 +83,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fpsUpdateTimer += Time.deltaTime;
+        if (fpsUpdateTimer > 0.5f) {
+            fpsCounter.text = "fps:" + Mathf.Round(1f / Time.deltaTime);
+            fpsUpdateTimer = 0;
+        }
+
         if (vignette == null) {
             vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
         }
@@ -91,6 +103,8 @@ public class PlayerController : MonoBehaviour
                 } else{
                     isPaused = true;
                     Time.timeScale = 0;
+                    // restart at main menu
+                    SceneManager.LoadScene("MainScene");
                 }
             }
 

@@ -18,16 +18,19 @@ public class MainMenu : MonoBehaviour
     PlayerController playerScript; // the player controlscript for purposes
     PauseMenu pauseMenu;
     float vScale = 1f;
+    GameObject menuThing;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        menuThing = GameObject.Find("MenuThing");
         Time.timeScale = 0f; // start paused
         MainMenuPanel.SetActive(true);
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         playerScript.isPaused = true;
         pauseMenu = GameObject.Find("MenuThing").GetComponent<PauseMenu>();
+        menuThing.SetActive(false);
         MMVignette = GameObject.Find("MMVignette");
         
     }
@@ -49,6 +52,7 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
         playerScript.isPaused = false;
         pauseMenu.isMainMenu = false;
+        menuThing.SetActive(true);
     }
 
 
