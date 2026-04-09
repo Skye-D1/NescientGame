@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7704952331435833287}
   - component: {fileID: 8209721460041629542}
   - component: {fileID: 2696848498941390246}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LootContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,6 +60,8 @@ MonoBehaviour:
   isItemReady: 0
   spawnOffsets: {x: 0, y: -0.2, z: 0}
   openSprite: {fileID: 7477496793726388702, guid: ad7dde7d78e73af43921cffe3aef739b, type: 3}
+  restrictAccess: 0
+  destroyOnUse: 0
 --- !u!212 &1339414287755417345
 SpriteRenderer:
   m_ObjectHideFlags: 0

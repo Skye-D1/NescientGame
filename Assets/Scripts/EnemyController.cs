@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour
     Vector2 prevPreciseTarget; // exact target location last frame
     [SerializeField] float predictiveValue; // how much this individual predicts target position
     Animator anim;
+    SpriteRenderer selfRenderer;
+    float flipCooldown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,6 +49,7 @@ public class EnemyController : MonoBehaviour
         RB = gameObject.GetComponent<Rigidbody2D>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         predictiveValue = Random.Range(0.5f, 2f);
+        selfRenderer = gameObject.GetComponent<SpriteRenderer>();
         
         // determine if leader
         if (Random.value > 0.4) { // todo: check proximity for other leaders
@@ -61,6 +64,16 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         didTargetUpdate = false; // allow one target update per frame
+        flipCooldown -= Time.deltaTime;
+        if (flipCooldown <= 0 && ((movement.x > 0.2f && !selfRenderer.flipX) || (movement.x < -0.2f && selfRenderer.flipX))) {
+            if (movement.x > 0.2f) {
+                selfRenderer.flipX = true;
+                flipCooldown = 0.5f;
+            } else if (movement.x < -0.2f) {
+                selfRenderer.flipX = false;
+                flipCooldown = 0.5f;
+            }
+        }
         
         // start moving past target for a time when reached
         if (targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {

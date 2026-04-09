@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4981474801988340299}
   - component: {fileID: 4682714854436849883}
   - component: {fileID: 8747099855151677028}
+  - component: {fileID: 6521241730403520576}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Projectile
@@ -283,3 +284,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &6521241730403520576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815902927484893885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78c3f17477e3134480f635abaff6937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
