@@ -32,6 +32,8 @@ public class EnemyController : MonoBehaviour
     Vector2 randValues;
     Rigidbody2D RB;
     [SerializeField] float targetDecayTimer = 0;
+    [SerializeField] float noTargetUpdateTimer = 0;
+
     Vector2 preciseTarget; // exact target location
     Vector2 prevPreciseTarget; // exact target location last frame
     [SerializeField] float predictiveValue; // how much this individual predicts target position
@@ -72,6 +74,18 @@ public class EnemyController : MonoBehaviour
             } else if (movement.x < -0.2f) {
                 selfRenderer.flipX = false;
                 flipCooldown = 0.5f;
+            }
+        }
+
+        // update noTargetUpdateTimer
+        if (hasTarget && targetPriority) {
+            noTargetUpdateTimer += Time.deltaTime;
+
+            // if no target update for a while, ignore predictive and offset targeting and go to precise location
+            if (noTargetUpdateTimer > 5f) {
+                target = preciseTarget;
+                prevPreciseTarget = preciseTarget;
+                noTargetUpdateTimer = 0;
             }
         }
         
@@ -145,6 +159,7 @@ public class EnemyController : MonoBehaviour
                 }
                 echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
                 target = new Vector2(transform.position.x, transform.position.y) + newPoint;
+                noTargetUpdateTimer = 0;
                 targetDecayTimer = 0;
                 //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
                 wanderCooldown = maxWanderCooldown + (maxWanderCooldown * (Random.value - 0.5f));
@@ -196,6 +211,7 @@ public class EnemyController : MonoBehaviour
 
                 target = new Vector2(newTarget.x + randValues.x, newTarget.y + randValues.y);
                 targetDecayTimer = 0;
+                noTargetUpdateTimer = 0;
             } while (loopys < 10 && ((target.x + transform.position.x) < mapEdgesXY[0] || (target.x + transform.position.x) > mapEdgesXY[1] || (target.y + transform.position.y) < mapEdgesXY[2] || (target.y + transform.position.y) > mapEdgesXY[3]));
             if (loopys > 9) {
                 //Debug.Log("loopys problem 2 in enemycontroller; target:" + target);
