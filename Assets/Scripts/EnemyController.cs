@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
         lineRenderer = gameObject.GetComponent<LineRenderer>();
         RB = gameObject.GetComponent<Rigidbody2D>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-        predictiveValue = Random.Range(0.5f, 2f);
+        predictiveValue = Random.Range(0.5f, 3f);
         selfRenderer = gameObject.GetComponent<SpriteRenderer>();
         
         // determine if leader

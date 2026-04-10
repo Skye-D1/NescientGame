@@ -9,13 +9,14 @@ public class noiseCircleController : MonoBehaviour
     public float noiseRange;
     float timer = 0;
     float opacityRate = -0.75f; // -1.5f
-    float offset = 0.5f; // 1f
+    float offset; // 1f is start at full opacity, determined on start, works with 0.5f
     float lifetime = 0.5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         transform.localScale = new Vector3(0.01f, 0.01f, 1f);
+        offset = 0.5f;//Mathf.Lerp(0.2f, 0.6f, (noiseRange / 20f));
     }
 
     // Update is called once per frame
