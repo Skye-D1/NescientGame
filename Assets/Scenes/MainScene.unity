@@ -297322,7 +297322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnableEnemy: {fileID: 4324750993966365974, guid: 234ce6cd5a6d89946a054e77f7081662, type: 3}
   player: {fileID: 1731215233}
-  mapHeight: 80
+  mapHeight: 76
   mapWidth: 80
   itemSpawnTable:
   - {fileID: 8403858814980272110, guid: 51a7b3726a8e0d049bd90eca0c3e8726, type: 3}
