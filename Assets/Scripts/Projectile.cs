@@ -9,6 +9,10 @@ public class Projectile : MonoBehaviour
     public float timer = 0.25f;
     bool stopped = false;
     Vector3 randomDir = new Vector3();
+    Vector3 origin;
+    float maxDistance = 0f;
+    bool firstFrame = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,6 +22,17 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(firstFrame){
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, gameObject.GetComponent<Rigidbody2D>().linearVelocity, 5f, LayerMask.GetMask("ProjectileBlocker"));
+            if(hit){
+                maxDistance = hit.distance;
+            }
+            origin = transform.position;
+        }
+
+        if(maxDistance != 0 && Vector3.Distance(origin, transform.position) > maxDistance){
+            timer = 0f;
+        }
         timer -= Time.deltaTime;
         if(!stopped && timer <= 0){
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector3();

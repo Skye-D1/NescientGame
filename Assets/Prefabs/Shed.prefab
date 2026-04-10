@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 36401307620539210}
   - component: {fileID: 2412652950768105329}
   - component: {fileID: 6993250892357342109}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2369061460331157565}
   - component: {fileID: 3307685118800112387}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
