@@ -16,6 +16,7 @@ public class enemySpawning : MonoBehaviour
     public GameObject[] itemSpawnTable;
     public float[] enemySpawnDelayRange; // min and max delay values
     public int totalEnemiesSpawned = 0;
+    public int popDensityCap; // was 15
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,7 +33,7 @@ public class enemySpawning : MonoBehaviour
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
                 // if population below limit
                 Collider2D[] enemiesFound = Physics2D.OverlapCircleAll(new Vector2(transform.position.x + newPos.x, transform.position.y + newPos.y), 20.0f, LayerMask.GetMask("Enemy"));
-                if (enemiesFound.Length < 15) {
+                if (enemiesFound.Length < popDensityCap) {
                     // reset timer
                     enemyTimer = Random.Range(enemySpawnDelayRange[0], enemySpawnDelayRange[1]);
                     // spawn enemy
