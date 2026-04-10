@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 310687757394730203}
   - component: {fileID: 334782927019779326}
   - component: {fileID: 1986678028150434569}
+  - component: {fileID: 216790563943355079}
   m_Layer: 5
   m_Name: Tree2
   m_TagString: Untagged
@@ -133,9 +134,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 10880990966121665}
   - {fileID: 8689389674823838539}
   - {fileID: 5573968859609058856}
-  - {fileID: 10880990966121665}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &310687757394730203
@@ -227,8 +228,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.16846062, y: -1.9136379}
-  m_Size: {x: 1.3407017, y: 0.75781024}
+  m_Offset: {x: -0.168, y: -1.9}
+  m_Size: {x: 1.34, y: 0.758}
   m_Direction: 1
 --- !u!114 &1986678028150434569
 MonoBehaviour:
@@ -243,6 +244,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
+--- !u!114 &216790563943355079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259160147797078855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed5d3b8ee697f64ba0d40fda444ce06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outRadius: 5
+  inRadius: -1
+  sortingOrderOffset: 0
+  transparencyRadiusOffset: {x: 0, y: 1.65}
 --- !u!1 &4647984240471343174
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +371,6 @@ GameObject:
   m_Component:
   - component: {fileID: 10880990966121665}
   - component: {fileID: 3908793425254801980}
-  - component: {fileID: 4812226295399066261}
   m_Layer: 0
   m_Name: Leaves
   m_TagString: Untagged
@@ -432,16 +448,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4812226295399066261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5304075629908040577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046a1700dade1014eb7cddec3ada15a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: -5

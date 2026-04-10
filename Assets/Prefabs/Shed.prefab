@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2759531679552837347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8591613395846429515}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8591613395846429515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759531679552837347}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.479, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7362748595077497059}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5114429616805741338
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +65,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2369061460331157565}
+  - {fileID: 8591613395846429515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7106930634167141852
@@ -103,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78c3f17477e3134480f635abaff6937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: -1
+  offset: -0.5
 --- !u!60 &2412652950768105329
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -155,8 +187,8 @@ PolygonCollider2D:
       - {x: -0.40491953, y: -2.5379744}
       - {x: -0.3998802, y: -2.4163008}
       - {x: -1.4000556, y: -2.4114225}
-      - {x: -1.4125891, y: -0.5402832}
-      - {x: 1.6594024, y: -0.5365117}
+      - {x: -1.4125891, y: -0.5702832}
+      - {x: 1.6594024, y: -0.5665117}
       - {x: 1.6628196, y: -2.4153097}
       - {x: 0.8332322, y: -2.4139395}
       - {x: 0.8424876, y: -2.5346453}
@@ -177,7 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outRadius: 5
   inRadius: 3
-  offset: 1.25
+  sortingOrderOffset: 1.25
+  transparencyRadiusOffset: {x: 0, y: 0}
 --- !u!1 &9160071628900255045
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2369061460331157565
 Transform:
   m_ObjectHideFlags: 0

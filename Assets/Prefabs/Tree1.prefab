@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2041729652065714302}
   - component: {fileID: 3174928683828550797}
   - component: {fileID: 7634264320603381588}
+  - component: {fileID: 6197845192984458392}
   m_Layer: 5
   m_Name: Tree1
   m_TagString: Untagged
@@ -32,9 +33,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8720552333556720138}
   - {fileID: 1354673477972590424}
   - {fileID: 7127810741798051584}
-  - {fileID: 8720552333556720138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2041729652065714302
@@ -142,6 +143,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
+--- !u!114 &6197845192984458392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011262095842865217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed5d3b8ee697f64ba0d40fda444ce06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outRadius: 5
+  inRadius: -1
+  sortingOrderOffset: 0
+  transparencyRadiusOffset: {x: 0, y: 1.5}
 --- !u!1 &3021857994875945054
 GameObject:
   m_ObjectHideFlags: 0
