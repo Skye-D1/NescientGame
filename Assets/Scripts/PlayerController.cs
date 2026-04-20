@@ -370,7 +370,7 @@ public class PlayerController : MonoBehaviour
                         }
 
                     } else if(inventory[selectedInvSlot, 0] == 3){
-                        //Hedge Clippers
+                        //Hedge Cutter
                         Collider2D[] deadEnemies = Physics2D.OverlapCircleAll((new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized * 2f, 1.5f, LayerMask.GetMask("DeadEnemy"));
                         Vector2 mouseDirFromWorld = (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized;
                         GameObject cut = GameObject.Instantiate(hedgeCut, (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized * 0f, Quaternion.identity);
