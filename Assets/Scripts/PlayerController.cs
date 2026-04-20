@@ -198,7 +198,8 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown("Fire1") && Water >= 4f){
                 Water -= 4f;
                 useMouseForLook = true;
-                Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
+                Vector3 projSourcePoint = new Vector3(transform.position.x + (selfRenderer.flipX ? 0.8f : -0.8f), transform.position.y + 0.3f, transform.position.z);
+                Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (projSourcePoint + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
                 currentNoiseVolume = waterGunNoiseVolume;
                 forceSoundPulseVisual();
 
@@ -221,7 +222,7 @@ public class PlayerController : MonoBehaviour
                     force = force * (1 + perc);
 
                     //make and add force to projectile
-                    GameObject proj = Instantiate(projectile, transform.position, new Quaternion());
+                    GameObject proj = Instantiate(projectile, projSourcePoint, new Quaternion());
                     proj.GetComponent<Rigidbody2D>().AddForce(dir * force);
                 }
             }
