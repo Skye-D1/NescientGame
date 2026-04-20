@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     Vignette vignette;
     TextMeshPro fpsCounter;
     float fpsUpdateTimer;
-    //public GameObject debugCircle;
+    public GameObject hedgeCut;
     Animator anim;
     float forceSoundPulseCooldown = 0;
 
@@ -370,17 +370,18 @@ public class PlayerController : MonoBehaviour
 
                     } else if(inventory[selectedInvSlot, 0] == 3){
                         //Hedge Clippers
-                        Collider2D[] deadEnemies = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, 2f, LayerMask.GetMask("DeadEnemy"));
-                        //GameObject circle = GameObject.Instantiate(debugCircle, new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized, new Quaternion());
-                        //circle.transform.localScale = new Vector3(2f,2f, 1f);
-                        
+                        Collider2D[] deadEnemies = Physics2D.OverlapCircleAll((new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized * 2f, 1.5f, LayerMask.GetMask("DeadEnemy"));
+                        Vector2 mouseDirFromWorld = (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized;
+                        GameObject cut = GameObject.Instantiate(hedgeCut, (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized * 0f, Quaternion.identity);
+                        cut.transform.LookAt(new Vector3(mouseDirFromWorld.x, mouseDirFromWorld.y, 0));
+                        cut.transform.Rotate(0,90,90);
 
                         foreach(Collider2D bush in deadEnemies){
                             GameObject.Destroy(bush.gameObject);
                         }
                         // destroy item
-                        inventory[selectedInvSlot, 0] = 0;
-                        inventory[selectedInvSlot, 1] = 0;
+                        //inventory[selectedInvSlot, 0] = 0;
+                        //inventory[selectedInvSlot, 1] = 0;
                     }
                 }
             }
