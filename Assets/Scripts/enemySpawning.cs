@@ -17,6 +17,7 @@ public class enemySpawning : MonoBehaviour
     public float[] enemySpawnDelayRange; // min and max delay values
     public int totalEnemiesSpawned = 0;
     public int popDensityCap; // was 15
+    public int forceSpawnCount; // force a number of zombies to spawn over the next frames
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +29,10 @@ public class enemySpawning : MonoBehaviour
     void Update()
     {
         // if enemy timer out and new position valid, spawn enemy and reset timer
-        if (enemyTimer < 0) {
+        if (enemyTimer < 0 || forceSpawnCount > 0) {
+            if (forceSpawnCount > 0) {
+                forceSpawnCount -= 1;
+            }
             Vector3 newPos = new Vector3(Random.Range(-(mapWidth/2f), (mapWidth/2f)), Random.Range(-(mapHeight/2f), (mapHeight/2f)), 0);
             if (Vector3.Distance(player.transform.position, newPos) > 20f) {
                 // if population below limit
