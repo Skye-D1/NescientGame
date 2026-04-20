@@ -195,8 +195,8 @@ public class PlayerController : MonoBehaviour
             }
 
             //Water Gun shoot
-            if(Input.GetButtonDown("Fire1") && Water >= 6f){
-                Water -= 6f;
+            if(Input.GetButtonDown("Fire1") && Water >= 4f){
+                Water -= 4f;
                 useMouseForLook = true;
                 Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (transform.position + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
                 currentNoiseVolume = waterGunNoiseVolume;
@@ -440,8 +440,8 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     if(hit){
-                        Health -= 30;
-                        hitCooldown = 0.5f;
+                        Health -= 33.333f;
+                        hitCooldown = 1f;
                     }
                 }
                 else if(DeadEnemyColliders.Length > 0 && (Health - 5) >= 0){
@@ -453,8 +453,8 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     if(hit){
-                        Health -= 30;
-                        hitCooldown = 0.5f;
+                        Health -= 8.333f;
+                        hitCooldown = 1f;
                     }
                 }
             }
