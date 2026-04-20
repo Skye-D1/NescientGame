@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] Vector2 target; // target movement location
     float moveSpeed = 400f; // speed of movement
+    float tempMoveSpeed; // temporary movespeed per frame
     Vector3 movement = new Vector3(); // current movement direction
     [SerializeField] bool targetPriority; // whether the target is high priority (player noise)
     [SerializeField] bool hasTarget; // whether current target is valid
@@ -112,7 +113,13 @@ public class EnemyController : MonoBehaviour
             targetPriority = false;
         // move towards target
         } else if (!isStatic && hasTarget) {
-            movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * moveSpeed;
+            tempMoveSpeed = moveSpeed;
+            if (prevPreciseTarget.magnitude > 0 && targetPriority) { // if predictive targeting
+                // higher rand value (further targeting) will cause temporary move faster to surround player
+                tempMoveSpeed += (moveSpeed * 0.8f) * (randValues.magnitude / targetRandFactor);
+            }
+
+            movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * tempMoveSpeed;
             if (playerScript.debugLasers) { // laser when laser time
                 lineRenderer.enabled = true;
             } else {
