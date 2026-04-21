@@ -188,11 +188,11 @@ public class PlayerController : MonoBehaviour
             }
 
             //Thirst drain based on Stamina
-            if(Thirst - Time.deltaTime * ((100 - Stamina)/50 + 0.1f) > 0){
+            /*if(Thirst - Time.deltaTime * ((100 - Stamina)/50 + 0.1f) > 0){
                 Thirst -= Time.deltaTime * ((100 - Stamina)/50 + 0.1f);
             } else{
                 Thirst = 0;
-            }
+            }*/
 
             //Water Gun shoot
             if(Input.GetButtonDown("Fire1") && Water >= 4f){
