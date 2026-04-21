@@ -268,7 +268,6 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
             
             //pickup
-            bool playPickupSound = true;
             if(Input.GetKeyDown(KeyCode.E)){
                 Collider2D[] itemsFound = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, 2.0f, LayerMask.GetMask("Item"));
                 if(itemsFound.Length > 0){
@@ -282,30 +281,24 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     
-                    //put item in free slot if available
+                    //put item in free slot if available and then update sprite if it is a water bottle
+                    int putSlot = 4;
                     if(inventory[selectedInvSlot, 0] == 0){
-                        inventory[selectedInvSlot, 0] = closestItem.GetComponent<Item>().itemID;
-                        inventory[selectedInvSlot, 1] = closestItem.GetComponent<Item>().power;
-                        GameObject.Destroy(closestItem);
+                        putSlot = selectedInvSlot;
                     } else{
                         if(inventory[0, 0] == 0){
-                            inventory[0, 0] = closestItem.GetComponent<Item>().itemID;
-                            inventory[0, 1] = closestItem.GetComponent<Item>().power;
-                            GameObject.Destroy(closestItem);
+                            putSlot = 0;
                         } else if(inventory[1, 0] == 0){
-                            inventory[1, 0] = closestItem.GetComponent<Item>().itemID;
-                            inventory[1, 1] = closestItem.GetComponent<Item>().power;
-                            GameObject.Destroy(closestItem);
+                            putSlot = 1;
                         } else if(inventory[2, 0] == 0){
-                            inventory[2, 0] = closestItem.GetComponent<Item>().itemID;
-                            inventory[2, 1] = closestItem.GetComponent<Item>().power;
-                            GameObject.Destroy(closestItem);
-                        } else{
-                            playPickupSound = false;
+                            putSlot = 2;
                         }
                     }
+                    if(putSlot != 4){
+                        inventory[putSlot, 0] = closestItem.GetComponent<Item>().itemID;
+                        inventory[putSlot, 1] = closestItem.GetComponent<Item>().power;
+                        GameObject.Destroy(closestItem);
 
-                    if(playPickupSound){
                         GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(2*closestItem.GetComponent<Item>().itemID, false);
                     }
                 }
@@ -345,18 +338,6 @@ public class PlayerController : MonoBehaviour
                                 Thirst = 100f;
                             }
                         }
-                        
-
-                        //change sprite of water bottle based on water level
-                        if(inventory[selectedInvSlot, 1] > 75f){
-                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[3];
-                        } else if(inventory[selectedInvSlot, 1] > 50f){
-                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[2];
-                        } else if(inventory[selectedInvSlot, 1] > 25){
-                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[1];
-                        }else{
-                            GameObject.Find("invSlot" + selectedInvSlot).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[0];
-                        }
 
                     } else if(inventory[selectedInvSlot, 0] == 2){
                         //Health Item
@@ -390,6 +371,20 @@ public class PlayerController : MonoBehaviour
             
 
             UpdateInventory();
+
+            foreach(Item item in FindObjectsOfType<Item>()){
+                if(item.itemID == 1){
+                    if(item.power > 75f){
+                        item.gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[3];
+                    } else if(item.power > 50f){
+                        item.gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[2];
+                    } else if(item.power > 25){
+                        item.gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[1];
+                    }else{
+                        item.gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[0];
+                    }
+                }
+            }
 
             // alert enemies with noise - Skye
             if (sprinting && movement.magnitude != 0) {
@@ -529,12 +524,13 @@ public class PlayerController : MonoBehaviour
             if((slot.transform.childCount != 0 && inventory[i,0] == 0) || (slot.transform.childCount != 0 && slot.transform.GetChild(0).gameObject.GetComponent<Item>().itemID != inventory[i,0])){
                 GameObject.Destroy(slot.transform.GetChild(0).gameObject);
             }
-        }
-
-        for(int i = 0; i < 3; i++){
-            GameObject slot = GameObject.Find("invSlot" + i);
+            if(slot.transform.childCount != 0 && inventory[i,0] != 0){
+                slot.transform.GetChild(0).gameObject.GetComponent<Item>().power = inventory[i,1];
+            }
             if(inventory[i,0]!=0 && slot.transform.childCount == 0){
-                Instantiate(itemKey[(int)inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
+                GameObject item = Instantiate(itemKey[(int)inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
+                item.GetComponent<Item>().itemID = (int)inventory[i,0];
+                item.GetComponent<Item>().power = inventory[i,1];
             }
         }
     }
@@ -544,6 +540,7 @@ public class PlayerController : MonoBehaviour
             GameObject item = Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, new Quaternion());
             item.GetComponent<Item>().power = inventory[selectedInvSlot, 1];
         }
+        
     }
 
     public bool isDying(){
