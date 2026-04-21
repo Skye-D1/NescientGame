@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2ca4d86d1778087489156ce1c683bbb7
+guid: 239965ce59c4de649816649d5fba0872
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -195185078656333070
-    second: ShaylaRock1_0
+      213: -4534872430750550929
+    second: start-button_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ShaylaRock1_0
+      name: start-button_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 342
-        height: 268
+        width: 3008
+        height: 1536
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2fa8b3184309a4df0800000000000000
-      internalID: -195185078656333070
+      spriteID: f64b66f0d85e011c0800000000000000
+      internalID: -4534872430750550929
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ShaylaRock1_0: -195185078656333070
+      start-button_0: -4534872430750550929
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
