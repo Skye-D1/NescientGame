@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outRadius: 5
   inRadius: 3
-  sortingOrderOffset: 1.25
+  sortingOrderOffset: 2
   transparencyRadiusOffset: {x: 0, y: 0}
 --- !u!1 &9160071628900255045
 GameObject:
