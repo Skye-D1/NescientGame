@@ -297649,7 +297649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b4bebf779772f42a600bec8f4277e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnableEnemy: {fileID: 4324750993966365974, guid: 234ce6cd5a6d89946a054e77f7081662, type: 3}
+  spawnableEnemies:
+  - {fileID: 4324750993966365974, guid: 234ce6cd5a6d89946a054e77f7081662, type: 3}
   player: {fileID: 1731215233}
   mapHeight: 76
   mapWidth: 80
@@ -297662,7 +297663,7 @@ MonoBehaviour:
   - 3
   totalEnemiesSpawned: 0
   popDensityCap: 15
-  forceSpawnCount: 0
+  forceSpawnCount: 20
 --- !u!4 &1528964714
 Transform:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class enemySpawning : MonoBehaviour
 {
-    public GameObject spawnableEnemy;
+    public GameObject[] spawnableEnemies;
     float enemyTimer;
     float itemTimer;
     LayerMask playerMask;
@@ -41,7 +41,7 @@ public class enemySpawning : MonoBehaviour
                     // reset timer
                     enemyTimer = Random.Range(enemySpawnDelayRange[0], enemySpawnDelayRange[1]);
                     // spawn enemy
-                    GameObject inst = Instantiate(spawnableEnemy, newPos, transform.rotation);
+                    GameObject inst = Instantiate(spawnableEnemies[Random.Range(0, spawnableEnemies.Length)], newPos, transform.rotation);
                     inst.GetComponent<Rigidbody2D>().linearVelocity = new Vector2();
                     totalEnemiesSpawned++;
                 }
