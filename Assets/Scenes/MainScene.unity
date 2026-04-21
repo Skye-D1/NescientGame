@@ -335837,7 +335837,7 @@ MonoBehaviour:
   - {fileID: 1962918328724520466, guid: 71746708c89977e468c024c8ae8d537d, type: 3}
   - {fileID: 9031904952403327201, guid: e6305823cf884364bbce710cf7477df4, type: 3}
   - {fileID: 2253809521244455620, guid: 6701798dc0abb9f43a7e46f46db81432, type: 3}
-  preventDie: 1
+  preventDie: 0
   debugLasers: 0
   isPaused: 0
   hedgeCut: {fileID: 3489181893971998815, guid: faae2c444a908f14c9d7894be534147e, type: 3}
