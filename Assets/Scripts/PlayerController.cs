@@ -381,8 +381,8 @@ public class PlayerController : MonoBehaviour
                             GameObject.Destroy(bush.gameObject);
                         }
                         // destroy item
-                        //inventory[selectedInvSlot, 0] = 0;
-                        //inventory[selectedInvSlot, 1] = 0;
+                        inventory[selectedInvSlot, 0] = 0;
+                        inventory[selectedInvSlot, 1] = 0;
                     }
                 }
             }
@@ -433,7 +433,7 @@ public class PlayerController : MonoBehaviour
             if(hitCooldown <= 0){
                 Collider2D[] EnemyColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("Enemy"));
                 Collider2D[] DeadEnemyColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.5f, LayerMask.GetMask("DeadEnemy"));
-                if(EnemyColliders.Length > 0 && (Health - 5) >= 0){
+                if(EnemyColliders.Length > 0){
                     bool hit = false;
                     foreach(Collider2D col in EnemyColliders){
                         if(col.GetType() == typeof(CircleCollider2D)){
@@ -442,11 +442,11 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     if(hit){
-                        Health -= 33.333f;
+                        Health -= 25f;
                         hitCooldown = 1f;
                     }
                 }
-                else if(DeadEnemyColliders.Length > 0 && (Health - 5) >= 0){
+                else if(DeadEnemyColliders.Length > 0){
                     bool hit = false;
                     foreach(Collider2D col in DeadEnemyColliders){
                         if(col.GetType() == typeof(CircleCollider2D)){
@@ -455,7 +455,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     if(hit){
-                        Health -= 8.333f;
+                        Health -= 5f;
                         hitCooldown = 1f;
                     }
                 }
