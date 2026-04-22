@@ -18,6 +18,7 @@ public class enemySpawning : MonoBehaviour
     public int totalEnemiesSpawned = 0;
     public int popDensityCap; // was 15
     public int forceSpawnCount; // force a number of zombies to spawn over the next frames
+    public float spawnrateChangeFactor; // how much to increase spawnrate
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +51,8 @@ public class enemySpawning : MonoBehaviour
             // progress timer
             enemyTimer -= Time.deltaTime;
         }
+        enemySpawnDelayRange[0] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
+        enemySpawnDelayRange[1] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
 
         // if item timer out and new position valid, spawn item and reset timer
         /*if (itemTimer < 0 && itemSpawnTable.Length > 0) {
