@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     public GameObject hedgeCut;
     Animator anim;
     float forceSoundPulseCooldown = 0;
+    enemySpawning spawner;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
 
         fpsCounter = GameObject.Find("fpsCounter").GetComponentInChildren<TextMeshPro>();
+        spawner = GameObject.Find("spawner").GetComponentInChildren<enemySpawning>();
         hudWaterGun = GameObject.Find("HUDWaterGun");
         selfRenderer = gameObject.GetComponent<SpriteRenderer>();
 
@@ -117,6 +119,10 @@ public class PlayerController : MonoBehaviour
             movement = new Vector3();
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
+
+            if (movement.magnitude > 0.1f) { // enable enemy spawning when player first moves
+                spawner.doSpawning = true;
+            }
 
             //look direction
             if (prevMovement != movement) { // if changed move input, loop at move direction

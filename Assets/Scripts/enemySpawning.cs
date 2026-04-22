@@ -19,6 +19,7 @@ public class enemySpawning : MonoBehaviour
     public int popDensityCap; // was 15
     public int forceSpawnCount; // force a number of zombies to spawn over the next frames
     public float spawnrateChangeFactor; // how much to increase spawnrate
+    public bool doSpawning;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,7 +31,7 @@ public class enemySpawning : MonoBehaviour
     void Update()
     {
         // if enemy timer out and new position valid, spawn enemy and reset timer
-        if (enemyTimer < 0 || forceSpawnCount > 0) {
+        if ((enemyTimer < 0 || forceSpawnCount > 0) && doSpawning) {
             if (forceSpawnCount > 0) {
                 forceSpawnCount -= 1;
             }
