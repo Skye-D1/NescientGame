@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outRadius: 5
-  inRadius: 3
+  inRadius: -1
   sortingOrderOffset: 2
   transparencyRadiusOffset: {x: 0, y: 0}
 --- !u!1 &9160071628900255045
@@ -285,11 +285,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8557991841067051634, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.95
+      value: -0.89
       objectReference: {fileID: 0}
     - target: {fileID: 8557991841067051634, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.46
+      value: -1.45
       objectReference: {fileID: 0}
     - target: {fileID: 8557991841067051634, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
       propertyPath: m_LocalPosition.z
