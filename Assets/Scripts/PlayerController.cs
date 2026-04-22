@@ -57,13 +57,17 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     float forceSoundPulseCooldown = 0;
     enemySpawning spawner;
+    SpriteRenderer dmgFrameOverlay;
+    float dmgOpacity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
-
+        dmgFrameOverlay = GameObject.Find("damageFrameOverlay").GetComponent<SpriteRenderer>();
+        //dmgFrameOverlay.enabled = false;
+        dmgFrameOverlay.color = new Color(1f,0f,0f,(0f));
         fpsCounter = GameObject.Find("fpsCounter").GetComponentInChildren<TextMeshPro>();
         spawner = GameObject.Find("spawner").GetComponentInChildren<enemySpawning>();
         hudWaterGun = GameObject.Find("HUDWaterGun");
@@ -89,6 +93,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // disable damage overlay at start of every frame
+        if (dmgOpacity > 0) {
+            dmgOpacity -= Time.deltaTime * 1f;
+        }
+
         fpsUpdateTimer += Time.deltaTime;
         if (fpsUpdateTimer > 0.5f) {
             fpsCounter.text = "fps:" + Mathf.Round(1f / Time.deltaTime);
@@ -473,6 +482,7 @@ public class PlayerController : MonoBehaviour
                     if(hit){
                         Health -= 25f;
                         hitCooldown = 1f;
+                        dmgOpacity = 0.1f;
                     }
                 }
                 else if(DeadEnemyColliders.Length > 0){
@@ -486,6 +496,7 @@ public class PlayerController : MonoBehaviour
                     if(hit){
                         Health -= 15f;
                         hitCooldown = 1f;
+                        dmgOpacity = 0.1f;
                     }
                 }
             }
@@ -549,6 +560,7 @@ public class PlayerController : MonoBehaviour
             }
             
             anim.SetBool("Sneaking", sneaking);
+            dmgFrameOverlay.color = new Color(1f,0f,0f,(dmgOpacity));
         }
     }
 
