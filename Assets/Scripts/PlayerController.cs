@@ -193,9 +193,67 @@ public class PlayerController : MonoBehaviour
             } else{
                 Thirst = 0;
             }*/
+            
+
+            //looking at water gun logic
+            Vector3 cameraPos = GameObject.Find("Main Camera").transform.position;
+            //going up
+            if(Input.GetKey(KeyCode.F)){
+                if(hudWaterGun.transform.position.y - cameraPos.y != 0){
+                    hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
+                    if(hudWaterGun.transform.position.y - cameraPos.y > 0){
+                        //Debug.Log("HUD view up!!!");
+                        hudWaterGun.transform.position = cameraPos + new Vector3(0,0,10f);
+                    }
+                }
+            }
+            //going down
+            else if(!Input.GetKey(KeyCode.F) && hudWaterGun.transform.position.y - cameraPos.y != -9.75f){
+                hudWaterGun.transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
+                if(hudWaterGun.transform.position.y - cameraPos.y < -9.75){
+                    //Debug.Log("HUD view down!!!");
+                    hudWaterGun.transform.position = cameraPos + new Vector3(0,-9.75f,100);
+                }
+            }
+
+            //inventory
+            GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
+
+            //scroll to swap slots
+            selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
+            while(selectedInvSlot >= 3){
+                selectedInvSlot -= 3;
+            } while(selectedInvSlot < 0){
+                selectedInvSlot += 3;
+            }
+            
+            //numbers to swap slots
+            if(Input.GetKeyDown(KeyCode.Alpha1)){
+                selectedInvSlot = 0;
+            } else if(Input.GetKeyDown(KeyCode.Alpha2)){
+                selectedInvSlot = 1;
+            } else if(Input.GetKeyDown(KeyCode.Alpha3)){
+                selectedInvSlot = 2;
+            }
+
+            //click to swap slots
+            bool isShoot = false;
+            if(Input.GetButtonDown("Fire1")){
+                isShoot = true;
+                for(int i = 0; i < 3; i++){
+                    GameObject slot = GameObject.Find("invSlot" + i);
+                    Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    if(Mathf.Abs(mousePos.x-slot.transform.position.x) < 1f && Mathf.Abs(mousePos.y-slot.transform.position.y) < 1f){
+                        isShoot = false;
+                        selectedInvSlot = i;
+                    }
+                }
+            }
+
+            GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
 
             //Water Gun shoot
-            if(Input.GetButtonDown("Fire1") && Water >= 4f){
+            if(isShoot && Water >= 4f){
                 Water -= 4f;
                 useMouseForLook = true;
                 Vector3 projSourcePoint = new Vector3(transform.position.x + (selfRenderer.flipX ? 0.8f : -0.8f), transform.position.y + 0.3f, transform.position.z);
@@ -226,46 +284,6 @@ public class PlayerController : MonoBehaviour
                     proj.GetComponent<Rigidbody2D>().AddForce(dir * force);
                 }
             }
-
-            //looking at water gun logic
-            Vector3 cameraPos = GameObject.Find("Main Camera").transform.position;
-            //going up
-            if(Input.GetKey(KeyCode.F)){
-                if(hudWaterGun.transform.position.y - cameraPos.y != 0){
-                    hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
-                    if(hudWaterGun.transform.position.y - cameraPos.y > 0){
-                        //Debug.Log("HUD view up!!!");
-                        hudWaterGun.transform.position = cameraPos + new Vector3(0,0,10f);
-                    }
-                }
-            }
-            //going down
-            else if(!Input.GetKey(KeyCode.F) && hudWaterGun.transform.position.y - cameraPos.y != -9.75f){
-                hudWaterGun.transform.position -= new Vector3(0,Time.deltaTime*9.75f,0);
-                if(hudWaterGun.transform.position.y - cameraPos.y < -9.75){
-                    //Debug.Log("HUD view down!!!");
-                    hudWaterGun.transform.position = cameraPos + new Vector3(0,-9.75f,100);
-                }
-            }
-
-            //inventory
-            GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
-            selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
-            while(selectedInvSlot >= 3){
-                selectedInvSlot -= 3;
-            } while(selectedInvSlot < 0){
-                selectedInvSlot += 3;
-            }
-
-            if(Input.GetKeyDown(KeyCode.Alpha1)){
-                selectedInvSlot = 0;
-            } else if(Input.GetKeyDown(KeyCode.Alpha2)){
-                selectedInvSlot = 1;
-            } else if(Input.GetKeyDown(KeyCode.Alpha3)){
-                selectedInvSlot = 2;
-            }
-
-            GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
             
             //pickup
             if(Input.GetKeyDown(KeyCode.E)){
