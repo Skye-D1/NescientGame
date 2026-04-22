@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
     Animator anim;
     SpriteRenderer selfRenderer;
     float flipCooldown;
+    float destroyTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,132 +67,138 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        didTargetUpdate = false; // allow one target update per frame
-        flipCooldown -= Time.deltaTime;
-        if (flipCooldown <= 0 && ((movement.x > 0.2f && !selfRenderer.flipX) || (movement.x < -0.2f && selfRenderer.flipX))) {
-            if (movement.x > 0.2f) {
-                selfRenderer.flipX = true;
-                flipCooldown = 0.5f;
-            } else if (movement.x < -0.2f) {
-                selfRenderer.flipX = false;
-                flipCooldown = 0.5f;
+        if(isPlant){
+            destroyTimer -= Time.deltaTime;
+            if(destroyTimer <= 0){
+                Destroy(gameObject);
             }
-        }
-
-        // update noTargetUpdateTimer
-        if (hasTarget && targetPriority) {
-            noTargetUpdateTimer += Time.deltaTime;
-
-            // if no target update for a while, ignore predictive and offset targeting and go to precise location
-            if (noTargetUpdateTimer > 5f) {
-                target = preciseTarget;
-                prevPreciseTarget = preciseTarget;
-                noTargetUpdateTimer = 0;
-            }
-        }
-        
-        // start moving past target for a time when reached
-        if (targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
-            overshootTimer = 3f;
-            hasTarget = false;
-        } else if ((Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) || (!targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 5f)) {
-            hasTarget = false;  
-        }
-
-        // target decay to forget target after some time
-        if (targetDecayTimer < 22f) {
-            targetDecayTimer += Time.deltaTime;
-        } else {
-            hasTarget = false;
-        }
-
-        // keep moving past target for a bit (overshoot)
-        if (overshootTimer > 0) {
-            overshootTimer -= Time.deltaTime;
-            lineRenderer.enabled = false;
-            target = new Vector2(transform.position.x, transform.position.y);
-            targetPriority = false;
-        // move towards target
-        } else if (!isStatic && hasTarget) {
-            tempMoveSpeed = moveSpeed;
-            if (prevPreciseTarget.magnitude > 0 && targetPriority) { // if predictive targeting
-                // higher rand value (further targeting) will cause temporary move faster to surround player
-                tempMoveSpeed += (moveSpeed * 0.8f) * (randValues.magnitude / targetRandFactor);
-            }
-
-            movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * tempMoveSpeed;
-            if (playerScript.debugLasers) { // laser when laser time
-                lineRenderer.enabled = true;
-            } else {
-                lineRenderer.enabled = false; // not laser when not laser time
-            }
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
-        }
-
-        // strafe around obstacles
-        if (hasTarget && Vector2.Distance(target, transform.position) > 2f) {
-            if (RB.linearVelocity.magnitude < 0.05f) {
-                Vector2 newMovement = Vector2.Perpendicular(new Vector2(movement.x, movement.y)) * strafeValue;
-                movement = new Vector3(newMovement.x, newMovement.y, 0);
-            }
-        }
-
-        // do movement
-        if (!isStatic && hasTarget && (movement * Time.deltaTime).magnitude < 99999f) {
-            RB.AddForce(movement * Time.deltaTime);
-        } else if ((movement * Time.deltaTime).magnitude >= 99999f) {
-            Debug.Log("debug: no don't do that;" + transform.position);
-        }
-
-        // no fast
-        if (RB.linearVelocity.magnitude > 5f) {
-            Debug.Log("debug: speeding ticket issued.");
-            RB.linearVelocity = new Vector2();
-        }
-
-        // leader generate new wander point if necessary
-        if (isLeader && !hasTarget) {
-            if (wanderCooldown < 0) {
-                // generate new wander point and broadcast to nearby
-                Vector2 newPoint;
-                int loopys = 0;
-                do {
-                    loopys++;
-                    newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 25f;
-                } while (loopys < 10 && ((newPoint.x + transform.position.x) < mapEdgesXY[0] || (newPoint.x + transform.position.x) > mapEdgesXY[1] || (newPoint.y + transform.position.y) < mapEdgesXY[2] || (newPoint.y + transform.position.y) > mapEdgesXY[3]));
-                if (loopys > 9) {
-                    //Debug.Log("loopys problem 1 in enemycontroller");
-                    hasTarget = false;
-                }
-                echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
-                target = new Vector2(transform.position.x, transform.position.y) + newPoint;
-                noTargetUpdateTimer = 0;
-                targetDecayTimer = 0;
-                //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
-                wanderCooldown = maxWanderCooldown + (maxWanderCooldown * (Random.value - 0.5f));
-                didTargetUpdate = true;
-            } else {
-                wanderCooldown -= Time.deltaTime;
-            }
-        }
-
-        //slow down if moving through bush
-        if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.4f, LayerMask.GetMask("DeadEnemy")) != null){
-            RB.linearDamping = 20f;
         } else{
-            RB.linearDamping = 5f;
+            didTargetUpdate = false; // allow one target update per frame
+            flipCooldown -= Time.deltaTime;
+            if (flipCooldown <= 0 && ((movement.x > 0.2f && !selfRenderer.flipX) || (movement.x < -0.2f && selfRenderer.flipX))) {
+                if (movement.x > 0.2f) {
+                    selfRenderer.flipX = true;
+                    flipCooldown = 0.5f;
+                } else if (movement.x < -0.2f) {
+                    selfRenderer.flipX = false;
+                    flipCooldown = 0.5f;
+                }
+            }
+
+            // update noTargetUpdateTimer
+            if (hasTarget && targetPriority) {
+                noTargetUpdateTimer += Time.deltaTime;
+
+                // if no target update for a while, ignore predictive and offset targeting and go to precise location
+                if (noTargetUpdateTimer > 5f) {
+                    target = preciseTarget;
+                    prevPreciseTarget = preciseTarget;
+                    noTargetUpdateTimer = 0;
+                }
+            }
+            
+            // start moving past target for a time when reached
+            if (targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f && overshootTimer <= 0 && movement.magnitude > 0) {
+                overshootTimer = 3f;
+                hasTarget = false;
+            } else if ((Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 1f) || (!targetPriority && Vector2.Distance(target, new Vector2(transform.position.x, transform.position.y)) < 5f)) {
+                hasTarget = false;  
+            }
+
+            // target decay to forget target after some time
+            if (targetDecayTimer < 22f) {
+                targetDecayTimer += Time.deltaTime;
+            } else {
+                hasTarget = false;
+            }
+
+            // keep moving past target for a bit (overshoot)
+            if (overshootTimer > 0) {
+                overshootTimer -= Time.deltaTime;
+                lineRenderer.enabled = false;
+                target = new Vector2(transform.position.x, transform.position.y);
+                targetPriority = false;
+            // move towards target
+            } else if (!isStatic && hasTarget) {
+                tempMoveSpeed = moveSpeed;
+                if (prevPreciseTarget.magnitude > 0 && targetPriority) { // if predictive targeting
+                    // higher rand value (further targeting) will cause temporary move faster to surround player
+                    tempMoveSpeed += (moveSpeed * 0.8f) * (randValues.magnitude / targetRandFactor);
+                }
+
+                movement = Vector3.Normalize(new Vector3(target.x, target.y, 0) - transform.position) * tempMoveSpeed;
+                if (playerScript.debugLasers) { // laser when laser time
+                    lineRenderer.enabled = true;
+                } else {
+                    lineRenderer.enabled = false; // not laser when not laser time
+                }
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, new Vector3(target.x, target.y, transform.position.z));
+            }
+
+            // strafe around obstacles
+            if (hasTarget && Vector2.Distance(target, transform.position) > 2f) {
+                if (RB.linearVelocity.magnitude < 0.05f) {
+                    Vector2 newMovement = Vector2.Perpendicular(new Vector2(movement.x, movement.y)) * strafeValue;
+                    movement = new Vector3(newMovement.x, newMovement.y, 0);
+                }
+            }
+
+            // do movement
+            if (!isStatic && hasTarget && (movement * Time.deltaTime).magnitude < 99999f) {
+                RB.AddForce(movement * Time.deltaTime);
+            } else if ((movement * Time.deltaTime).magnitude >= 99999f) {
+                Debug.Log("debug: no don't do that;" + transform.position);
+            }
+
+            // no fast
+            if (RB.linearVelocity.magnitude > 5f) {
+                Debug.Log("debug: speeding ticket issued.");
+                RB.linearVelocity = new Vector2();
+            }
+
+            // leader generate new wander point if necessary
+            if (isLeader && !hasTarget) {
+                if (wanderCooldown < 0) {
+                    // generate new wander point and broadcast to nearby
+                    Vector2 newPoint;
+                    int loopys = 0;
+                    do {
+                        loopys++;
+                        newPoint = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 25f;
+                    } while (loopys < 10 && ((newPoint.x + transform.position.x) < mapEdgesXY[0] || (newPoint.x + transform.position.x) > mapEdgesXY[1] || (newPoint.y + transform.position.y) < mapEdgesXY[2] || (newPoint.y + transform.position.y) > mapEdgesXY[3]));
+                    if (loopys > 9) {
+                        //Debug.Log("loopys problem 1 in enemycontroller");
+                        hasTarget = false;
+                    }
+                    echoNoise(new Vector2(transform.position.x, transform.position.y) + newPoint, false, 10f);
+                    target = new Vector2(transform.position.x, transform.position.y) + newPoint;
+                    noTargetUpdateTimer = 0;
+                    targetDecayTimer = 0;
+                    //Debug.Log("wander point broadcasted " + newPoint + " | " + transform.position);
+                    wanderCooldown = maxWanderCooldown + (maxWanderCooldown * (Random.value - 0.5f));
+                    didTargetUpdate = true;
+                } else {
+                    wanderCooldown -= Time.deltaTime;
+                }
+            }
+
+            //slow down if moving through bush
+            if(Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<CircleCollider2D>().offset, 0.4f, LayerMask.GetMask("DeadEnemy")) != null){
+                RB.linearDamping = 20f;
+            } else{
+                RB.linearDamping = 5f;
+            }
+
+            // target offset cooldown timer
+            if (randCooldown > 0) {
+                randCooldown -= Time.deltaTime;
+            }
+
+            //update animation
+            anim.SetBool("moving", RB.linearVelocity.magnitude > 0.01f);
+            anim.SetFloat("speed", RB.linearVelocity.magnitude);
         }
-
-        // target offset cooldown timer
-        if (randCooldown > 0) {
-            randCooldown -= Time.deltaTime;
-        }
-
-        //update animation
-        anim.SetBool("moving", RB.linearVelocity.magnitude > 0.01f);
-        anim.SetFloat("speed", RB.linearVelocity.magnitude);
-
     }
 
     // hear a noise and update target if necessary
@@ -259,7 +266,8 @@ public class EnemyController : MonoBehaviour
             // spawn static plant
             Instantiate(staticPlant, transform.position, transform.rotation);
             // delete self
-            GameObject.Destroy(gameObject);
+            //GameObject.Destroy(gameObject);
+            destroyTimer = 0.33333f;
         }
     }
     /*void OnCollisionEnter2D(Collision2D collision) {
