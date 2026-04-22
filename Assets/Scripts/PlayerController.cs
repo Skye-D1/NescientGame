@@ -319,6 +319,7 @@ public class PlayerController : MonoBehaviour
                     
                     if(inventory[selectedInvSlot, 0] == 1){
                         //Water Bottle
+                        /*
                         if(Input.GetKey(KeyCode.F)){
                             if(100f-Water >= inventory[selectedInvSlot, 1]){
                                 Water += inventory[selectedInvSlot, 1];
@@ -337,6 +338,15 @@ public class PlayerController : MonoBehaviour
                                 inventory[selectedInvSlot, 1] -= 100f-Thirst;
                                 Thirst = 100f;
                             }
+                        }
+                        */
+                        if(100f-Water >= inventory[selectedInvSlot, 1]){
+                            Water += inventory[selectedInvSlot, 1];
+                            inventory[selectedInvSlot, 0] = 0;
+                            inventory[selectedInvSlot, 1] = 0;
+                        } else if(100f-Water < inventory[selectedInvSlot, 1]){
+                            inventory[selectedInvSlot, 1] -= 100f-Water;
+                            Water = 100f;
                         }
 
                     } else if(inventory[selectedInvSlot, 0] == 2){
