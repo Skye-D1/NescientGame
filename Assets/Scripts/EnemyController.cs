@@ -68,6 +68,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if(isPlant){
+            RB.linearVelocity = new Vector3();
             destroyTimer -= Time.deltaTime;
             if(destroyTimer <= 0){
                 Destroy(gameObject);
