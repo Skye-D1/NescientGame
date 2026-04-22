@@ -460,7 +460,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     if(hit){
-                        Health -= 5f;
+                        Health -= 15f;
                         hitCooldown = 1f;
                     }
                 }
