@@ -8204,8 +8204,8 @@ MonoBehaviour:
   - {fileID: 4574023413743267243, guid: eddd23fd926249f4683233c247cd9d68, type: 3}
   - {fileID: 656293466806290139, guid: 0572e0d3c8430f14c9696a2e5c4ddd13, type: 3}
   enemySpawnDelayRange:
-  - 2
-  - 3
+  - 1.5
+  - 2.5
   totalEnemiesSpawned: 0
   popDensityCap: 15
   forceSpawnCount: 50
