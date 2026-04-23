@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
             //looking at water gun logic
             Vector3 cameraPos = GameObject.Find("Main Camera").transform.position;
             //going up
-            if(Input.GetKey(KeyCode.F)){
+            /*if(Input.GetKey(KeyCode.F)){
                 if(hudWaterGun.transform.position.y - cameraPos.y != 0){
                     hudWaterGun.transform.position += new Vector3(0,Time.deltaTime*14f,0);
                     if(hudWaterGun.transform.position.y - cameraPos.y > 0){
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
                     //Debug.Log("HUD view down!!!");
                     hudWaterGun.transform.position = cameraPos + new Vector3(0,-9.75f,100);
                 }
-            }
+            }*/
 
             //inventory
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
