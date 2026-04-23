@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: isItemReady
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2719455356023681232, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
+      propertyPath: restrictAccess
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3648949905984941420, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
       propertyPath: m_Name
       value: LootContainer
