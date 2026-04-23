@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
     float dmgOpacity;
     public float gameScore;
     public float deltaScoreOpacity;
+    ScoreData scoreData;
+    float deathTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,6 +81,9 @@ public class PlayerController : MonoBehaviour
         spawner = GameObject.Find("spawner").GetComponentInChildren<enemySpawning>();
         hudWaterGun = GameObject.Find("HUDWaterGun");
         selfRenderer = gameObject.GetComponent<SpriteRenderer>();
+
+        scoreData = GameObject.Find("dataKeeper").GetComponent<ScoreData>();
+        DontDestroyOnLoad(scoreData.gameObject);
 
         // Disable VSync to use target frameRate
         QualitySettings.vSyncCount = 1;
@@ -121,6 +126,24 @@ public class PlayerController : MonoBehaviour
         if (vignette == null) {
             vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
         }
+        
+        if((Health <= 0 || Thirst <= 0) && !preventDie && (!(vignette.intensity.value < 1f) && !(vignette.smoothness.value < 1f))){
+            isPaused = true;
+            Time.timeScale = 0.01f;
+            // update high score
+            if (gameScore > scoreData.highScore) {
+                scoreData.highScore = gameScore;
+            }
+            // record death time to stay here for a bit
+            if (deathTime == 0) {
+                deathTime = Time.realtimeSinceStartup;
+            }
+            if (Time.realtimeSinceStartup - deathTime > 5f) {
+                // restart at main menu
+                SceneManager.LoadScene("MainScene");
+            }
+        }
+
         if(!isPaused){
             // update score and display
             gameScore += Time.deltaTime;
@@ -133,11 +156,6 @@ public class PlayerController : MonoBehaviour
                     vignette.intensity.value += Time.deltaTime;
                 }else if(vignette.smoothness.value < 1f){
                     vignette.smoothness.value += Time.deltaTime;
-                } else{
-                    isPaused = true;
-                    Time.timeScale = 0;
-                    // restart at main menu
-                    SceneManager.LoadScene("MainScene");
                 }
             }
 
