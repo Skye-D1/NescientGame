@@ -233,6 +233,7 @@ public class PlayerController : MonoBehaviour
 
             //inventory
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.6f);
+            int pastInvSlot = selectedInvSlot;
 
             //scroll to swap slots
             selectedInvSlot += (int) (Input.GetAxisRaw("Mouse ScrollWheel") * -10f);
@@ -263,6 +264,10 @@ public class PlayerController : MonoBehaviour
                         selectedInvSlot = i;
                     }
                 }
+            }
+
+            if(selectedInvSlot != pastInvSlot){
+                GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(2 + 3*(int)inventory[selectedInvSlot,0], false);
             }
 
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
@@ -332,7 +337,7 @@ public class PlayerController : MonoBehaviour
                         inventory[putSlot, 1] = closestItem.GetComponent<Item>().power;
                         GameObject.Destroy(closestItem);
 
-                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(2*closestItem.GetComponent<Item>().itemID, false);
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(3*closestItem.GetComponent<Item>().itemID, false);
                     }
                 }
             }
@@ -348,7 +353,7 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown("Fire2")){
                 if(inventory[selectedInvSlot, 0] != 0){
                     
-                    GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 2*(int)inventory[0,0], false);
+                    GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 3*(int)inventory[selectedInvSlot,0], false);
                     
                     if(inventory[selectedInvSlot, 0] == 1){
                         //Water Bottle
