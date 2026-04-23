@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // disable damage overlay at start of every frame
+        // decrease damage overlay at start of every frame
         if (dmgOpacity > 0) {
             dmgOpacity -= Time.deltaTime * 1f;
         }
@@ -482,7 +482,7 @@ public class PlayerController : MonoBehaviour
                     if(hit){
                         Health -= 25f;
                         hitCooldown = 1f;
-                        dmgOpacity = 0.1f;
+                        dmgOpacity = 0.3f;
                     }
                 }
                 else if(DeadEnemyColliders.Length > 0){
@@ -496,7 +496,7 @@ public class PlayerController : MonoBehaviour
                     if(hit){
                         Health -= 15f;
                         hitCooldown = 1f;
-                        dmgOpacity = 0.1f;
+                        dmgOpacity = 0.3f;
                     }
                 }
             }
