@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     float cameraLagRatio = 100f;
     Vignette vignette;
     TextMeshPro fpsCounter;
+    TextMeshPro scoreDisplay;
+    public TextMeshPro deltaScoreDisplay; // displays changes in score to player
     float fpsUpdateTimer;
     public GameObject hedgeCut;
     Animator anim;
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour
     enemySpawning spawner;
     SpriteRenderer dmgFrameOverlay;
     float dmgOpacity;
+    public float gameScore;
+    public float deltaScoreOpacity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -69,6 +73,9 @@ public class PlayerController : MonoBehaviour
         //dmgFrameOverlay.enabled = false;
         dmgFrameOverlay.color = new Color(1f,0f,0f,(0f));
         fpsCounter = GameObject.Find("fpsCounter").GetComponentInChildren<TextMeshPro>();
+        scoreDisplay = GameObject.Find("scoreDisplay").GetComponentInChildren<TextMeshPro>();
+        deltaScoreDisplay = GameObject.Find("deltaScoreDisplay").GetComponentInChildren<TextMeshPro>();
+        
         spawner = GameObject.Find("spawner").GetComponentInChildren<enemySpawning>();
         hudWaterGun = GameObject.Find("HUDWaterGun");
         selfRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -98,6 +105,12 @@ public class PlayerController : MonoBehaviour
             dmgOpacity -= Time.deltaTime * 1f;
         }
 
+        // decrease score change overlay at start of every frame
+        if (deltaScoreOpacity > 0) {
+            deltaScoreOpacity -= Time.deltaTime * 0.4f;
+        }
+        deltaScoreDisplay.color = new Color(deltaScoreDisplay.color.r,deltaScoreDisplay.color.g,deltaScoreDisplay.color.b,(deltaScoreOpacity));
+
         fpsUpdateTimer += Time.deltaTime;
         if (fpsUpdateTimer > 0.5f) {
             fpsCounter.text = "fps:" + Mathf.Round(1f / Time.deltaTime);
@@ -109,6 +122,10 @@ public class PlayerController : MonoBehaviour
             vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
         }
         if(!isPaused){
+            // update score and display
+            gameScore += Time.deltaTime;
+            scoreDisplay.text = "score:" + Mathf.Round(gameScore);
+            
             if((Health <= 0 || Thirst <= 0) && !preventDie){
                 dying = true;
                 //Debug.Log("dying: " + dying);
@@ -507,7 +524,7 @@ public class PlayerController : MonoBehaviour
             if (currentZ > 180) {
                 currentZ -= 360;
             }
-            hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, Mathf.Sign(targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
+            hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, ((Mathf.Abs(targetZ - currentZ) > 1) ? Mathf.Sign(targetZ - currentZ) : targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
             
             currentNoiseVolume = 2f; // base noise volume for next frame
 

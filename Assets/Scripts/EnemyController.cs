@@ -71,6 +71,9 @@ public class EnemyController : MonoBehaviour
             RB.linearVelocity = new Vector3();
             destroyTimer -= Time.deltaTime;
             if(destroyTimer <= 0){
+                playerScript.gameScore += 5f;
+                playerScript.deltaScoreOpacity = 1f;
+                playerScript.deltaScoreDisplay.text = "+5";
                 Destroy(gameObject);
             }
         } else{
