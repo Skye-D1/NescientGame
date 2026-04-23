@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     bool[] isLooping;
     float timeSinceLastBeat = 0f;
     public int[] soundToPlayAfter;
+    float lastTime = 0f;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,9 +23,9 @@ public class AudioManager : MonoBehaviour
         isPlaying[0] = true;
         isLooping[0] = true;
         try{
-            loopLengths[0] = transform.GetChild(0).GetComponent<AudioChildManager>().source.clip.length;
+            loopLengths[0] = 108;
         } catch(Exception E){
-            Debug.Log("sound in audiosource 1 is not a clip.");
+            Debug.Log("sound in audiosource 0 is not a clip.");
         }
         
         PlayClip(0, true);
@@ -33,11 +34,13 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeSinceLastBeat += Time.deltaTime;
+        timeSinceLastBeat += Time.realtimeSinceStartup - lastTime;
+        lastTime = Time.realtimeSinceStartup;
         if(timeSinceLastBeat > bpm/60f){
-            timeSinceLastBeat = 0;
+            timeSinceLastBeat -= bpm/60f;
 
             //BEAT
+            //Debug.Log("Beat");
             for(int i = 0; i < sounds; i++){
                 if(isPlaying[i]){
                     beatsIn[i] += 1;
