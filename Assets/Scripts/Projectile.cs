@@ -38,6 +38,8 @@ public class Projectile : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector3();
             stopped = true;
             timer = Random.Range(0.25f, 0.5f);
+            gameObject.GetComponent<layerSetDynamic>().enabled = false;
+            gameObject.GetComponent<TrailLayerSetDynamic>().enabled = false;
         }
         else if (stopped && timer <= 0){
             GameObject.Destroy(gameObject);

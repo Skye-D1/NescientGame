@@ -259,10 +259,10 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("invSlot" + selectedInvSlot).GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
 
             //Water Gun shoot
-            if(isShoot && Water >= 4f){
+            Vector3 projSourcePoint = new Vector3(transform.position.x + (selfRenderer.flipX ? 0.8f : -0.8f), transform.position.y + 0.3f, transform.position.z);
+            if(isShoot && Water >= 4f && Physics2D.Raycast(transform.position, new Vector2((selfRenderer.flipX ? 0.8f : -0.8f), 0.3f), 1f, LayerMask.GetMask("ProjectileBlocker")).collider == null){
                 Water -= 4f;
                 useMouseForLook = true;
-                Vector3 projSourcePoint = new Vector3(transform.position.x + (selfRenderer.flipX ? 0.8f : -0.8f), transform.position.y + 0.3f, transform.position.z);
                 Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (projSourcePoint + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
                 currentNoiseVolume = waterGunNoiseVolume;
                 forceSoundPulseVisual();
