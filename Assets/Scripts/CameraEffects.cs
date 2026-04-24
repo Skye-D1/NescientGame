@@ -27,7 +27,7 @@ public class CameraEffects : MonoBehaviour
         GameObject healthV = GameObject.Find("Vignette_Health");
         float Health = GameObject.Find("Player").GetComponent<PlayerController>().Health;
 
-        healthV.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0, (100f-Health)/100f);
+        healthV.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0, Mathf.Clamp((100f-Health)/60f, 0f, 1f));
 
         
         //stamina vignette

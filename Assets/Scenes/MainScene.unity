@@ -1160,7 +1160,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 672119502}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &176498979
 MonoBehaviour:
@@ -4350,7 +4350,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 176498978}
   - {fileID: 1528964714}
   - {fileID: 946781203}
   m_Father: {fileID: 0}
@@ -4545,7 +4544,7 @@ SpriteRenderer:
   m_SortingLayerID: -763694443
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4676662932147178654, guid: 48c33e61987638e4381b05215468d12e, type: 3}
+  m_Sprite: {fileID: 2823567687765095263, guid: 7a1fc43a26ce1eb44a64f57478650727, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
@@ -10343,7 +10342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c4892a88aaaac4c87635987f2cf7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: 9
+  sounds: 13
   loopLengths:
   - 0
   - 0
@@ -14265,6 +14264,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1219952275}
   - {fileID: 1731215236}
+  - {fileID: 176498978}
   - {fileID: 672119502}
   - {fileID: 377842159}
   - {fileID: 425182315}
