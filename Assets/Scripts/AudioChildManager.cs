@@ -1,6 +1,10 @@
 using UnityEngine;
 using System;
 
+//Name: Sam Johnson
+//File: AudioChildManager.cs
+//Purpose: holds data for the audiomanager to use and is placed on objects with a sound source
+
 public class AudioChildManager : MonoBehaviour
 {
     public AudioSource source;

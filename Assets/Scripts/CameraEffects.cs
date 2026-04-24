@@ -37,6 +37,7 @@ public class CameraEffects : MonoBehaviour
         }
 
         //thirst desaturation
+        /*
         float Thirst = GameObject.Find("Player").GetComponent<PlayerController>().Thirst;
         //desaturation.saturation.value = -(100f-Thirst);
         if(Thirst >= 50f){
@@ -45,6 +46,6 @@ public class CameraEffects : MonoBehaviour
             desaturation.saturation.value = -100f;
         } else{
             desaturation.saturation.value = -(100f - ((Thirst-20f) * (10f/3f)));
-        }
+        }*/
     }
 }

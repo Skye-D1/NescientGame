@@ -1,6 +1,10 @@
 using UnityEngine;
 using System;
 
+//Name: Sam Johnson
+//File: AudioManager.cs
+//Purpose: manage playing audio
+
 public class AudioManager : MonoBehaviour
 {
     float bpm = 145f;
