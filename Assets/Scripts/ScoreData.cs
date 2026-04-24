@@ -7,10 +7,4 @@ using UnityEngine;
 public class ScoreData : MonoBehaviour
 {
     public float highScore;
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

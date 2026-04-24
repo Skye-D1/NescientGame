@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     Vignette vignette;
     TextMeshPro fpsCounter;
     TextMeshPro scoreDisplay;
+    TextMeshPro highScoreDisplay;
+    
     public TextMeshPro deltaScoreDisplay; // displays changes in score to player
     float fpsUpdateTimer;
     public GameObject hedgeCut;
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour
         fpsCounter = GameObject.Find("fpsCounter").GetComponentInChildren<TextMeshPro>();
         scoreDisplay = GameObject.Find("scoreDisplay").GetComponentInChildren<TextMeshPro>();
         deltaScoreDisplay = GameObject.Find("deltaScoreDisplay").GetComponentInChildren<TextMeshPro>();
+        highScoreDisplay = GameObject.Find("highScoreDisplay").GetComponentInChildren<TextMeshPro>();
         
         spawner = GameObject.Find("spawner").GetComponentInChildren<enemySpawning>();
         hudWaterGun = GameObject.Find("HUDWaterGun");
@@ -109,6 +112,8 @@ public class PlayerController : MonoBehaviour
         if (dmgOpacity > 0) {
             dmgOpacity -= Time.deltaTime * 1f;
         }
+
+        highScoreDisplay.text = "high score:" + Mathf.Round(scoreData.highScore);
 
         // decrease score change overlay at start of every frame
         if (deltaScoreOpacity > 0) {
