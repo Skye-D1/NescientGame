@@ -38,12 +38,13 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // manages when a beat happens
         timeSinceLastBeat += Time.realtimeSinceStartup - lastTime;
         lastTime = Time.realtimeSinceStartup;
         if(timeSinceLastBeat > bpm/60f){
             timeSinceLastBeat -= bpm/60f;
 
-            //BEAT
+            //Beat has happened! for each sound, do what needs to happen that beat (loop, reset, play next sound, etc)
             //Debug.Log("Beat");
             for(int i = 0; i < sounds; i++){
                 if(isPlaying[i]){
@@ -64,6 +65,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    //plays the specified clip from the child object that has it
     public void PlayClip(int index, bool loop){
         transform.GetChild(index).GetComponent<AudioChildManager>().playSound();
         isPlaying[index] = true;
@@ -71,6 +73,7 @@ public class AudioManager : MonoBehaviour
         isLooping[index] = loop;
     }
 
+    //stops a specific sound from looping
     public void StopLooping(int index){
         isLooping[index] = false;
     }

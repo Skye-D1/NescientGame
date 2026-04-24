@@ -10354,7 +10354,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  soundToPlayAfter: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  - 0
+  - 0
+  - 0
+  - 0
+  soundToPlayAfter: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 --- !u!1 &1731215233
 GameObject:
   m_ObjectHideFlags: 0
