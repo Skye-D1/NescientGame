@@ -2,7 +2,7 @@ using UnityEngine;
 
 //Name: Sam Johnson
 //File: hedgeCutter.cs
-//Purpose: destroy and move the hedge cutter nimation that runs when the item is used
+//Purpose: destroy and move the hedge cutter animation that runs when the item is used
 
 public class hedgeCutter : MonoBehaviour
 {
