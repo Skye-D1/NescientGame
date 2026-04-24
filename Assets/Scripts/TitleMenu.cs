@@ -35,7 +35,7 @@ public class TitleMenu : MonoBehaviour
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 
-    // 
+    // load credits
     public void creditsFunction() {
         Debug.Log("credits time");
     }

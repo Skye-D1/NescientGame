@@ -26,6 +26,7 @@ public class layerSetDynamic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //set sort layer of object based on position of collider (if it has one) and offset
         if(hasCollider){
             Renderer.sortingOrder = -(int)Mathf.Floor((transform.position.y + Collider.offset.y + offset)*10);
         }
