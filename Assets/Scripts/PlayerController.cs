@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     bool useMouseForLook;
     public bool isPaused = false;
     Vector3 lastCameraChange;
-    float cameraLagRatio = 100f;
+    //float cameraLagRatio = 100f;
     Vignette vignette;
     TextMeshPro fpsCounter;
     TextMeshPro scoreDisplay;
@@ -149,6 +149,7 @@ public class PlayerController : MonoBehaviour
             gameScore += Time.deltaTime;
             scoreDisplay.text = "score:" + Mathf.Round(gameScore);
             
+            //death
             if((Health <= 0 || Thirst <= 0) && !preventDie){
                 dying = true;
                 //Debug.Log("dying: " + dying);
@@ -455,7 +456,7 @@ public class PlayerController : MonoBehaviour
 
             UpdateInventory();
 
-            foreach(Item item in FindObjectsOfType<Item>()){
+            foreach(Item item in FindObjectsByType<Item>(0)){
                 if(item.itemID == 1){
                     if(item.power > 75f){
                         item.gameObject.GetComponent<SpriteRenderer>().sprite = bottleSprites[3];
