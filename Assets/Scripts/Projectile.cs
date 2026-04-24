@@ -22,6 +22,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //on first frame of its existence it checks if it will hit anything marked as too thin so that it doesn't pass through it.
         if(firstFrame){
             RaycastHit2D hit = Physics2D.Raycast(transform.position, gameObject.GetComponent<Rigidbody2D>().linearVelocity, 5f, LayerMask.GetMask("ProjectileBlocker"));
             if(hit){
@@ -30,10 +31,13 @@ public class Projectile : MonoBehaviour
             origin = transform.position;
         }
 
+        //if it is passed the max distance, delete it
         if(maxDistance != 0 && Vector3.Distance(origin, transform.position) > maxDistance){
             timer = 0f;
         }
+        //update timer
         timer -= Time.deltaTime;
+        //if timer is done, stop it
         if(!stopped && timer <= 0){
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector3();
             stopped = true;
@@ -44,6 +48,7 @@ public class Projectile : MonoBehaviour
         else if (stopped && timer <= 0){
             GameObject.Destroy(gameObject);
         }
+        //wiggle around for splash effect
         if(stopped){
             transform.position -= randomDir;
             randomDir = new Vector3(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f), 0);
@@ -51,6 +56,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    //hit a thing
     void OnTriggerEnter2D(Collider2D collider){
         if(!stopped && !collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Projectile")){
             //Debug.Log(collider.gameObject.name);

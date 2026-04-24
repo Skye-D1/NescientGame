@@ -46,6 +46,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    //starts the game
     public void StartGame()
     {
         MainMenuPanel.SetActive(false);
@@ -55,12 +56,13 @@ public class MainMenu : MonoBehaviour
         menuThing.SetActive(true);
     }
 
-
+    //quits game
     public void QuitGame()
     {
         Application.Quit();
     }
 
+    //loads credits
     public void LoadCredits()
     {
         SceneManager.LoadScene("CreditScene");

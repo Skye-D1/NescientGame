@@ -274,11 +274,4 @@ public class EnemyController : MonoBehaviour
             destroyTimer = 0.33333f;
         }
     }
-    /*void OnCollisionEnter2D(Collision2D collision) {
-        //Debug.Log("enemy touched " + collision.gameObject.transform.name);
-        // forget target when hit barrier
-        if (collision.gameObject.transform.name.Contains("Barrier")) {
-            hasTarget = false;
-        }
-    }*/
 }

@@ -18,10 +18,12 @@ public class hedgeCutter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //delete object if animation is complete
         delay -= Time.deltaTime;
         if(delay <= 0){
             Destroy(gameObject);
         }
+        //move the animation forward during animation
         transform.position += transform.up * (delay/totalDelay) * (distance / 20);
     }
 }

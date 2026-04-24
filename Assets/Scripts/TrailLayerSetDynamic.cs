@@ -26,6 +26,7 @@ public class TrailLayerSetDynamic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //sets sortinglayer of the trail
         if(hasCollider){
             Renderer.sortingOrder = -(int)Mathf.Floor((transform.position.y + Collider.offset.y + offset)*10);
         }

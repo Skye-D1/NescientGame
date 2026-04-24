@@ -12,6 +12,7 @@ public class CameraEffects : MonoBehaviour
     public Vignette vignette;
     ColorAdjustments desaturation;
     GameObject mainMenuPanel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,17 +36,5 @@ public class CameraEffects : MonoBehaviour
             float Stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
             vignette.intensity.value = (100f-Stamina)/175f;
         }
-
-        //thirst desaturation
-        /*
-        float Thirst = GameObject.Find("Player").GetComponent<PlayerController>().Thirst;
-        //desaturation.saturation.value = -(100f-Thirst);
-        if(Thirst >= 50f){
-            desaturation.saturation.value = 0;
-        } else if(Thirst < 20f){
-            desaturation.saturation.value = -100f;
-        } else{
-            desaturation.saturation.value = -(100f - ((Thirst-20f) * (10f/3f)));
-        }*/
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//Name: Aidan Gillette
+//Name: Aidan Gillette, Skye Drury
 //File: PauseMenu.cs
 //Purpose: Manages pause menu
 
@@ -28,6 +28,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //activate on escape
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    //pauses the game
     public void PauseGame()
     {
         PauseMenuPanel.SetActive(true);
@@ -49,7 +51,7 @@ public class PauseMenu : MonoBehaviour
         playerScript.isPaused = true;
     }
 
-
+    //resumes the game
     public void ResumeGame()
     {
         PauseMenuPanel.SetActive(false);
@@ -58,11 +60,13 @@ public class PauseMenu : MonoBehaviour
         playerScript.isPaused = false;
     }
 
-
+    //quits to the menu
     public void QuitToMenu()
     {
         SceneManager.LoadScene("MainScene");
     }
+
+    //loads the credits
     public void LoadCredits()
     {
         SceneManager.LoadScene("CreditScene");
