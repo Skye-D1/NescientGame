@@ -89,10 +89,10 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(scoreData.gameObject);
 
         // Disable VSync to use target frameRate
-        QualitySettings.vSyncCount = 1;
+        //QualitySettings.vSyncCount = 1;
 
-        // Set target frame rate to 120 FPS
-        Application.targetFrameRate = 120;
+        // Set target frame rate to 60 FPS
+        Application.targetFrameRate = 60;
 
         //linerenderer
         /*
@@ -553,7 +553,8 @@ public class PlayerController : MonoBehaviour
             if (currentZ > 180) {
                 currentZ -= 360;
             }
-            hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, ((Mathf.Abs(targetZ - currentZ) > 1) ? Mathf.Sign(targetZ - currentZ) : targetZ - currentZ) * Time.deltaTime * 300f); // .Rotate uses euler angles
+            hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, ((Mathf.Abs(targetZ - currentZ) > 2) ? Mathf.Sign(targetZ - currentZ) * 3f : (targetZ - currentZ) * 0.03f)); // .Rotate uses euler angles
+            
             
             currentNoiseVolume = 2f; // base noise volume for next frame
 
