@@ -8384,7 +8384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainMenuPanel: {fileID: 1721066852}
-  MMVignette: {fileID: 0}
+  menuCursor: {fileID: 2800000, guid: 4a08bf6b5b4792f478c0d3f53b0b70b4, type: 3}
+  gameCursor: {fileID: 2800000, guid: a3d9c514a065d454fae6e87a1b2d7e71, type: 3}
 --- !u!4 &657917200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4186615487451729194, guid: d9f6cbff2208e2e4f929bfed68c1527c, type: 3}

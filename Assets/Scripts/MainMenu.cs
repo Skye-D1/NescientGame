@@ -12,13 +12,16 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject MainMenuPanel;
-    public GameObject MMVignette;
+    GameObject MMVignette;
     //public bool isPaused = false;
 
     PlayerController playerScript; // the player controlscript for purposes
     PauseMenu pauseMenu;
     float vScale = 1f;
     GameObject menuThing;
+
+    public Texture2D menuCursor;
+    public Texture2D gameCursor;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,7 +35,7 @@ public class MainMenu : MonoBehaviour
         pauseMenu = GameObject.Find("MenuThing").GetComponent<PauseMenu>();
         menuThing.SetActive(false);
         MMVignette = GameObject.Find("MMVignette");
-        
+        //Cursor.SetCursor(menuCursor, new Vector2(0,0), CursorMode.ForceSoftware);
     }
 
     // Update is called once per frame
@@ -54,6 +57,7 @@ public class MainMenu : MonoBehaviour
         playerScript.isPaused = false;
         pauseMenu.isMainMenu = false;
         menuThing.SetActive(true);
+        //Cursor.SetCursor(gameCursor, new Vector2(0,0), CursorMode.ForceSoftware);
     }
 
     //quits game
