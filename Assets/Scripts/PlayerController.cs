@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     public float deltaScoreOpacity;
     ScoreData scoreData;
     float deathTime;
+    public Vector2 tutorialForcedTarget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -148,8 +149,18 @@ public class PlayerController : MonoBehaviour
                 SceneManager.LoadScene("MainScene");
             }
         }
+        if (tutorialForcedTarget != new Vector2()) {
+            // move to tutorial spot
+            movement = Vector3.Normalize(new Vector3(tutorialForcedTarget.x, tutorialForcedTarget.y, 0) - transform.position) * moveSpeed;
+            gameObject.GetComponent<Rigidbody2D>().AddForce(movement * Time.deltaTime);
+            if (Vector2.Distance(tutorialForcedTarget, new Vector2(transform.position.x, transform.position.y)) < 0.5f) {
+                tutorialForcedTarget = new Vector2();
+            }
+            anim.SetFloat("walkMult", 1f);
+            anim.SetFloat("sprintMult", 3f);
+            anim.SetFloat("sneakMult", 0.35f);
 
-        if(!isPaused){
+        } else if(!isPaused){
             // update score and display
             gameScore += Time.deltaTime;
             scoreDisplay.text = "score:" + Mathf.Round(gameScore);
