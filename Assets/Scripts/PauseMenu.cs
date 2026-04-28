@@ -15,6 +15,8 @@ public class PauseMenu : MonoBehaviour
     MainMenu mainMenu;
 
     PlayerController playerScript; // the player controlscript for purposes
+    public Texture2D menuCursor;
+    public Texture2D gameCursor;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +47,7 @@ public class PauseMenu : MonoBehaviour
     //pauses the game
     public void PauseGame()
     {
+        Cursor.SetCursor(menuCursor, new Vector2(0,0), CursorMode.ForceSoftware);
         PauseMenuPanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -58,6 +61,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         playerScript.isPaused = false;
+        Cursor.SetCursor(gameCursor, new Vector2(32f,32f), CursorMode.ForceSoftware);
     }
 
     //quits to the menu

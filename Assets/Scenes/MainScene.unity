@@ -10531,6 +10531,8 @@ MonoBehaviour:
   PauseMenuPanel: {fileID: 2070802918}
   isPaused: 0
   isMainMenu: 1
+  menuCursor: {fileID: 2800000, guid: 6dfe4b1202796334cad67524c0266b1a, type: 3}
+  gameCursor: {fileID: 2800000, guid: d870fa9358154d64dbebb79f35a65f1e, type: 3}
 --- !u!4 &784538904
 Transform:
   m_ObjectHideFlags: 0
