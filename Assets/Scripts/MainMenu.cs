@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
         pauseMenu = GameObject.Find("MenuThing").GetComponent<PauseMenu>();
         menuThing.SetActive(false);
         MMVignette = GameObject.Find("MMVignette");
-        //Cursor.SetCursor(menuCursor, new Vector2(0,0), CursorMode.ForceSoftware);
+        Cursor.SetCursor(menuCursor, new Vector2(0,0), CursorMode.ForceSoftware);
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class MainMenu : MonoBehaviour
         playerScript.isPaused = false;
         pauseMenu.isMainMenu = false;
         menuThing.SetActive(true);
-        //Cursor.SetCursor(gameCursor, new Vector2(0,0), CursorMode.ForceSoftware);
+        Cursor.SetCursor(gameCursor, new Vector2(32f,32f), CursorMode.ForceSoftware);
     }
 
     //quits game
