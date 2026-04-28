@@ -43,6 +43,8 @@ public class EnemyController : MonoBehaviour
     float flipCooldown;
     float destroyTimer;
 
+    public Vector2 tutorialForcedTarget;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,6 +69,19 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        didTargetUpdate = false; // allow one target update per frame
+        flipCooldown -= Time.deltaTime;
+        // ensure sprite flip correct
+        if (flipCooldown <= 0 && ((movement.x > 0.2f && !selfRenderer.flipX) || (movement.x < -0.2f && selfRenderer.flipX)) && !isStatic) {
+            if (movement.x > 0.2f) {
+                selfRenderer.flipX = true;
+                flipCooldown = 0.5f;
+            } else if (movement.x < -0.2f) {
+                selfRenderer.flipX = false;
+                flipCooldown = 0.5f;
+            }
+        }
+
         if(isPlant){
             RB.linearVelocity = new Vector3();
             destroyTimer -= Time.deltaTime;
@@ -76,19 +91,16 @@ public class EnemyController : MonoBehaviour
                 playerScript.deltaScoreDisplay.text = "+5";
                 Destroy(gameObject);
             }
-        } else{
-            didTargetUpdate = false; // allow one target update per frame
-            flipCooldown -= Time.deltaTime;
-            if (flipCooldown <= 0 && ((movement.x > 0.2f && !selfRenderer.flipX) || (movement.x < -0.2f && selfRenderer.flipX))) {
-                if (movement.x > 0.2f) {
-                    selfRenderer.flipX = true;
-                    flipCooldown = 0.5f;
-                } else if (movement.x < -0.2f) {
-                    selfRenderer.flipX = false;
-                    flipCooldown = 0.5f;
-                }
+        } if (tutorialForcedTarget != new Vector2()) {
+            // move to tutorial spot and then be static
+            movement = Vector3.Normalize(new Vector3(tutorialForcedTarget.x, tutorialForcedTarget.y, 0) - transform.position) * moveSpeed;
+            RB.AddForce(movement * Time.deltaTime);
+            if (Vector2.Distance(tutorialForcedTarget, new Vector2(transform.position.x, transform.position.y)) < 0.5f) {
+                tutorialForcedTarget = new Vector2();
+                isStatic = true;
             }
 
+        } else{
             // update noTargetUpdateTimer
             if (hasTarget && targetPriority) {
                 noTargetUpdateTimer += Time.deltaTime;

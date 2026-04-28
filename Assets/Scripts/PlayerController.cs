@@ -170,7 +170,8 @@ public class PlayerController : MonoBehaviour
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
-            if (movement.magnitude > 0.1f) { // enable enemy spawning when player first moves
+            // enable enemy spawning when player leaves tutorial house
+            if (transform.position.x < 8f || transform.position.x > 25f || transform.position.y < 9f || transform.position.y > 16f) { 
                 spawner.doSpawning = true;
             }
 
@@ -216,11 +217,11 @@ public class PlayerController : MonoBehaviour
             movement = Vector3.Normalize(movement)*moveSpeed; // normalize and set speed of movement in direction
 
             //is the player sprinting or sneaking? Stamina regeneration if they aren't sprinting
-            if(Input.GetKey(KeyCode.LeftShift) && movement != new Vector3()){
+            if((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && movement != new Vector3()){
                 sprinting = true;
             } else{
                 sprinting = false;
-                if(Input.GetKey(KeyCode.LeftControl)){
+                if(Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.LeftControl)){
                     sneaking = true;
                 } else{
                     sneaking = false;
