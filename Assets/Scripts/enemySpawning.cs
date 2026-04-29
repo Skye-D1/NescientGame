@@ -68,7 +68,7 @@ public class enemySpawning : MonoBehaviour
 
     // cycles active tutorial object when the player activates the trigger
     void OnTriggerStay2D(Collider2D collision) {
-        if (collision.transform.name == "Player" && (tutorialIndex + 1) < tutorialTriggers.Length) {
+        if ((collision.transform.name == "Player" || collision.transform.name == "Enemy1(Clone)") && (tutorialIndex + 1) < tutorialTriggers.Length) {
             // disable previous obj
             if (tutorialObjects[tutorialIndex] != null) {
                 tutorialObjects[tutorialIndex].SetActive(false);
@@ -84,7 +84,7 @@ public class enemySpawning : MonoBehaviour
             // spawn the tutorial zombie
             if (tutorialIndex == 3) {
                 GameObject inst = Instantiate(spawnableEnemies[0], new Vector3(13f, 0f, 0f), transform.rotation);
-                inst.GetComponent<EnemyController>().tutorialForcedTarget = new Vector2(17.1f, 12.3f);
+                inst.GetComponent<EnemyController>().tutorialForcedTarget = new Vector2(17.1f, 12.8f);
             }
             // move trigger to next pos
             gameObject.GetComponent<BoxCollider2D>().offset = tutorialTriggers[tutorialIndex];
