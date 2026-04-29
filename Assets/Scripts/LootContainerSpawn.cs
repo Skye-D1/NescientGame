@@ -17,6 +17,7 @@ public class LootContainerSpawn : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public bool restrictAccess; // whether restrict to box trigger
     public bool destroyOnUse; // for single use container
+    public GameObject[] disabledOnOpen; // disable some objects on open
     bool isPlayerInTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,6 +48,9 @@ public class LootContainerSpawn : MonoBehaviour
             isItemReady = false;
             spriteRenderer.sprite = openSprite;
             Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], (transform.position + spawnOffsets), transform.rotation);
+            for (int i = 0; i < disabledOnOpen.Length; i++) {
+                disabledOnOpen[i].gameObject.SetActive(false);
+            }
             if (destroyOnUse) {
                 // particles here maybe
                 GameObject.Destroy(gameObject);
