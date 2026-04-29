@@ -330,7 +330,7 @@ public class PlayerController : MonoBehaviour
             if(isShoot && Water >= 4f && Physics2D.Raycast(transform.position, new Vector2((selfRenderer.flipX ? 0.8f : -0.8f), 0.3f), 1f, LayerMask.GetMask("ProjectileBlocker")).collider == null){
                 Water -= 4f;
                 useMouseForLook = true;
-                Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - (projSourcePoint + new Vector3(gameObject.GetComponent<Collider2D>().offset.x, gameObject.GetComponent<Collider2D>().offset.y, 0)));
+                Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - projSourcePoint);
                 currentNoiseVolume = waterGunNoiseVolume;
                 forceSoundPulseVisual();
 
