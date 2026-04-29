@@ -81,6 +81,11 @@ public class enemySpawning : MonoBehaviour
             if (tutorialObjEnableOnly[tutorialIndex] != null) {
                 tutorialObjEnableOnly[tutorialIndex].SetActive(true);
             }
+            // spawn the tutorial zombie
+            if (tutorialIndex == 3) {
+                GameObject inst = Instantiate(spawnableEnemies[0], new Vector3(13f, 0f, 0f), transform.rotation);
+                inst.GetComponent<EnemyController>().tutorialForcedTarget = new Vector2(17.1f, 12.3f);
+            }
             // move trigger to next pos
             gameObject.GetComponent<BoxCollider2D>().offset = tutorialTriggers[tutorialIndex];
         }
