@@ -1,13 +1,16 @@
+/*
+* Name: PlayerController.cs
+* Author: Sam Johnson, Skye Drury
+* Email: samuel.johnson, skye.drury
+* Desc: Manage all player movement, input, and things affecting the player
+*/
+
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-
-//Name: Sam Johnson, Skye Drury
-//File: PlayerController.cs
-//Purpose: Manage all player movement, input, and things affecting the player
 
 public class PlayerController : MonoBehaviour
 {
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //fetches reference and assigns necessary variables
         anim = gameObject.GetComponent<Animator>();
         enemyMask = LayerMask.GetMask("Enemy"); // set layer mask
         dmgFrameOverlay = GameObject.Find("damageFrameOverlay").GetComponent<SpriteRenderer>();
@@ -623,6 +627,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*
+    Name: UpdateInventory
+    Desc: refreshes the in-scene aspects of the inventory
+    */
     void UpdateInventory(){
         for(int i = 0; i < 3; i++){
             GameObject slot = GameObject.Find("invSlot" + i);
@@ -640,6 +648,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*
+    Name: DropItem
+    Desc: Drops the item in the currently selected inventory slot from the inventory into the scene at the feet of the player
+    */
     void DropItem(){
         if(inventory[selectedInvSlot,0] != 0){
             GameObject item = Instantiate(itemKey[(int)inventory[selectedInvSlot,0]], new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset, new Quaternion());
@@ -648,11 +660,10 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public bool isDying(){
-        //Debug.Log("is dying is " + dying);
-        return dying;
-    }
-
+    /*
+    Name: forceSoundPulseVisual
+    Desc: forces the sound visual to pulse if the cooldown isn't active.
+    */
     void forceSoundPulseVisual() {
         if (forceSoundPulseCooldown <= 0) {
             soundPulseTimer = -1;

@@ -1,3 +1,10 @@
+/*
+* Name: EnemyController.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: Manage enemy movement, receiving and communicating noises, and other enemy behavior
+*/
+
 using UnityEngine;
 
 //Name: Skye Drury
@@ -217,7 +224,12 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // hear a noise and update target if necessary
+    /*
+    Name: recieveNoise
+    Input: newTarget - position of the new sound
+            isNewTargetPriority - is that sound priority (player)
+    Desc: hear a noise and update target if necessary
+    */
     public void recieveNoise(Vector2 newTarget, bool isNewTargetPriority)
     {
         // switch target if new is priority or current is invalid
@@ -264,6 +276,13 @@ public class EnemyController : MonoBehaviour
     }
 
     // communicate some recieved noises to other enemies nearby
+    /*
+    Name: echoNoise
+    Inputs: newTarget - position of new sound
+            isNewTargetPriority - is the sound priority (player)
+            rangeOverride - overrides range if its not 0
+    Desc: Plays the sound in the audio source. uses PlayOneShot if it is an AudioClip or Play if it isn't.
+    */
     void echoNoise(Vector2 newTarget, bool isNewTargetPriority, float rangeOverride) {
         if (rangeOverride == 0) {
             rangeOverride = echoRadius;
@@ -275,7 +294,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // recieve signal from colliding water to become static plant
+    /*
+    Name: plantify
+    Desc: recieve signal from colliding water to become static plant
+    */
     public void plantify () {
         if (!isPlant) {
             isPlant = true;

@@ -1,10 +1,13 @@
+/*
+* Name: CameraEffects.cs
+* Author: Sam Johnson
+* Email: samuel.johnson
+* Desc: Manages all post processing effects
+*/
+
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
-
-//Name: Sam Johnson
-//File: CameraEffects.cs
-//Purpose: Manage all post-processing effects
 
 public class CameraEffects : MonoBehaviour
 {

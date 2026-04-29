@@ -1,8 +1,11 @@
-using UnityEngine;
+/*
+* Name: noiseCircleController.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: makes noise pulse and then deletes self
+*/
 
-//Name: Skye Drury
-//File: noiseCircleController.cs
-//Purpose: make noise pulse and delete self
+using UnityEngine;
 
 public class noiseCircleController : MonoBehaviour
 {

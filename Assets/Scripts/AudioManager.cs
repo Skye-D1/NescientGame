@@ -1,9 +1,12 @@
+/*
+* Name: AudioManager.cs
+* Author: Sam Johnson
+* Email: samuel.johnson
+* Desc: manages playing audio
+*/
+
 using UnityEngine;
 using System;
-
-//Name: Sam Johnson
-//File: AudioManager.cs
-//Purpose: manage playing audio
 
 public class AudioManager : MonoBehaviour
 {
@@ -65,7 +68,12 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    //plays the specified clip from the child object that has it
+    /*
+    Name: playClip
+    Inputs: index - index of the sound to play
+            loop - whether to loop or not
+    Desc: plays the specified clip from the child object that has it
+    */
     public void PlayClip(int index, bool loop){
         transform.GetChild(index).GetComponent<AudioChildManager>().playSound();
         isPlaying[index] = true;
@@ -73,7 +81,10 @@ public class AudioManager : MonoBehaviour
         isLooping[index] = loop;
     }
 
-    //stops a specific sound from looping
+    /*
+    Name: stopLooping
+    Desc: stops a specific sound from looping
+    */
     public void StopLooping(int index){
         isLooping[index] = false;
     }

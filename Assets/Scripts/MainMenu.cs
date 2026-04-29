@@ -1,13 +1,15 @@
-//using Unity.VisualScripting;
+/*
+* Name: MainMenu.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: Manages main menu
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-
-//Name: Skye Drury
-//File: MainMenu.cs
-//Purpose: Manages main menu
 
 public class MainMenu : MonoBehaviour
 {
@@ -49,7 +51,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    //starts the game
+    /*
+    Name: StartGame
+    Desc: starts the game
+    */
     public void StartGame()
     {
         MainMenuPanel.SetActive(false);
@@ -60,13 +65,19 @@ public class MainMenu : MonoBehaviour
         Cursor.SetCursor(gameCursor, new Vector2(32f,32f), CursorMode.ForceSoftware);
     }
 
-    //quits game
+    /*
+    Name: QuitGame
+    Desc: quits the game
+    */
     public void QuitGame()
     {
         Application.Quit();
     }
 
-    //loads credits
+    /*
+    Name: LoadCredits
+    Desc: loads the credits
+    */
     public void LoadCredits()
     {
         SceneManager.LoadScene("CreditScene");

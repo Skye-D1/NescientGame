@@ -1,8 +1,11 @@
-using UnityEngine;
+/*
+* Name: LootContainerSpawn.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: Makes more loot at containers
+*/
 
-//Name: Skye Drury
-//File: LootContainerSpawn.cs
-//Purpose: make more loot at container
+using UnityEngine;
 
 public class LootContainerSpawn : MonoBehaviour
 {
@@ -53,6 +56,8 @@ public class LootContainerSpawn : MonoBehaviour
             }
         }
     }
+
+    // if the player enters the trigger, set isPlayerInTrigger to true
     void OnTriggerEnter2D(Collider2D found) {
         // if thing is player, isPlayerInTrigger set to true
         if (found.gameObject.transform.name.Contains("Player")) {
@@ -60,6 +65,7 @@ public class LootContainerSpawn : MonoBehaviour
         }
     }
 
+    // if the player exits the trigger, set isPlayerInTrigger to false
     void OnTriggerExit2D(Collider2D found) {
         // if thing is player, isPlayerInTrigger set to false
         if (found.gameObject.transform.name.Contains("Player")) {

@@ -1,12 +1,20 @@
+/*
+* Name: CreditsMenu.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: Manages credits UI
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//Name: Skye Drury
-//File: CreditsMenu.cs
-//Purpose: Manages credits UI
 public class CreditsMenu : MonoBehaviour
 {
+    /*
+    Name: LoadMain
+    Desc: loads the main menu scene
+    */
     public void LoadMain()
     {
         SceneManager.LoadScene("MainScene");

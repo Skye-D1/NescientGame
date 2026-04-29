@@ -1,8 +1,11 @@
-using UnityEngine;
+/*
+* Name: Projectile.cs
+* Author: Sam Johnson
+* Email: samuel.johnson
+* Desc: Manage player's projectiles
+*/
 
-//Name: Sam Johnson
-//File: Projectile.cs
-//Purpose: Manage player's projectiles
+using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
@@ -56,7 +59,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    //hit a thing
+    //hits a thing when it collides with it and stops the projectile
     void OnTriggerEnter2D(Collider2D collider){
         if(!stopped && !collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Projectile")){
             //Debug.Log(collider.gameObject.name);

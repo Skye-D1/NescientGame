@@ -1,9 +1,12 @@
+/*
+* Name: TrailLayerSetDynamic.cs
+* Author: Sam Johnson, Skye Drury
+* Email: samuel.johnson, skye.drury
+* Desc: Manages the sortingLayer of the trailrenderer on objects that have a dynamic position
+*/
+
 using UnityEngine;
 using System;
-
-//Name: Sam Johnson, Skye Drury
-//File: TrailLayerSetDynamic.cs
-//Purpose: Manages the sortingLayer of the trailrenderer on objects that have a dynamic position
 
 public class TrailLayerSetDynamic : MonoBehaviour
 {

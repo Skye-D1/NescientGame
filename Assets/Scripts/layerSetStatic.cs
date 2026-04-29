@@ -1,9 +1,12 @@
+/*
+* Name: layerSetStatic.cs
+* Author: Sam Johnson
+* Email: samuel.johnson
+* Desc: Manages the sortingLayer of objects that have a static position
+*/
+
 using UnityEngine;
 using System;
-
-//Name: Sam Johnson
-//File: layerSetStatic.cs
-//Purpose: Manages the sortingLayer of objects that have a static position
 
 public class layerSetStatic : MonoBehaviour
 {

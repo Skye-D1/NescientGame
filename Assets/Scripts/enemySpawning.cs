@@ -1,8 +1,11 @@
-using UnityEngine;
+/*
+* Name: enemySpawning.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: make more enemies
+*/
 
-//Name: Skye Drury
-//File: EnemySpawning.cs
-//Purpose: make more enemy
+using UnityEngine;
 
 public class enemySpawning : MonoBehaviour
 {
@@ -62,6 +65,7 @@ public class enemySpawning : MonoBehaviour
         enemySpawnDelayRange[1] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
     }
 
+    // cycles active tutorial object when the player activates the trigger
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.name == "Player") {
             tutorialObjects[tutorialIndex].SetActive(false);

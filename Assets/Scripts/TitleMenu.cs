@@ -1,10 +1,13 @@
+/*
+* Name: TitleMenu.cs
+* Author: Skye Drury
+* Email: skye.drury
+* Desc: menu for title screen scene
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-//Name: Skye Drury
-//File: TitleMenu.cs
-//Purpose: menu for title screen scene
 
 public class TitleMenu : MonoBehaviour
 {
@@ -29,18 +32,27 @@ public class TitleMenu : MonoBehaviour
         }
     }
 
-    // load main scene
+    /*
+    Name: playFunction
+    Desc: loads the main scene
+    */
     public void playFunction() {
         Debug.Log("meow");
         SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
     }
 
-    // load credits
+    /*
+    Name: creditsFunction
+    Desc: loads the credits scene
+    */
     public void creditsFunction() {
         Debug.Log("credits time");
     }
 
-    // quit game
+    /*
+    Name: quitFunction
+    Desc: quits the game
+    */
     public void quitFunction() {
         Application.Quit();
     }

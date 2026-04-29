@@ -1,8 +1,11 @@
-using UnityEngine;
+/*
+* Name: Item.cs
+* Author: Sam Johnson, Skye Drury
+* Email: samuel.johnson, skye.drury
+* Desc: Manages holding data about items, layering them correctly, and glow effect
+*/
 
-//Name: Sam Johnson, Skye Drury
-//File: Item.cs
-//Purpose: Manages holding data about items, layering them correctly, and glow effect
+using UnityEngine;
 
 public class Item : MonoBehaviour
 {

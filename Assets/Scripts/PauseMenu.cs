@@ -1,11 +1,13 @@
-//using Unity.VisualScripting;
+/*
+* Name: PauseMenu.cs
+* Author: Aidan Gillette, Skye Drury
+* Email: aidan.gillette, skye.drury
+* Desc: Manages pause menu
+*/
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-//Name: Aidan Gillette, Skye Drury
-//File: PauseMenu.cs
-//Purpose: Manages pause menu
 
 public class PauseMenu : MonoBehaviour
 {
@@ -44,7 +46,10 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    //pauses the game
+    /*
+    Name: PauseGame
+    Desc: Pauses the game
+    */
     public void PauseGame()
     {
         Cursor.SetCursor(menuCursor, new Vector2(0,0), CursorMode.ForceSoftware);
@@ -54,7 +59,10 @@ public class PauseMenu : MonoBehaviour
         playerScript.isPaused = true;
     }
 
-    //resumes the game
+    /*
+    Name: ResumeGame
+    Desc: resumes the game
+    */
     public void ResumeGame()
     {
         PauseMenuPanel.SetActive(false);
@@ -64,13 +72,19 @@ public class PauseMenu : MonoBehaviour
         Cursor.SetCursor(gameCursor, new Vector2(32f,32f), CursorMode.ForceSoftware);
     }
 
-    //quits to the menu
+    /*
+    Name: QuitToMenu
+    Desc: quits to the menu
+    */
     public void QuitToMenu()
     {
         SceneManager.LoadScene("MainScene");
     }
 
-    //loads the credits
+    /*
+    Name: LoadCredits
+    Desc: loads the credits
+    */
     public void LoadCredits()
     {
         SceneManager.LoadScene("CreditScene");

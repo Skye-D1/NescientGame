@@ -1,8 +1,11 @@
-using UnityEngine;
+/*
+* Name: Building.cs
+* Author: Sam Johnson
+* Email: samuel.johnson
+* Desc: Manages the sortingLayer of buildings and their roofs as well as the transparency of the roof
+*/
 
-//Name: Sam Johnson
-//File: Building.cs
-//Purpose: Manages the sortingLayer of buildings and their roofs as well as the transparency of the roof
+using UnityEngine;
 
 public class Building : MonoBehaviour
 {
