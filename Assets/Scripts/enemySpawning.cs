@@ -20,11 +20,17 @@ public class enemySpawning : MonoBehaviour
     public int forceSpawnCount; // force a number of zombies to spawn over the next frames
     public float spawnrateChangeFactor; // how much to increase spawnrate
     public bool doSpawning;
+    public GameObject[] tutorialObjects;
+    public Vector3[] tutorialTriggers;
+    int tutorialIndex = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerMask = LayerMask.GetMask("Player");
+        if (tutorialObjects.Length > 0) {
+            tutorialObjects[tutorialIndex].SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -54,5 +60,15 @@ public class enemySpawning : MonoBehaviour
         }
         enemySpawnDelayRange[0] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
         enemySpawnDelayRange[1] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
+    }
+
+    void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.transform.name == "Player") {
+            tutorialObjects[tutorialIndex].SetActive(false);
+            tutorialIndex++;
+            tutorialObjects[tutorialIndex].SetActive(true);
+
+            // move trigger to next pos
+        }
     }
 }
