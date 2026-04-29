@@ -63,7 +63,7 @@ public class enemySpawning : MonoBehaviour
         enemySpawnDelayRange[1] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerStay2D(Collider2D collision) {
         if (collision.transform.name == "Player" && (tutorialIndex + 1) < tutorialTriggers.Length) {
             // disable previous obj
             if (tutorialObjects[tutorialIndex] != null) {
