@@ -35,7 +35,7 @@ public class CameraEffects : MonoBehaviour
 
         
         //stamina vignette
-        if(!GameObject.Find("Player").GetComponent<PlayerController>().isDying() && !mainMenuPanel.activeSelf){
+        if(!GameObject.Find("Player").GetComponent<PlayerController>().dying && !mainMenuPanel.activeSelf){
             float Stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
             vignette.intensity.value = (100f-Stamina)/175f;
         }

@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] itemKey;
     float hitCooldown = 0;
     public Sprite[] bottleSprites;
-    bool dying;
+    public bool dying;
     public bool preventDie; // debug probably
     public bool debugLasers; // debuggin emeny
     GameObject hudWaterGun;
