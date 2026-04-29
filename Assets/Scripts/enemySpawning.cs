@@ -21,8 +21,9 @@ public class enemySpawning : MonoBehaviour
     public float spawnrateChangeFactor; // how much to increase spawnrate
     public bool doSpawning;
     public GameObject[] tutorialObjects;
-    public Vector3[] tutorialTriggers;
-    int tutorialIndex = 0;
+    public GameObject[] tutorialObjEnableOnly;
+    public Vector2[] tutorialTriggers;
+    public int tutorialIndex = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,12 +64,21 @@ public class enemySpawning : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.transform.name == "Player") {
-            tutorialObjects[tutorialIndex].SetActive(false);
+        if (collision.transform.name == "Player" && (tutorialIndex + 1) < tutorialTriggers.Length) {
+            // disable previous obj
+            if (tutorialObjects[tutorialIndex] != null) {
+                tutorialObjects[tutorialIndex].SetActive(false);
+            }
             tutorialIndex++;
-            tutorialObjects[tutorialIndex].SetActive(true);
-
+            // enable next objs
+            if (tutorialObjects[tutorialIndex] != null) {
+                tutorialObjects[tutorialIndex].SetActive(true);
+            }
+            if (tutorialObjEnableOnly[tutorialIndex] != null) {
+                tutorialObjEnableOnly[tutorialIndex].SetActive(true);
+            }
             // move trigger to next pos
+            gameObject.GetComponent<BoxCollider2D>().offset = tutorialTriggers[tutorialIndex];
         }
     }
 }
