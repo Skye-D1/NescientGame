@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f0cd02d1243040a4aa70cab23125231f
+guid: dbff100d6aaed3d438529ef6ee4b32e0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4366464658220702659
-    second: zomb3stand_0
+      213: -5549174822724452234
+    second: zombiestand_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 2200
+  spritePixelsToUnits: 1600
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: zomb3stand_0
+      name: zombiestand_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2178
-        height: 3771
-      alignment: 9
-      pivot: {x: 0.6, y: 0.5}
+        width: 1186
+        height: 2061
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3cbda8dd87cc89c30800000000000000
-      internalID: 4366464658220702659
+      spriteID: 670c7f646ee5df2b0800000000000000
+      internalID: -5549174822724452234
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b3744d5509a9b334fa74e41689ed306b
+    spriteID: 1fde0750b5469b041810c726e02d0969
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      zomb3stand_0: 4366464658220702659
+      zombiestand_0: -5549174822724452234
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
