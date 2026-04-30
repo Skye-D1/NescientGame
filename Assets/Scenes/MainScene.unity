@@ -20601,7 +20601,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: clippin time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21425,6 +21425,7 @@ MonoBehaviour:
   - {fileID: 695765254}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 1976604015}
   tutorialObjEnableOnly:
   - {fileID: 0}
@@ -21432,12 +21433,14 @@ MonoBehaviour:
   - {fileID: 3375587167257365374}
   - {fileID: 125433709}
   - {fileID: 0}
+  - {fileID: 0}
   tutorialTriggers:
   - {x: 17, y: 12.6}
   - {x: 21, y: 10.5}
   - {x: 21, y: 10.5}
   - {x: 16.6, y: 10.5}
   - {x: 11.1, y: 13}
+  - {x: 999, y: 999}
   tutorialIndex: 0
 --- !u!4 &1528964714
 Transform:
@@ -28307,7 +28310,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: shootorial
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

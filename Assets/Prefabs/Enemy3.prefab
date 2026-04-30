@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0}
+  moveSpeed: 400
   targetPriority: 0
   hasTarget: 0
   echoRadius: 3
@@ -144,6 +145,8 @@ MonoBehaviour:
   noTargetUpdateTimer: 0
   predictiveValue: 0
   tutorialForcedTarget: {x: 0, y: 0}
+  enabledOnPlantify:
+  - {fileID: 0}
 --- !u!58 &4585176587218781560
 CircleCollider2D:
   m_ObjectHideFlags: 0

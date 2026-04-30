@@ -27,6 +27,7 @@ public class enemySpawning : MonoBehaviour
     public GameObject[] tutorialObjEnableOnly;
     public Vector2[] tutorialTriggers;
     public int tutorialIndex = 0;
+    GameObject clippersTutorial;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -85,6 +86,8 @@ public class enemySpawning : MonoBehaviour
             if (tutorialIndex == 3) {
                 GameObject inst = Instantiate(spawnableEnemies[0], new Vector3(13f, 0f, 0f), transform.rotation);
                 inst.GetComponent<EnemyController>().tutorialForcedTarget = new Vector2(17.1f, 12.8f);
+                inst.GetComponent<EnemyController>().moveSpeed = 650f;
+                inst.GetComponent<EnemyController>().enabledOnPlantify[0] = clippersTutorial;
             }
             // move trigger to next pos
             gameObject.GetComponent<BoxCollider2D>().offset = tutorialTriggers[tutorialIndex];

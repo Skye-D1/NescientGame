@@ -14,7 +14,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] Vector2 target; // target movement location
-    float moveSpeed = 400f; // speed of movement
+    public float moveSpeed = 400f; // speed of movement
     float tempMoveSpeed; // temporary movespeed per frame
     Vector3 movement = new Vector3(); // current movement direction
     [SerializeField] bool targetPriority; // whether the target is high priority (player noise)
@@ -49,8 +49,8 @@ public class EnemyController : MonoBehaviour
     SpriteRenderer selfRenderer;
     float flipCooldown;
     float destroyTimer;
-
     public Vector2 tutorialForcedTarget;
+    public GameObject[] enabledOnPlantify;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -170,13 +170,13 @@ public class EnemyController : MonoBehaviour
             // do movement
             if (!isStatic && hasTarget && (movement * Time.deltaTime).magnitude < 99999f) {
                 RB.AddForce(movement * Time.deltaTime);
-            } else if ((movement * Time.deltaTime).magnitude >= 99999f) {
-                Debug.Log("debug: no don't do that;" + transform.position);
-            }
+            }// else if ((movement * Time.deltaTime).magnitude >= 99999f) {
+                //Debug.Log("debug: no don't do that;" + transform.position);
+            //}
 
             // no fast
             if (RB.linearVelocity.magnitude > 5f) {
-                Debug.Log("debug: speeding ticket issued.");
+                //Debug.Log("debug: speeding ticket issued.");
                 RB.linearVelocity = new Vector2();
             }
 
@@ -303,6 +303,10 @@ public class EnemyController : MonoBehaviour
             isPlant = true;
             // spawn static plant
             Instantiate(staticPlant, transform.position, transform.rotation);
+            // enable things for tutorial etc
+            for (int i = 0; i < enabledOnPlantify.Length; i++) {
+                enabledOnPlantify[i].gameObject.SetActive(true);
+            }
             // delete self
             //GameObject.Destroy(gameObject);
             destroyTimer = 0.33333f;
