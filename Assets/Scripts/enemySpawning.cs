@@ -67,7 +67,7 @@ public class enemySpawning : MonoBehaviour
         enemySpawnDelayRange[0] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
         enemySpawnDelayRange[1] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
         // hide tutorial objects when leave
-        if (!playerScript.isTutorialTime && !isTutorialEnded) {
+        if (!player.GetComponent<PlayerController>().isTutorialTime && !isTutorialEnded) {
             isTutorialEnded = true;
             for (int i = 0; i < tutorialObjEnableOnly.Length; i++) {
                 tutorialObjEnableOnly[i].gameObject.SetActive(false);
