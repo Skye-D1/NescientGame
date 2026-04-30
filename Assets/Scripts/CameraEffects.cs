@@ -11,17 +11,13 @@ using UnityEngine.Rendering.Universal;
 
 public class CameraEffects : MonoBehaviour
 {
-    public Volume volume;
-    public Vignette vignette;
-    ColorAdjustments desaturation;
     GameObject mainMenuPanel;
+    GameObject staminaBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainMenuPanel = GameObject.Find("MainMenuPanel");
-        volume.profile.TryGet(out vignette);
-        volume.profile.TryGet(out desaturation);
     }
 
     // Update is called once per frame
@@ -34,10 +30,10 @@ public class CameraEffects : MonoBehaviour
         healthV.GetComponent<SpriteRenderer>().color = new Color(1f, 0, 0, Mathf.Clamp((100f-Health)/60f, 0f, 1f));
 
         
-        //stamina vignette
-        if(!GameObject.Find("Player").GetComponent<PlayerController>().dying && !mainMenuPanel.activeSelf){
-            float Stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
-            vignette.intensity.value = (100f-Stamina)/175f;
-        }
+        //stamina bar
+        float stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
+        float center = staminaBar.transform.parent.position.x;
+        staminaBar.transform.localScale = new Vector3((100f - stamina)/100f * 10, 1, 1);
+        staminaBar.transform.position = new Vector3(center - center/2 + staminaBar.transform.localScale.x/2, staminaBar.transform.parent.position.y, 0);
     }
 }

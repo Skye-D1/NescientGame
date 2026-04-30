@@ -134,7 +134,7 @@ public class PlayerController : MonoBehaviour
         forceSoundPulseCooldown -= Time.deltaTime;
 
         if (vignette == null) {
-            vignette = GameObject.Find("Main Camera").GetComponent<CameraEffects>().vignette;
+            GameObject.Find("Volume").GetComponent<Volume>().profile.TryGet(out vignette);
         }
         
         if((Health <= 0 || Thirst <= 0) && !preventDie && (!(vignette.intensity.value < 1f) && !(vignette.smoothness.value < 1f))){
@@ -410,31 +410,11 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown("Fire2")){
                 if(inventory[selectedInvSlot, 0] != 0){
                     
-                    GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 3*(int)inventory[selectedInvSlot,0], false);
                     
-                    if(inventory[selectedInvSlot, 0] == 1){
+                    
+                    if(inventory[selectedInvSlot, 0] == 1 && Water != 100f){
                         //Water Bottle
-                        /*
-                        if(Input.GetKey(KeyCode.F)){
-                            if(100f-Water >= inventory[selectedInvSlot, 1]){
-                                Water += inventory[selectedInvSlot, 1];
-                                inventory[selectedInvSlot, 0] = 0;
-                                inventory[selectedInvSlot, 1] = 0;
-                            } else if(100f-Water < inventory[selectedInvSlot, 1]){
-                                inventory[selectedInvSlot, 1] -= 100f-Water;
-                                Water = 100f;
-                            }
-                        }else{
-                            if(100f-Thirst >= inventory[selectedInvSlot, 1]){
-                                Thirst += inventory[selectedInvSlot, 1];
-                                inventory[selectedInvSlot, 0] = 0;
-                                inventory[selectedInvSlot, 1] = 0;
-                            } else if(100f-Thirst < inventory[selectedInvSlot, 1]){
-                                inventory[selectedInvSlot, 1] -= 100f-Thirst;
-                                Thirst = 100f;
-                            }
-                        }
-                        */
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 3*(int)inventory[selectedInvSlot,0], false);
                         if(100f-Water >= inventory[selectedInvSlot, 1]){
                             Water += inventory[selectedInvSlot, 1];
                             inventory[selectedInvSlot, 0] = 0;
@@ -444,19 +424,19 @@ public class PlayerController : MonoBehaviour
                             Water = 100f;
                         }
 
-                    } else if(inventory[selectedInvSlot, 0] == 2){
+                    } else if(inventory[selectedInvSlot, 0] == 2 && Health != 100.0f){
                         //Health Item
-                        if(Health != 100.0f){
-                            Health+=25;
-                            if(Health > 100f){
-                                Health = 100f;
-                            }
-                            inventory[selectedInvSlot, 0] = 0;
-                            inventory[selectedInvSlot, 1] = 0;
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 3*(int)inventory[selectedInvSlot,0], false);
+                        Health+=25;
+                        if(Health > 100f){
+                            Health = 100f;
                         }
+                        inventory[selectedInvSlot, 0] = 0;
+                        inventory[selectedInvSlot, 1] = 0;
 
                     } else if(inventory[selectedInvSlot, 0] == 3){
                         //Hedge Cutter
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 3*(int)inventory[selectedInvSlot,0], false);
                         Collider2D[] deadEnemies = Physics2D.OverlapCircleAll((new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized * 2f, 1.5f, LayerMask.GetMask("DeadEnemy"));
                         Vector2 mouseDirFromWorld = (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized;
                         GameObject cut = GameObject.Instantiate(hedgeCut, (new Vector2(transform.position.x, transform.position.y) + gameObject.GetComponent<Collider2D>().offset) + (new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y) - new Vector2(transform.position.x, transform.position.y)).normalized * 0f, Quaternion.identity);
