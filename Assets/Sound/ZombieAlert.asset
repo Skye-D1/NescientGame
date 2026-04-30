@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-7500469573937008505
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_10_{-7500469573937008505}
+  m_AudioClip: {fileID: 8300000, guid: 95108528dc582d943b51637d6dc74854, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4083512768249983988
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_4_{-4083512768249983988}
+  m_AudioClip: {fileID: 8300000, guid: 6576838874cdfa94987c7301cb5eca4e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3884203926102975369
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_16_{-3884203926102975369}
+  m_AudioClip: {fileID: 8300000, guid: 79f60c071a06c494bbeb664d82f310fb, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2946749948196333063
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_7_{-2946749948196333063}
+  m_AudioClip: {fileID: 8300000, guid: 27ccd131002b0d34dbe1ce9cdae1c4b4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2547146188909102109
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_8_{-2547146188909102109}
+  m_AudioClip: {fileID: 8300000, guid: 296c47ee9a5159c4786b9ff6d0cb57c5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &751969260499751121
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_9_{751969260499751121}
+  m_AudioClip: {fileID: 8300000, guid: be1015ea669d444478c7f2e275a5d274, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1431067164183197413
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_17_{1431067164183197413}
+  m_AudioClip: {fileID: 8300000, guid: f132281e8f181b5499495a89afea226d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1693453218190701392
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_18_{1693453218190701392}
+  m_AudioClip: {fileID: 8300000, guid: 68428de6b3bc638479655db47e35ca9a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2227384019402731510
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_6_{2227384019402731510}
+  m_AudioClip: {fileID: 8300000, guid: 93d847f00c356124ca15c14b30bb29fe, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4442293830790845240
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_3_{4442293830790845240}
+  m_AudioClip: {fileID: 8300000, guid: e2dc4c3cf09368146b4468e0cd6c7c13, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5558708587936118348
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_15_{5558708587936118348}
+  m_AudioClip: {fileID: 8300000, guid: 8d8685f16ed5da142a27e88050243b85, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &6005269172724359895
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_13_{6005269172724359895}
+  m_AudioClip: {fileID: 8300000, guid: 13c38794948400a4bac550d085d29595, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &6072246818250176099
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_1_{6072246818250176099}
+  m_AudioClip: {fileID: 8300000, guid: 4680832bc8db8bf4b9c88c8d81dcdfff, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ZombieAlert
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 6072246818250176099}
+  - {fileID: 8447487248723661147}
+  - {fileID: 4442293830790845240}
+  - {fileID: -4083512768249983988}
+  - {fileID: 6670168154257088864}
+  - {fileID: 2227384019402731510}
+  - {fileID: -2946749948196333063}
+  - {fileID: -2547146188909102109}
+  - {fileID: 751969260499751121}
+  - {fileID: -7500469573937008505}
+  - {fileID: 8387280233633695341}
+  - {fileID: 7255590646844396835}
+  - {fileID: 6005269172724359895}
+  - {fileID: 7557311274803278060}
+  - {fileID: 5558708587936118348}
+  - {fileID: -3884203926102975369}
+  - {fileID: 1431067164183197413}
+  - {fileID: 1693453218190701392}
+  m_AvoidRepeatingLast: 1
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &6670168154257088864
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_5_{6670168154257088864}
+  m_AudioClip: {fileID: 8300000, guid: ec38b4eeb4757eb46847779521215f5a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &7255590646844396835
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_12_{7255590646844396835}
+  m_AudioClip: {fileID: 8300000, guid: dedbc0389a2cf1f4e80944a4a37f7965, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &7557311274803278060
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_14_{7557311274803278060}
+  m_AudioClip: {fileID: 8300000, guid: 85e8dfc0da6e36646bd44dcc4336b2e3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8387280233633695341
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_11_{8387280233633695341}
+  m_AudioClip: {fileID: 8300000, guid: e009d5833a0560a4faabcd65b833ea62, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &8447487248723661147
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_alert_2_{8447487248723661147}
+  m_AudioClip: {fileID: 8300000, guid: d5bdffa483132b44880e08873c94573e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

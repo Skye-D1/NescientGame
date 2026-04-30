@@ -18,6 +18,7 @@ public class CameraEffects : MonoBehaviour
     void Start()
     {
         mainMenuPanel = GameObject.Find("MainMenuPanel");
+        staminaBar = GameObject.Find("StaminaBar");
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class CameraEffects : MonoBehaviour
         //stamina bar
         float stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
         float center = staminaBar.transform.parent.position.x;
-        staminaBar.transform.localScale = new Vector3((100f - stamina)/100f * 10, 1, 1);
-        staminaBar.transform.position = new Vector3(center - center/2 + staminaBar.transform.localScale.x/2, staminaBar.transform.parent.position.y, 0);
+        staminaBar.transform.localScale = new Vector3((stamina)/100f * 9, 0.5f, 1);
+        staminaBar.transform.position = new Vector3(center - 9/2 - 0.5f + staminaBar.transform.localScale.x/2, staminaBar.transform.parent.position.y, 0);
     }
 }

@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-9065823717360543091
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_5_{-9065823717360543091}
+  m_AudioClip: {fileID: 8300000, guid: 7865a90f6fcf4284888fc3efc77ed456, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8429075297655845361
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_16_{-8429075297655845361}
+  m_AudioClip: {fileID: 8300000, guid: 9cd9c0fa7f54b8f42af067bf063cad19, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8364006452576763420
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_12_{-8364006452576763420}
+  m_AudioClip: {fileID: 8300000, guid: 93a650677bee1314fa08085b8f72975b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6571422237871191829
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_10_{-6571422237871191829}
+  m_AudioClip: {fileID: 8300000, guid: edc84f9166d95e1438055763b9182089, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5437464930569263087
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_9_{-5437464930569263087}
+  m_AudioClip: {fileID: 8300000, guid: c0e299f84d100c54ab5235bf1733a397, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2999930900719372250
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_1_{-2999930900719372250}
+  m_AudioClip: {fileID: 8300000, guid: e6be940e8e07ddd428d085540812131f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2611978441724182491
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_2_{-2611978441724182491}
+  m_AudioClip: {fileID: 8300000, guid: abcd456f24b7aca4983ab5d9032ce2f6, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2361212668083537204
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_8_{-2361212668083537204}
+  m_AudioClip: {fileID: 8300000, guid: 1c8712e92284bc849a47ee097240e631, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1900998946843239587
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_13_{-1900998946843239587}
+  m_AudioClip: {fileID: 8300000, guid: cd99568ba0a64f64f9461f6463035154, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-992631631777267564
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_14_{-992631631777267564}
+  m_AudioClip: {fileID: 8300000, guid: 62302c736dc5bf640ac6427e1c569b98, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2074035484112099447
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_6_{2074035484112099447}
+  m_AudioClip: {fileID: 8300000, guid: 091c7f1f9112fe24991fcb24df1ab680, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2499656851688098138
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_11_{2499656851688098138}
+  m_AudioClip: {fileID: 8300000, guid: f7f39d1e63eabed4ca2462e0f7e47859, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3101266803645134258
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_18_{3101266803645134258}
+  m_AudioClip: {fileID: 8300000, guid: 2663ca322e643e44fb0ab6da73363a23, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3439370921637532773
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_3_{3439370921637532773}
+  m_AudioClip: {fileID: 8300000, guid: b08a3bf29a9c082418288abd1b408aae, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3842143675009905129
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_4_{3842143675009905129}
+  m_AudioClip: {fileID: 8300000, guid: 87b5503c35be94a4590d825b64dc3cc0, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3922524313715770353
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_15_{3922524313715770353}
+  m_AudioClip: {fileID: 8300000, guid: 05ae5b6f0042f6849aaf4ccd69b78d6f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4026547713237418418
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_17_{4026547713237418418}
+  m_AudioClip: {fileID: 8300000, guid: f54be992b6d76d04bb2af9de1391ca94, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WoodSteps
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -2999930900719372250}
+  - {fileID: -2611978441724182491}
+  - {fileID: 3439370921637532773}
+  - {fileID: 3842143675009905129}
+  - {fileID: -9065823717360543091}
+  - {fileID: 2074035484112099447}
+  - {fileID: 8542631879188345725}
+  - {fileID: -2361212668083537204}
+  - {fileID: -5437464930569263087}
+  - {fileID: -6571422237871191829}
+  - {fileID: 2499656851688098138}
+  - {fileID: -8364006452576763420}
+  - {fileID: -1900998946843239587}
+  - {fileID: -992631631777267564}
+  - {fileID: 3922524313715770353}
+  - {fileID: -8429075297655845361}
+  - {fileID: 4026547713237418418}
+  - {fileID: 3101266803645134258}
+  m_AvoidRepeatingLast: 1
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8542631879188345725
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: player_wood_step_7_{8542631879188345725}
+  m_AudioClip: {fileID: 8300000, guid: 55cec04ed7ac1e044b383f479236d7f5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

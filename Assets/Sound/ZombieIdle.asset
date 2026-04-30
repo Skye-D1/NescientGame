@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-6086171806245181229
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_7_{-6086171806245181229}
+  m_AudioClip: {fileID: 8300000, guid: 4df223c3c83d98b49a0d9b69624f5f67, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-4626174337046965461
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_1_{-4626174337046965461}
+  m_AudioClip: {fileID: 8300000, guid: c0ddfc667dae7274dac39fa39741a391, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3930919042706534983
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_3_{-3930919042706534983}
+  m_AudioClip: {fileID: 8300000, guid: e3e802082799e8e448e09d06e3f22c0e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3552352173898134355
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_6_{-3552352173898134355}
+  m_AudioClip: {fileID: 8300000, guid: fec5ef3fad5862044a3ab7c7ded6aa5c, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2462916028421848714
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_5_{-2462916028421848714}
+  m_AudioClip: {fileID: 8300000, guid: add52e3cc878a064db6b8f419871e50d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-776742385221429461
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_2_{-776742385221429461}
+  m_AudioClip: {fileID: 8300000, guid: 5018c250829c2534dac46c780e1766b9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1268369278530193115
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_8_{1268369278530193115}
+  m_AudioClip: {fileID: 8300000, guid: 5f8d4f58bb714d24cb3b23098de76254, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2457403782683255504
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: creature_idle_4_{2457403782683255504}
+  m_AudioClip: {fileID: 8300000, guid: 71c265d86f232d94aa2bd2ee3f50f666, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ZombieIdle
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -4626174337046965461}
+  - {fileID: -776742385221429461}
+  - {fileID: -3930919042706534983}
+  - {fileID: 2457403782683255504}
+  - {fileID: -2462916028421848714}
+  - {fileID: -3552352173898134355}
+  - {fileID: -6086171806245181229}
+  - {fileID: 1268369278530193115}
+  m_AvoidRepeatingLast: 1
+  m_PlaybackMode: 2
+  m_TriggerMode: 0
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
