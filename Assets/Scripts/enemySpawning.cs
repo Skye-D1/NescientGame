@@ -28,6 +28,7 @@ public class enemySpawning : MonoBehaviour
     public Vector2[] tutorialTriggers;
     public int tutorialIndex = 0;
     public GameObject clippersTutorial;
+    bool isTutorialEnded;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -65,6 +66,14 @@ public class enemySpawning : MonoBehaviour
         }
         enemySpawnDelayRange[0] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
         enemySpawnDelayRange[1] /= (1 + (Time.deltaTime * (spawnrateChangeFactor/60f)));
+        // hide tutorial objects when leave
+        if (!playerScript.isTutorialTime && !isTutorialEnded) {
+            isTutorialEnded = true;
+            for (int i = 0; i < tutorialObjEnableOnly.Length; i++) {
+                tutorialObjEnableOnly[i].gameObject.SetActive(false);
+                tutorialObjects[i].gameObject.SetActive(false);
+            }
+        }
     }
 
     // cycles active tutorial object when the player activates the trigger
