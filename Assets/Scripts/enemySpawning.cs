@@ -27,7 +27,7 @@ public class enemySpawning : MonoBehaviour
     public GameObject[] tutorialObjEnableOnly;
     public Vector2[] tutorialTriggers;
     public int tutorialIndex = 0;
-    GameObject clippersTutorial;
+    public GameObject clippersTutorial;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
