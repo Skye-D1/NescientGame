@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     ScoreData scoreData;
     float deathTime;
     public Vector2 tutorialForcedTarget;
+    public bool isTutorialTime = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -165,8 +166,10 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("sneakMult", 0.35f);
 
         } else if(!isPaused){
-            // update score and display
-            gameScore += Time.deltaTime;
+            if (!isTutorialTime) {
+                // update score and display
+                gameScore += Time.deltaTime;
+            }
             scoreDisplay.text = "score:" + Mathf.Round(gameScore);
             
             //death
@@ -188,6 +191,7 @@ public class PlayerController : MonoBehaviour
             // enable enemy spawning when player leaves tutorial house
             if (transform.position.x < 8f || transform.position.x > 25f || transform.position.y < 9f || transform.position.y > 16f) { 
                 spawner.doSpawning = true;
+                isTutorialTime = false;
             }
 
             //look direction
@@ -644,6 +648,8 @@ public class PlayerController : MonoBehaviour
                 GameObject item = Instantiate(itemKey[(int)inventory[i,0]], GameObject.Find("invSlot" + i).transform.position, new Quaternion(), GameObject.Find("invSlot" + i).transform);
                 item.GetComponent<Item>().itemID = (int)inventory[i,0];
                 item.GetComponent<Item>().power = inventory[i,1];
+                item.transform.localScale = new Vector3(30f, 30f, 1f);
+                item.GetComponent<SpriteRenderer>().sortingLayerName = "UI";
             }
         }
     }
