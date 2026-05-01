@@ -48,6 +48,7 @@ public class LootContainerSpawn : MonoBehaviour
         
         // if player press e and in range
         if(isItemReady && Input.GetKeyDown(KeyCode.E) && Vector3.Distance(player.transform.position, transform.position) < 2f && (!restrictAccess || isPlayerInTrigger)) {
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(24, false);
             isItemReady = false;
             spriteRenderer.sprite = openSprite;
             Instantiate(itemSpawnTable[Random.Range(0, itemSpawnTable.Length)], (transform.position + spawnOffsets), transform.rotation);
