@@ -555,6 +555,12 @@ public class PlayerController : MonoBehaviour
             }
             hudWaterGun.transform.GetChild(0).transform.Rotate(0, 0, ((Mathf.Abs(targetZ - currentZ) > 2) ? Mathf.Sign(targetZ - currentZ) * 3f : (targetZ - currentZ) * 0.03f)); // .Rotate uses euler angles
             
+            // update water tank water position
+            if (waterTankOverlay != null) {
+                float center = waterTankOverlay.transform.parent.position.y;
+                waterTankOverlay.transform.localScale = new Vector3(20, (water)/100f * 20f, 1f);
+                waterTankOverlay.transform.position = new Vector3(waterTankOverlay.transform.position.x, waterTankOverlay.transform.parent.position.y, 0);
+            }
             
             currentNoiseVolume = 2f; // base noise volume for next frame
 
