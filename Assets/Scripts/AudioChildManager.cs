@@ -23,9 +23,9 @@ public class AudioChildManager : MonoBehaviour
     Desc: Plays the sound in the audio source. uses PlayOneShot if it is an AudioClip or Play if it isn't.
     */
     public void playSound(){
-        try{
+        if(source.clip != null){
             source.PlayOneShot(source.clip);
-        } catch(Exception E){
+        } else{
             source.Play();
         }
     }

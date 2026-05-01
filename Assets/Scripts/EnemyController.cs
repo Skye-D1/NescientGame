@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
     float destroyTimer;
     public Vector2 tutorialForcedTarget;
     public GameObject[] enabledOnPlantify;
+    float alertNoiseCooldown;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -237,6 +238,11 @@ public class EnemyController : MonoBehaviour
             wanderCooldown = maxWanderCooldown; // ensure leader does not immediately make new wander target
             didTargetUpdate = true;
             preciseTarget = newTarget;
+            alertNoiseCooldown -= Time.deltaTime;
+            if(!targetPriority && isNewTargetPriority && alertNoiseCooldown <= 0){
+                GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(17, false);
+                alertNoiseCooldown = 2f;
+            }
             int loopys = 0;
             do {
                 loopys++;
@@ -300,6 +306,7 @@ public class EnemyController : MonoBehaviour
     */
     public void plantify () {
         if (!isPlant) {
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(20, false);
             isPlant = true;
             // spawn static plant
             Instantiate(staticPlant, transform.position, transform.rotation);

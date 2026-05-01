@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     float deathTime;
     public Vector2 tutorialForcedTarget;
     public bool isTutorialTime = true;
+    bool onWood = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -269,7 +270,6 @@ public class PlayerController : MonoBehaviour
             } else{
                 Thirst = 0;
             }*/
-            
 
             //looking at water gun logic
             Vector3 cameraPos = GameObject.Find("Main Camera").transform.position;
@@ -336,6 +336,7 @@ public class PlayerController : MonoBehaviour
             //Water Gun shoot
             Vector3 projSourcePoint = new Vector3(transform.position.x + (selfRenderer.flipX ? 0.8f : -0.8f), transform.position.y + 0.3f, transform.position.z);
             if(isShoot && Water >= 4f && Physics2D.Raycast(transform.position, new Vector2((selfRenderer.flipX ? 0.8f : -0.8f), 0.3f), 1f, LayerMask.GetMask("ProjectileBlocker")).collider == null){
+                GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(21, false);
                 Water -= 4f;
                 useMouseForLook = true;
                 Vector3 dir = Vector3.Normalize(Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0,0,10) - projSourcePoint);
@@ -398,6 +399,7 @@ public class PlayerController : MonoBehaviour
                         inventory[putSlot, 1] = closestItem.GetComponent<Item>().power;
                         GameObject.Destroy(closestItem);
 
+                        Debug.Log("pickup sound");
                         GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(3*closestItem.GetComponent<Item>().itemID, false);
                     }
                 }
@@ -413,9 +415,6 @@ public class PlayerController : MonoBehaviour
             //use item
             if(Input.GetButtonDown("Fire2")){
                 if(inventory[selectedInvSlot, 0] != 0){
-                    
-                    
-                    
                     if(inventory[selectedInvSlot, 0] == 1 && Water != 100f){
                         //Water Bottle
                         GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1 + 3*(int)inventory[selectedInvSlot,0], false);
@@ -526,6 +525,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
                     if(hit){
+                        GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(19, false);
                         Health -= 25f;
                         hitCooldown = 1f;
                         dmgOpacity = 0.3f;
@@ -660,6 +660,36 @@ public class PlayerController : MonoBehaviour
         if (forceSoundPulseCooldown <= 0) {
             soundPulseTimer = -1;
             forceSoundPulseCooldown = 0.5f;
+        }
+    }
+
+    void playStepSound(){
+        if(!sprinting && !onWood){
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(12, false);
+        } else if(sprinting && !onWood){
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(13, false);
+        } else if(!sprinting && onWood){
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(14, false);
+        } else if(sprinting && onWood){
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(15, false);
+        } else{
+            Debug.Log("step sound error");
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collider){
+        if(collider.CompareTag("Bush")){
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(16, false);
+        } else if(collider.CompareTag("onWood")){
+            Debug.Log("ON WOOD");
+            onWood = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collider){
+        if(collider.CompareTag("onWood")){
+            Debug.Log("NOT ON WOOD");
+            onWood = false;
         }
     }
 }
