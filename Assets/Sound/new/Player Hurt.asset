@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8974864803310482679
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_15_{-8974864803310482679}
+  m_AudioClip: {fileID: 8300000, guid: 698e4420d69796041833ee09fdd08d3b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6636374131394653162
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_4_{-6636374131394653162}
+  m_AudioClip: {fileID: 8300000, guid: 2505783dcfd1416468f92d6320f71b26, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5479486713815016940
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_5_{-5479486713815016940}
+  m_AudioClip: {fileID: 8300000, guid: 067120a7b9682c24e964014ad66b2d9f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3027742819510310418
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_2_{-3027742819510310418}
+  m_AudioClip: {fileID: 8300000, guid: cd4b7467c3deac94e9a4a9240e4cb2c4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2115135779409666795
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_11_{-2115135779409666795}
+  m_AudioClip: {fileID: 8300000, guid: 1b83a199998c536439f1537f8dce90d5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-33452384249096679
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_1_{-33452384249096679}
+  m_AudioClip: {fileID: 8300000, guid: 9f6f6d405285ab241b478ac4a72ae43b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &246209363338752926
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_13_{246209363338752926}
+  m_AudioClip: {fileID: 8300000, guid: bf251683282650945bc0c8a71bca979b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1099539296654019977
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_7_{1099539296654019977}
+  m_AudioClip: {fileID: 8300000, guid: 4fa0207212a6a724bb95fa55b34a7d00, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &2826616325016249635
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_3_{2826616325016249635}
+  m_AudioClip: {fileID: 8300000, guid: e62b50bf2bc0a1b49842a1274c87b11f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3338705188527762164
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_6_{3338705188527762164}
+  m_AudioClip: {fileID: 8300000, guid: f865f83a14974ee458ae256298200c95, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5676794945263882766
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_8_{5676794945263882766}
+  m_AudioClip: {fileID: 8300000, guid: 94587ad7db026bb40988fe0c3e0dbf0d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5821509929261148189
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_12_{5821509929261148189}
+  m_AudioClip: {fileID: 8300000, guid: c83d0d8069460a147b3fd088f3cbfbf7, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &6399308601329088139
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_14_{6399308601329088139}
+  m_AudioClip: {fileID: 8300000, guid: 3e19bb1066b9d324793b364c6deda527, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Player Hurt
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 0}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -33452384249096679}
+  - {fileID: -3027742819510310418}
+  - {fileID: 2826616325016249635}
+  - {fileID: -6636374131394653162}
+  - {fileID: -5479486713815016940}
+  - {fileID: 3338705188527762164}
+  - {fileID: 1099539296654019977}
+  - {fileID: 5676794945263882766}
+  - {fileID: 7964749463773896802}
+  - {fileID: 9146064253527408000}
+  - {fileID: -2115135779409666795}
+  - {fileID: 5821509929261148189}
+  - {fileID: 246209363338752926}
+  - {fileID: 6399308601329088139}
+  - {fileID: -8974864803310482679}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 0
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 2
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 0
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7964749463773896802
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_9_{7964749463773896802}
+  m_AudioClip: {fileID: 8300000, guid: 103f687873111a048b103b1d6719cf18, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &9146064253527408000
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: super_squirter_3000_hurt_10_{9146064253527408000}
+  m_AudioClip: {fileID: 8300000, guid: bd88b87006d497f469e963ed6969fa5d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

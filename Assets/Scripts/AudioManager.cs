@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
 
         //wind 809
         //play wind tail
-        PlayClip(25, false);
+        PlayClip(26, false);
 
     }
 

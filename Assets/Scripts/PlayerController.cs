@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if(!isTutorialTime && !drumTrack){
-            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1, true);
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1, false);
         }
         // decrease damage overlay at start of every frame
         if (dmgOpacity > 0) {
