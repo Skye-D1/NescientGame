@@ -27,15 +27,15 @@ public class AudioManager : MonoBehaviour
         beatsIn = new int[sounds];
         isPlaying = new bool[sounds];
         isLooping = new bool[sounds];
-        isPlaying[0] = true;
-        isLooping[0] = true;
-        try{
-            loopLengths[0] = 108;
-        } catch(Exception E){
-            Debug.Log("sound in audiosource 0 is not a clip.");
-        }
-        
+
+        //piano 108
+        //play piano
         PlayClip(0, true);
+
+        //wind 809
+        //play wind tail
+        PlayClip(25, false);
+
     }
 
     // Update is called once per frame

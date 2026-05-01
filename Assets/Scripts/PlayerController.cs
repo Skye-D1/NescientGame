@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     float deathTime;
     public Vector2 tutorialForcedTarget;
     public bool isTutorialTime = true;
+    bool drumTrack = false;
     bool onWood = false;
     public GameObject waterTankOverlay;
 
@@ -116,6 +117,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isTutorialTime && !drumTrack){
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1, true);
+        }
         // decrease damage overlay at start of every frame
         if (dmgOpacity > 0) {
             dmgOpacity -= Time.deltaTime * 1f;
