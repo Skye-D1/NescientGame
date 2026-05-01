@@ -34,7 +34,7 @@ public class enemySpawning : MonoBehaviour
     void Start()
     {
         playerMask = LayerMask.GetMask("Player");
-        if (tutorialObjects.Length > 0) {
+        if (tutorialObjects.Length > 0 && tutorialObjects[tutorialIndex] != null) {
             tutorialObjects[tutorialIndex].SetActive(true);
         }
     }
@@ -70,8 +70,13 @@ public class enemySpawning : MonoBehaviour
         if (!player.GetComponent<PlayerController>().isTutorialTime && !isTutorialEnded) {
             isTutorialEnded = true;
             for (int i = 0; i < tutorialObjEnableOnly.Length; i++) {
-                tutorialObjEnableOnly[i].gameObject.SetActive(false);
-                tutorialObjects[i].gameObject.SetActive(false);
+                if (tutorialObjEnableOnly[i] != null) {
+                    tutorialObjEnableOnly[i].gameObject.SetActive(false);
+                }
+                if (tutorialObjects[i] != null) {
+                    tutorialObjects[i].gameObject.SetActive(false);
+                }
+                
             }
         }
     }
