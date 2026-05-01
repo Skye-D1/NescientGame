@@ -559,7 +559,7 @@ public class PlayerController : MonoBehaviour
             // update water tank water position
             if (waterTankOverlay != null) {
                 float center = waterTankOverlay.transform.parent.position.y;
-                waterTankOverlay.transform.localScale = new Vector3(20, (water)/100f * 20f, 1f);
+                waterTankOverlay.transform.localScale = new Vector3(20, (Water)/100f * 20f, 1f);
                 waterTankOverlay.transform.position = new Vector3(waterTankOverlay.transform.position.x, waterTankOverlay.transform.parent.position.y, 0);
             }
             
