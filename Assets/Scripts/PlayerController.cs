@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 tutorialForcedTarget;
     public bool isTutorialTime = true;
     bool onWood = false;
+    public GameObject waterTankOverlay;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
