@@ -558,9 +558,10 @@ public class PlayerController : MonoBehaviour
             
             // update water tank water position
             if (waterTankOverlay != null) {
-                float center = waterTankOverlay.transform.parent.position.y;
-                waterTankOverlay.transform.localScale = new Vector3(20, (Water)/100f * 20f, 1f);
-                waterTankOverlay.transform.position = new Vector3(waterTankOverlay.transform.position.x, waterTankOverlay.transform.parent.position.y, 0);
+                float center = waterTankOverlay.transform.parent.localPosition.y;
+                waterTankOverlay.transform.localScale = new Vector3(1, (Water)/100f * 1f, 1f);
+                waterTankOverlay.transform.localPosition = new Vector3(waterTankOverlay.transform.localPosition.x, center - ((100f-Water) / 200f), 0);
+                Debug.Log("water y: " + (center - ((100f-Water) * 0.025f)) + " center: " + center);
             }
             
             currentNoiseVolume = 2f; // base noise volume for next frame
