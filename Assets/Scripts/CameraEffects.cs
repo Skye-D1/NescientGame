@@ -33,8 +33,8 @@ public class CameraEffects : MonoBehaviour
         
         //stamina bar
         float stamina = GameObject.Find("Player").GetComponent<PlayerController>().Stamina;
-        float center = staminaBar.transform.parent.position.x;
+        float center = staminaBar.transform.parent.localPosition.x;
         staminaBar.transform.localScale = new Vector3((stamina)/100f * 9, 0.5f, 1);
-        staminaBar.transform.position = new Vector3(center - 9/2 - 0.5f + staminaBar.transform.localScale.x/2, staminaBar.transform.parent.position.y, 0);
+        staminaBar.transform.localPosition = new Vector3(-9/2 - 0.5f + staminaBar.transform.localScale.x/2, 0, 0);
     }
 }

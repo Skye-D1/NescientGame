@@ -566,7 +566,6 @@ public class PlayerController : MonoBehaviour
                 
                 waterTankOverlay.transform.localScale = new Vector3(1, (Water)/100f * 1f, 1f);
                 waterTankOverlay.transform.localPosition = new Vector3(waterTankOverlay.transform.localPosition.x, center - ((100f-Water) / 80f), 0);
-                Debug.Log("water y: " + (center - ((100f-Water) / 200f)) + " center: " + center);
             }
             
             currentNoiseVolume = 2f; // base noise volume for next frame
