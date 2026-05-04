@@ -312,7 +312,9 @@ public class EnemyController : MonoBehaviour
             Instantiate(staticPlant, transform.position, transform.rotation);
             // enable things for tutorial etc
             for (int i = 0; i < enabledOnPlantify.Length; i++) {
-                enabledOnPlantify[i].gameObject.SetActive(true);
+                if (enabledOnPlantify[i] != null) {
+                    enabledOnPlantify[i].gameObject.SetActive(true);
+                }
             }
             // delete self
             //GameObject.Destroy(gameObject);

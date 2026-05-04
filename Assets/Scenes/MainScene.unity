@@ -10114,22 +10114,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &679307558
-Transform:
+--- !u!224 &679307558
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679307556}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.375084, y: -6.2009277, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -2015.9999}
+  m_LocalScale: {x: 25.199999, y: 25.199999, z: 25.199999}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 666269251}
-  m_Father: {fileID: 1219952275}
+  m_Father: {fileID: 1412917756}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -180, y: 13.736633}
+  m_SizeDelta: {x: 9.220001, y: 0.60292053}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &680467050
 GameObject:
   m_ObjectHideFlags: 0
@@ -15184,6 +15188,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 425182315}
     m_Modifications:
+    - target: {fileID: -2719455356023681232, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
+      propertyPath: restrictAccess
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3648949905984941420, guid: 3444319ea89d9614dbfa389b7290e57b, type: 3}
       propertyPath: m_Name
       value: LootContainer
@@ -17618,7 +17626,6 @@ Transform:
   - {fileID: 698201300}
   - {fileID: 27231513}
   - {fileID: 757896906}
-  - {fileID: 679307558}
   - {fileID: 1412917756}
   - {fileID: 1697703637}
   - {fileID: 2063695055}
@@ -20525,6 +20532,7 @@ RectTransform:
   - {fileID: 25364579}
   - {fileID: 721659643}
   - {fileID: 2049206415}
+  - {fileID: 679307558}
   m_Father: {fileID: 1219952275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
