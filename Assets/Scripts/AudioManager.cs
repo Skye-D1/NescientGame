@@ -28,13 +28,18 @@ public class AudioManager : MonoBehaviour
         isPlaying = new bool[sounds];
         isLooping = new bool[sounds];
 
+        AudioSource[] sources = FindObjectsOfType<AudioSource>();
+        foreach(AudioSource source in sources){
+            source.Stop();
+        }
+
         //piano 108
         //play piano
         PlayClip(0, true);
 
         //wind 809
         //play wind tail
-        //PlayClip(26, false);
+        PlayClip(26, false);
 
     }
 
