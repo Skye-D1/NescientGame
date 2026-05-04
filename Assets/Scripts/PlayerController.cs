@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
             dmgOpacity -= Time.deltaTime * 1f;
         }
 
-        highScoreDisplay.text = "high score:" + Mathf.Round(scoreData.highScore);
+        highScoreDisplay.text = "high score: " + Mathf.Round(scoreData.highScore);
 
         // decrease score change overlay at start of every frame
         if (deltaScoreOpacity > 0) {
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
                 // update score and display
                 gameScore += Time.deltaTime;
             }
-            scoreDisplay.text = "score:" + Mathf.Round(gameScore);
+            scoreDisplay.text = "score: " + Mathf.Round(gameScore);
             
             //death
             if((Health <= 0 || Thirst <= 0) && !preventDie){
