@@ -119,7 +119,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if(!isTutorialTime && !drumTrack){
-            //GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1, false);
+            GameObject.Find("AudioManager").GetComponent<AudioManager>().PlayClip(1, false);
+            drumTrack = true;
         }
         // decrease damage overlay at start of every frame
         if (dmgOpacity > 0) {
@@ -566,7 +567,7 @@ public class PlayerController : MonoBehaviour
                 
                 waterTankOverlay.transform.localScale = new Vector3(1, (Water)/100f * 1f, 1f);
                 waterTankOverlay.transform.localPosition = new Vector3(waterTankOverlay.transform.localPosition.x, center - ((100f-Water) / 80f), 0);
-                Debug.Log("water y: " + (center - ((100f-Water) / 200f)) + " center: " + center);
+                //Debug.Log("water y: " + (center - ((100f-Water) / 200f)) + " center: " + center);
             }
             
             currentNoiseVolume = 2f; // base noise volume for next frame

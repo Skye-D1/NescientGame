@@ -33,6 +33,9 @@ public class AudioManager : MonoBehaviour
             source.Stop();
         }
 
+        isLooping[28] = true;
+        soundToPlayAfter[1] = 28;
+
         //piano 108
         //play piano
         PlayClip(0, true);
@@ -60,6 +63,7 @@ public class AudioManager : MonoBehaviour
                     if(beatsIn[i] >= loopLengths[i] && isLooping[i]){
                         PlayClip(i, true);
                     } else if(beatsIn[i] >= loopLengths[i] && soundToPlayAfter[i] != -1){
+                        Debug.Log("sound to play after attempt: " + i);
                         beatsIn[i] = 0;
                         isPlaying[i] = false;
 

@@ -1531,7 +1531,7 @@ GameObject:
   - component: {fileID: 96598818}
   - component: {fileID: 96598817}
   m_Layer: 0
-  m_Name: Piano_Inter
+  m_Name: BLANK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6787,12 +6787,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Credits
-
-'
+  m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b9a77b576375e42b4bde5bfa3dc764, type: 2}
-  m_sharedMaterial: {fileID: -3248747100611471647, guid: 31b9a77b576375e42b4bde5bfa3dc764, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c0b590cd889a0a40bed42cb046ad83c, type: 2}
+  m_sharedMaterial: {fileID: 1304832390416139470, guid: 0c0b590cd889a0a40bed42cb046ad83c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6816,8 +6814,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7558,7 +7556,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b1023d8476c7bcb48943b6bf53fc7cc9, type: 3}
+  m_Resource: {fileID: 8300000, guid: f27c6a9e9489db745a4c6a72f4f87ad2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -19481,8 +19479,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b9a77b576375e42b4bde5bfa3dc764, type: 2}
-  m_sharedMaterial: {fileID: -3248747100611471647, guid: 31b9a77b576375e42b4bde5bfa3dc764, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c0b590cd889a0a40bed42cb046ad83c, type: 2}
+  m_sharedMaterial: {fileID: 1304832390416139470, guid: 0c0b590cd889a0a40bed42cb046ad83c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19506,12 +19504,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 0
-  m_fontSizeMax: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -19523,13 +19521,13 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
-  m_ActiveFontFeatures: 
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -20177,8 +20175,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 31b9a77b576375e42b4bde5bfa3dc764, type: 2}
-  m_sharedMaterial: {fileID: -3248747100611471647, guid: 31b9a77b576375e42b4bde5bfa3dc764, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0c0b590cd889a0a40bed42cb046ad83c, type: 2}
+  m_sharedMaterial: {fileID: 1304832390416139470, guid: 0c0b590cd889a0a40bed42cb046ad83c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20202,8 +20200,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -23216,7 +23214,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: ffc4a36ded98a954c8007189d10bf748, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5a106b94c4a51da409126b42c785ed0b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -25585,6 +25583,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds: 29
   loopLengths:
+  - 128
+  - 16
   - 0
   - 0
   - 0
@@ -25609,11 +25609,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  - 0
-  - 0
-  - 0
+  - 2
   - 809
-  - 0
+  - 384
   soundToPlayAfter: ffffffff1c000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1b000000ffffffffffffffff
 --- !u!1 &1731215233
 GameObject:
@@ -26969,7 +26967,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 3a7b34bb9320acd4ca5c636366a59176, type: 3}
+  m_Resource: {fileID: 8300000, guid: 8e1d6b0ae121b9e46a1528fbc89bb46e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
