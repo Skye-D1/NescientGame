@@ -10,6 +10,7 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
+    int counter = 0;
     float bpm = 145f;
     public int sounds;
     public float[] loopLengths; //length of loop in beats
@@ -18,7 +19,9 @@ public class AudioManager : MonoBehaviour
     bool[] isLooping;
     float timeSinceLastBeat = 0f;
     public int[] soundToPlayAfter;
-    float lastTime = 0f;
+    float lastTime = 5f;
+    bool[] queue;
+    bool firstBeat = true;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,6 +30,7 @@ public class AudioManager : MonoBehaviour
         beatsIn = new int[sounds];
         isPlaying = new bool[sounds];
         isLooping = new bool[sounds];
+        queue = new bool[5];
 
         AudioSource[] sources = FindObjectsOfType<AudioSource>();
         foreach(AudioSource source in sources){
@@ -36,41 +40,64 @@ public class AudioManager : MonoBehaviour
         isLooping[28] = true;
         soundToPlayAfter[1] = 28;
 
-        //piano 108
-        //play piano
-        PlayClip(0, true);
-
-        //wind 809
-        //play wind tail
-        PlayClip(26, false);
+        PlayOnBeat(0);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        // manages when a beat happens
-        timeSinceLastBeat += Time.realtimeSinceStartup - lastTime;
-        lastTime = Time.realtimeSinceStartup;
-        if(timeSinceLastBeat > bpm/60f){
-            timeSinceLastBeat -= bpm/60f;
 
-            //Beat has happened! for each sound, do what needs to happen that beat (loop, reset, play next sound, etc)
-            Debug.Log("Beat");
-            for(int i = 0; i < sounds; i++){
-                if(isPlaying[i]){
-                    beatsIn[i] += 1;
-                    if(beatsIn[i] >= loopLengths[i] && isLooping[i]){
-                        PlayClip(i, true);
-                    } else if(beatsIn[i] >= loopLengths[i] && soundToPlayAfter[i] != -1){
-                        Debug.Log("sound to play after attempt: " + i);
-                        beatsIn[i] = 0;
-                        isPlaying[i] = false;
+        if(Time.realtimeSinceStartup >= 5f){
+            // manages when a beat happens
+            timeSinceLastBeat += Time.realtimeSinceStartup - lastTime;
+            lastTime = Time.realtimeSinceStartup;
+            if(timeSinceLastBeat > 60f/bpm){
+                timeSinceLastBeat -= 60f/bpm;
 
-                        PlayClip(soundToPlayAfter[i], isLooping[soundToPlayAfter[i]]);
-                    }else if(beatsIn[i] >= loopLengths[i]){
-                        beatsIn[i] = 0;
-                        isPlaying[i] = false;
+                if(firstBeat){
+                    PlayClip(26, false);
+                    firstBeat = false;
+                }
+
+                //Beat has happened! for each sound, do what needs to happen that beat (loop, reset, play next sound, etc)
+                Debug.Log("Beat");
+                for(int i = 0; i < 5; i++){
+                    if(queue[i]){
+                        if(i == 0){
+                            PlayClip(0, true);
+                            queue[0] = false;
+                        } else if(i == 1 && beatsIn[0] == 111){
+                            PlayClip(1, false);
+                            queue[1] = false;
+                        } else if(i == 2){
+                            PlayClip(26, false);
+                            queue[2] = false;
+                        } else if(i == 3){
+                            PlayClip(27, true);
+                            queue[3] = false;
+                        } else if(i == 4){
+                            PlayClip(28, true);
+                            queue[4] = false;
+                        }
+                    }
+                }
+
+                for(int i = 0; i < sounds; i++){
+                    if(isPlaying[i]){
+                        beatsIn[i] += 1;
+                        if(beatsIn[i] >= loopLengths[i] && isLooping[i]){
+                            PlayClip(i, true);
+                        } else if(beatsIn[i] >= loopLengths[i] && soundToPlayAfter[i] != -1){
+                            Debug.Log("sound to play after attempt: " + i);
+                            beatsIn[i] = 0;
+                            isPlaying[i] = false;
+
+                            PlayClip(soundToPlayAfter[i], isLooping[soundToPlayAfter[i]]);
+                        }else if(beatsIn[i] >= loopLengths[i]){
+                            beatsIn[i] = 0;
+                            isPlaying[i] = false;
+                        }
                     }
                 }
             }
@@ -96,5 +123,19 @@ public class AudioManager : MonoBehaviour
     */
     public void StopLooping(int index){
         isLooping[index] = false;
+    }
+
+    public void PlayOnBeat(int index){
+        if(index == 0){
+            queue[0] = true;
+        } else if(index == 1){
+            queue[1] = true;
+        } else if(index == 26){
+            queue[2] = true;
+        } else if(index == 27){
+            queue[3] = true;
+        } else if(index == 28){
+            queue[4] = true;
+        }
     }
 }
