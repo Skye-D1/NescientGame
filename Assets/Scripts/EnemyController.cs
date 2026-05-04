@@ -63,6 +63,10 @@ public class EnemyController : MonoBehaviour
         RB = gameObject.GetComponent<Rigidbody2D>();
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         predictiveValue = Random.Range(0.5f, 3f);
+        if (Random.value > 0.6) { // randomly set some enemies to not predict player movement
+            predictiveValue = 0f;
+        }
+
         selfRenderer = gameObject.GetComponent<SpriteRenderer>();
         
         // determine if leader
