@@ -56,7 +56,7 @@ public class AudioManager : MonoBehaviour
             timeSinceLastBeat -= bpm/60f;
 
             //Beat has happened! for each sound, do what needs to happen that beat (loop, reset, play next sound, etc)
-            //Debug.Log("Beat");
+            Debug.Log("Beat");
             for(int i = 0; i < sounds; i++){
                 if(isPlaying[i]){
                     beatsIn[i] += 1;
