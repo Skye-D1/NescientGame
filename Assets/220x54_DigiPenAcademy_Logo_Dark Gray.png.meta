@@ -1,0 +1,624 @@
+fileFormatVersion: 2
+guid: 8b449860c8a4a0348807b0fff5395619
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1885217407805065130
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_0
+  - first:
+      213: 1781539390834212699
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_1
+  - first:
+      213: -8376909301944975291
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_2
+  - first:
+      213: -866775327396957617
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_3
+  - first:
+      213: 1872519139380937416
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_4
+  - first:
+      213: 8397196579197895013
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_5
+  - first:
+      213: -1430612860707293707
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_6
+  - first:
+      213: -5919575580621918275
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_7
+  - first:
+      213: -7024555533494361030
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_8
+  - first:
+      213: -4008852225211828173
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_9
+  - first:
+      213: 8704939704747646110
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_10
+  - first:
+      213: 4545701937574098986
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_11
+  - first:
+      213: -7642537399058097007
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_12
+  - first:
+      213: 7837520766866463493
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_13
+  - first:
+      213: 2145373141550376772
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_14
+  - first:
+      213: 9000333138813441462
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_15
+  - first:
+      213: -7310825168524268506
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_16
+  - first:
+      213: -3346367384626415151
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_17
+  - first:
+      213: -1207038668545068895
+    second: 220x54_DigiPenAcademy_Logo_Dark Gray_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_0
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 6
+        width: 27
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 658756381cc56d5e0800000000000000
+      internalID: -1885217407805065130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_1
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 185
+        width: 162
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5ff90013ac49b810800000000000000
+      internalID: 1781539390834212699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_2
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 142
+        width: 203
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54087e56f5d3fbb80800000000000000
+      internalID: -8376909301944975291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_3
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 307
+        width: 67
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f427e6e9e6898f3f0800000000000000
+      internalID: -866775327396957617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_4
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 307
+        width: 68
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c2cbe97c368cf910800000000000000
+      internalID: 1872519139380937416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_5
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 142
+        width: 193
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 561473c6cc5d88470800000000000000
+      internalID: 8397196579197895013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_6
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 142
+        width: 164
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f5bf62de21752ce0800000000000000
+      internalID: -1430612860707293707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_7
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 142
+        width: 164
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbf24f76f5179dda0800000000000000
+      internalID: -5919575580621918275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 6
+        width: 162
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a346011c5f3c38e90800000000000000
+      internalID: -7024555533494361030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_9
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 142
+        width: 67
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 338f6371422bd58c0800000000000000
+      internalID: -4008852225211828173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_10
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 74
+        width: 158
+        height: 228
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9c5dac6a882ec870800000000000000
+      internalID: 8704939704747646110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_11
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 142
+        width: 68
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a28b8ebf3d3951f30800000000000000
+      internalID: 4545701937574098986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_12
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 5
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19c118a3ab040f590800000000000000
+      internalID: -7642537399058097007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_13
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 4
+        width: 48
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50b92dccc9774cc60800000000000000
+      internalID: 7837520766866463493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_14
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 5
+        width: 51
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44726cc6185e5cd10800000000000000
+      internalID: 2145373141550376772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_15
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 5
+        width: 47
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b5d62fcd4b97ec70800000000000000
+      internalID: 9000333138813441462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_16
+      rect:
+        serializedVersion: 2
+        x: 1101
+        y: 5
+        width: 37
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62c202f5e3bba8a90800000000000000
+      internalID: -7310825168524268506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_17
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 5
+        width: 54
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d9b36fe7905f81d0800000000000000
+      internalID: -3346367384626415151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 220x54_DigiPenAcademy_Logo_Dark Gray_18
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 5
+        width: 49
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a0f533e9bcbf3fe0800000000000000
+      internalID: -1207038668545068895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      220x54_DigiPenAcademy_Logo_Dark Gray_0: -1885217407805065130
+      220x54_DigiPenAcademy_Logo_Dark Gray_1: 1781539390834212699
+      220x54_DigiPenAcademy_Logo_Dark Gray_10: 8704939704747646110
+      220x54_DigiPenAcademy_Logo_Dark Gray_11: 4545701937574098986
+      220x54_DigiPenAcademy_Logo_Dark Gray_12: -7642537399058097007
+      220x54_DigiPenAcademy_Logo_Dark Gray_13: 7837520766866463493
+      220x54_DigiPenAcademy_Logo_Dark Gray_14: 2145373141550376772
+      220x54_DigiPenAcademy_Logo_Dark Gray_15: 9000333138813441462
+      220x54_DigiPenAcademy_Logo_Dark Gray_16: -7310825168524268506
+      220x54_DigiPenAcademy_Logo_Dark Gray_17: -3346367384626415151
+      220x54_DigiPenAcademy_Logo_Dark Gray_18: -1207038668545068895
+      220x54_DigiPenAcademy_Logo_Dark Gray_2: -8376909301944975291
+      220x54_DigiPenAcademy_Logo_Dark Gray_3: -866775327396957617
+      220x54_DigiPenAcademy_Logo_Dark Gray_4: 1872519139380937416
+      220x54_DigiPenAcademy_Logo_Dark Gray_5: 8397196579197895013
+      220x54_DigiPenAcademy_Logo_Dark Gray_6: -1430612860707293707
+      220x54_DigiPenAcademy_Logo_Dark Gray_7: -5919575580621918275
+      220x54_DigiPenAcademy_Logo_Dark Gray_8: -7024555533494361030
+      220x54_DigiPenAcademy_Logo_Dark Gray_9: -4008852225211828173
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

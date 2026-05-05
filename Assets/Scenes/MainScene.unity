@@ -25525,8 +25525,8 @@ MonoBehaviour:
   - 1.5
   - 2.5
   totalEnemiesSpawned: 0
-  popDensityCap: 15
-  forceSpawnCount: 50
+  popDensityCap: 25
+  forceSpawnCount: 75
   spawnrateChangeFactor: 0.1
   doSpawning: 0
   tutorialObjects:
@@ -31425,7 +31425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1825616863
 RectTransform:
   m_ObjectHideFlags: 0
